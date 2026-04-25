@@ -151,21 +151,33 @@ const formatCurrency = (value: number | string) => {
           </ul>
 
           <template #footer>
-            <div class="flex gap-2">
+            <div class="flex flex-col gap-2">
+              <div class="flex gap-2">
+                <UButton
+                  block
+                  class="flex-1"
+                  color="primary"
+                  :disabled="Object.keys(selectedComponents).length === 0"
+                  @click="saveBuild"
+                >
+                  Salvar Build
+                </UButton>
+                <UButton
+                  variant="soft"
+                  color="gray"
+                  icon="i-heroicons-trash"
+                  @click="clearBuild"
+                />
+              </div>
               <UButton
+                to="/compare"
                 block
+                variant="outline"
                 color="primary"
-                :disabled="Object.keys(selectedComponents).length === 0"
-                @click="saveBuild"
+                icon="i-heroicons-arrows-right-left"
               >
-                Salvar Build
+                Comparar com Bike Comercial
               </UButton>
-              <UButton
-                variant="soft"
-                color="gray"
-                icon="i-heroicons-trash"
-                @click="clearBuild"
-              />
             </div>
           </template>
         </UCard>
