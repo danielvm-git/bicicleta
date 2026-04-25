@@ -4,6 +4,8 @@ export const components = pgTable('components', {
   id: serial('id').primaryKey(),
   category: text('category').notNull(),
   model: text('model').notNull(),
+  brand: text('brand'),
+  line: text('line'),
   link: text('link'),
   price: numeric('price', { precision: 10, scale: 2 }).notNull().default('0'),
 });
