@@ -1,4 +1,5 @@
 import { pgTable, serial, text, numeric, integer } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
 export const components = pgTable('components', {
   id: serial('id').primaryKey(),
@@ -9,6 +10,10 @@ export const components = pgTable('components', {
   link: text('link'),
   price: numeric('price', { precision: 10, scale: 2 }).notNull().default('0'),
 });
+
+export const componentsRelations = relations(components, ({ many }) => ({
+  buildComponents: many(buildComponents),
+}));
 
 export const groups = pgTable('groups', {
   id: serial('id').primaryKey(),
@@ -33,9 +38,24 @@ export const builds = pgTable('builds', {
   totalPrice: numeric('total_price', { precision: 10, scale: 2 }).notNull().default('0'),
 });
 
+export const buildsRelations = relations(builds, ({ many }) => ({
+  buildComponents: many(buildComponents),
+}));
+
 export const buildComponents = pgTable('build_components', {
   id: serial('id').primaryKey(),
   buildId: integer('build_id').references(() => builds.id),
   componentId: integer('component_id').references(() => components.id),
 });
+
+export const buildComponentsRelations = relations(buildComponents, ({ one }) => ({
+  build: one(builds, {
+    fields: [buildComponents.buildId],
+    references: [builds.id],
+  }),
+  component: one(components, {
+    fields: [buildComponents.componentId],
+    references: [components.id],
+  }),
+}));
 
