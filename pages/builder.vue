@@ -4,6 +4,17 @@ const { selectedComponents, selectComponent, removeComponent, totalPrice, clearB
 const { data: categories } = await useFetch('/api/categories')
 const { data: allComponents } = await useFetch('/api/components')
 
+// Persistência de builds
+const isOpen = ref(false)
+const { data: buildsList, refresh: refreshBuilds, pending } = await useFetch('/api/builds', {
+  lazy: true,
+  server: false
+})
+
+watch(isOpen, (newVal) => {
+  if (newVal) refreshBuilds()
+})
+
 const componentsMap = computed(() => {
   const map: Record<string, any[]> = {}
   if (!allComponents.value) return map
@@ -36,10 +47,21 @@ const saveBuild = async () => {
       }
     })
     alert('Build salva com sucesso!')
+    await refreshBuilds()
   } catch (e) {
     console.error(e)
     alert('Erro ao salvar build.')
   }
+}
+
+const loadBuild = (build: any) => {
+  const newSelected: Record<string, any> = {}
+  build.buildComponents.forEach((bc: any) => {
+    const comp = bc.component
+    newSelected[comp.category] = comp
+  })
+  selectedComponents.value = newSelected
+  isOpen.value = false
 }
 
 const formatCurrency = (value: number | string) => {
@@ -52,9 +74,18 @@ const formatCurrency = (value: number | string) => {
   <UContainer class="py-8">
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-bold">Simulador de Montagem</h1>
-      <div class="text-right">
-        <p class="text-sm text-gray-500">Total Estimado</p>
-        <p class="text-2xl font-bold text-primary">{{ formatCurrency(totalPrice) }}</p>
+      <div class="flex items-center gap-4">
+        <UButton
+          variant="ghost"
+          icon="i-heroicons-folder-open"
+          @click="isOpen = true"
+        >
+          Minhas Montagens
+        </UButton>
+        <div class="text-right">
+          <p class="text-sm text-gray-500">Total Estimado</p>
+          <p class="text-2xl font-bold text-primary">{{ formatCurrency(totalPrice) }}</p>
+        </div>
       </div>
     </div>
 
@@ -140,5 +171,36 @@ const formatCurrency = (value: number | string) => {
         </UCard>
       </div>
     </div>
+
+    <UModal v-model="isOpen">
+      <UCard>
+        <template #header>
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Minhas Montagens
+            </h3>
+            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+          </div>
+        </template>
+
+        <div v-if="pending" class="flex justify-center p-4">
+          <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
+        </div>
+        <div v-else-if="buildsList && buildsList.length > 0" class="divide-y divide-gray-200 dark:divide-gray-700">
+          <div v-for="build in buildsList" :key="build.id" class="py-3 flex justify-between items-center">
+            <div>
+              <p class="font-medium">{{ build.name }}</p>
+              <p class="text-xs text-gray-500">{{ formatCurrency(build.totalPrice) }}</p>
+            </div>
+            <UButton size="xs" color="primary" variant="soft" @click="loadBuild(build)">
+              Carregar
+            </UButton>
+          </div>
+        </div>
+        <div v-else class="text-center py-4 text-gray-500">
+          Nenhuma montagem salva encontrada.
+        </div>
+      </UCard>
+    </UModal>
   </UContainer>
 </template>
