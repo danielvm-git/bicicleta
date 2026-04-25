@@ -5,6 +5,8 @@ import XLSX from 'xlsx';
 export interface ComponentRow {
   category: string;
   model: string;
+  brand?: string;
+  line?: string;
   link?: string;
   price: string;
 }
@@ -28,7 +30,7 @@ export interface BikeRow {
   name: string;
   price: string;
   link?: string;
-  components: { category: string; model: string }[];
+  components: { category: string; model: string; brand?: string; line?: string; link?: string; price?: string }[];
 }
 
 export function parseCSV(path: string, options: any = {}): any[] {
@@ -87,15 +89,71 @@ export function cleanPrice(priceStr: string): string {
   return isNaN(numericValue) ? '0' : numericValue.toFixed(2);
 }
 
+export function inferMetadata(model: string, filename?: string): { brand?: string, line?: string } {
+  const brands = [
+    'Absolute', 'Shimano', 'SRAM', 'RockShox', 'SunRace', 'GTS', 'Kapa', 'Show', 
+    'Vicini', 'K7', 'Logan', 'Microshift', 'Promax', 'Chaoyang', 'Pirelli', 
+    'Vzan', 'Caloi', 'Oggi', 'Sense', 'Soul', 'TSW', 'Colli', 'SR Suntour', 'Kenda', 'Vittoria'
+  ];
+  const lines = [
+    'Nero', 'Wild', 'Prime', 'Deore', 'Alivio', 'Altus', 'SLX', 'XT', 'XTR', 
+    'Eagle', 'NX', 'GX', 'SX', 'Nextep', 'Mia', 'Brut', 'Cues', 'Tourney', 'Acera', 
+    'Stamina', 'Explorer', 'React', 'Extreme'
+  ];
+
+  let brand: string | undefined;
+  let line: string | undefined;
+
+  const modelLower = model.toLowerCase();
+  const fnLower = filename ? filename.toLowerCase() : '';
+
+  // Try from model first (more specific)
+  for (const b of brands) {
+    if (modelLower.includes(b.toLowerCase())) {
+      brand = b;
+      break;
+    }
+  }
+
+  for (const l of lines) {
+    if (modelLower.includes(l.toLowerCase())) {
+      line = l;
+      break;
+    }
+  }
+
+  // If not found in model, try from filename
+  if (!brand && fnLower) {
+    for (const b of brands) {
+      if (fnLower.includes(b.toLowerCase())) {
+        brand = b;
+        break;
+      }
+    }
+  }
+
+  if (!line && fnLower) {
+    for (const l of lines) {
+      if (fnLower.includes(l.toLowerCase())) {
+        line = l;
+        break;
+      }
+    }
+  }
+
+  return { brand, line };
+}
+
 export function parseBikeKV(path: string): BikeRow {
   const kv = parseKV(path);
-  const components: { category: string; model: string }[] = [];
+  const components: BikeRow['components'] = [];
   
   const reservedKeys = ['Modelo', 'Preço Sugerido', 'Link', 'Fonte', 'Velocidades'];
   
   for (const [key, value] of Object.entries(kv)) {
     if (!reservedKeys.includes(key)) {
-      components.push({ category: key, model: value });
+      const { brand, line } = inferMetadata(value, path);
+      components.push({ category: key, model: value, brand, line });
     }
   }
   
@@ -113,7 +171,7 @@ export function parseXLSX(path: string): BikeRow {
   const worksheet = workbook.Sheets[sheetName];
   const data: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
   
-  const components: { category: string; model: string; link?: string; price?: string }[] = [];
+  const components: BikeRow['components'] = [];
   let name = 'Desconhecido';
   let totalPrice = '0';
   
@@ -135,9 +193,12 @@ export function parseXLSX(path: string): BikeRow {
       if (category === 'QUADRO' && name === 'Desconhecido') {
         name = model;
       }
+      const { brand, line } = inferMetadata(model, path);
       components.push({
         category,
         model,
+        brand,
+        line,
         link: link || undefined,
         price: cleanPrice(price)
       });
@@ -147,6 +208,6 @@ export function parseXLSX(path: string): BikeRow {
   return {
     name,
     price: totalPrice,
-    components: components as any
+    components
   };
 }

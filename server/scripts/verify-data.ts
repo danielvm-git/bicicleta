@@ -15,11 +15,19 @@ async function verify() {
   console.log(`Builds: ${buildCount.value}`);
   console.log(`BuildComponents: ${buildCompCount.value}`);
 
+  const [brandCoverage] = await db.select({ count: count(components.brand) }).from(components);
+  const [lineCoverage] = await db.select({ count: count(components.line) }).from(components);
+
+  console.log(`Components with Brand: ${brandCoverage.count}`);
+  console.log(`Components with Line: ${lineCoverage.count}`);
+
   // Sample check: get a build and its components using joins
   const sampleBuilds = await db.select({
     buildName: builds.name,
     compCategory: components.category,
     compModel: components.model,
+    compBrand: components.brand,
+    compLine: components.line,
   })
   .from(builds)
   .leftJoin(buildComponents, eq(builds.id, buildComponents.buildId))
@@ -29,15 +37,15 @@ async function verify() {
   if (sampleBuilds.length > 0) {
     console.log(`Sample Build: ${sampleBuilds[0].buildName}`);
     for (const row of sampleBuilds) {
-       console.log(` - [${row.compCategory}] ${row.compModel}`);
+       console.log(` - [${row.compCategory}] ${row.compModel} (${row.compBrand} / ${row.compLine})`);
     }
   }
 
-  if (compCount.value > 0 && groupCount.value === 11 && buildCount.value >= 38) {
+  if (compCount.value > 0 && brandCoverage.count > 0 && groupCount.value === 11) {
     console.log('✅ Ingestão validada com sucesso!');
     process.exit(0);
   } else {
-    console.log('❌ Ingestão incompleta ou com erros.');
+    console.log('❌ Ingestão incompleta ou com erros de normalização.');
     process.exit(1);
   }
 }

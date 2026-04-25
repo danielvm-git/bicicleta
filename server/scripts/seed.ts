@@ -3,13 +3,21 @@ import fs from 'fs';
 import path from 'path';
 import { db } from '../database/db';
 import { components, groups, builds, buildComponents } from '../database/schema';
-import { parseCSV, parseBikeKV, parseXLSX, cleanPrice } from '../utils/parser';
+import { parseCSV, parseBikeKV, parseXLSX, cleanPrice, inferMetadata } from '../utils/parser';
 
 async function seed() {
   const dryRun = process.argv.includes('--dry-run');
 
   if (dryRun) {
     console.log('--- DRY RUN ---');
+  }
+
+  if (!dryRun) {
+    console.log('Cleaning existing data...');
+    await db.delete(buildComponents);
+    await db.delete(builds);
+    await db.delete(groups);
+    await db.delete(components);
   }
 
   // 1. Seed Components from Tabular CSV
@@ -33,17 +41,21 @@ async function seed() {
         
         if (category === 'TOTAL' || !category || !model) continue;
 
+        const { brand: inferredBrand, line: inferredLine } = inferMetadata(String(model), file);
+
         const data = {
           category: String(category).trim(),
           model: String(model).trim(),
+          brand: row.Marca || row.brand || inferredBrand,
+          line: row.Linha || row.line || inferredLine,
           link: row.Link || row.url,
           price: cleanPrice(row.Preço || row.Preco || row.Valor || '0'),
         };
         
         if (!dryRun) {
-          await db.insert(components).values(data as any);
+          await db.insert(components).values(data);
         } else {
-          console.log(`[DRY RUN] Would insert component: [${data.category}] ${data.model} from ${file}`);
+          console.log(`[DRY RUN] Would insert component: [${data.category}] ${data.model} (Brand: ${data.brand}, Line: ${data.line}) from ${file}`);
         }
       }
     }
@@ -97,6 +109,8 @@ async function seed() {
           const [insertedComponent] = await db.insert(components).values({
             category: component.category,
             model: component.model,
+            brand: component.brand,
+            line: component.line,
             price: '0',
           }).returning();
 
@@ -134,8 +148,10 @@ async function seed() {
           const [insertedComponent] = await db.insert(components).values({
             category: component.category,
             model: component.model,
+            brand: component.brand,
+            line: component.line,
             link: component.link,
-            price: (component as any).price || '0',
+            price: component.price || '0',
           }).returning();
 
           await db.insert(buildComponents).values({
