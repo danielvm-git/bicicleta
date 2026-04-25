@@ -11,7 +11,7 @@ export interface BikeComponent {
 }
 
 export const useBuilder = () => {
-  const selectedComponents = ref<Record<string, BikeComponent>>({})
+  const selectedComponents = useState<Record<string, BikeComponent>>('builder-selected-components', () => ({}))
 
   const selectComponent = (component: BikeComponent) => {
     selectedComponents.value[component.category] = component

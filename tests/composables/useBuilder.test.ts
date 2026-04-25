@@ -6,11 +6,27 @@ describe('useBuilder', () => {
 
   beforeEach(() => {
     builder = useBuilder()
+    builder.clearBuild()
   })
 
   it('should start with an empty build', () => {
     expect(builder.selectedComponents.value).toEqual({})
     expect(builder.totalPrice.value).toBe(0)
+  })
+
+  it('should persist state across different instances', () => {
+    const component = {
+      id: 1,
+      category: 'Quadro',
+      model: 'Absolute Nero',
+      price: 500
+    }
+    
+    builder.selectComponent(component)
+    
+    // Get a new instance
+    const newBuilder = useBuilder()
+    expect(newBuilder.selectedComponents.value['Quadro']).toEqual(component)
   })
 
   it('should select a component', () => {
