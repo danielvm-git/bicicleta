@@ -6,7 +6,12 @@ const { data: allComponents } = await useFetch('/api/components')
 
 // Persistência de builds
 const isOpen = ref(false)
-const { data: buildsList, refresh: refreshBuilds, pending } = await useFetch('/api/builds', {
+const isCompareOpen = ref(false)
+const { data: buildsList, refresh: refreshBuilds, pending: buildsPending } = await useFetch('/api/builds', {
+  lazy: true,
+  server: false
+})
+const { data: templates, pending: templatesPending } = await useFetch('/api/builds/templates', {
   lazy: true,
   server: false
 })
@@ -170,11 +175,11 @@ const formatCurrency = (value: number | string) => {
                 />
               </div>
               <UButton
-                to="/compare"
                 block
                 variant="outline"
                 color="primary"
                 icon="i-heroicons-arrows-right-left"
+                @click="isCompareOpen = true"
               >
                 Comparar com Bike Comercial
               </UButton>
@@ -195,7 +200,7 @@ const formatCurrency = (value: number | string) => {
           </div>
         </template>
 
-        <div v-if="pending" class="flex justify-center p-4">
+        <div v-if="buildsPending" class="flex justify-center p-4">
           <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
         </div>
         <div v-else-if="buildsList && buildsList.length > 0" class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -211,6 +216,37 @@ const formatCurrency = (value: number | string) => {
         </div>
         <div v-else class="text-center py-4 text-gray-500">
           Nenhuma montagem salva encontrada.
+        </div>
+      </UCard>
+    </UModal>
+
+    <UModal v-model="isCompareOpen">
+      <UCard>
+        <template #header>
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+              Selecionar Bike Comercial para Comparar
+            </h3>
+            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isCompareOpen = false" />
+          </div>
+        </template>
+
+        <div v-if="templatesPending" class="flex justify-center p-4">
+          <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
+        </div>
+        <div v-else-if="templates && templates.length > 0" class="divide-y divide-gray-200 dark:divide-gray-700">
+          <div v-for="template in templates" :key="template.id" class="py-3 flex justify-between items-center">
+            <div>
+              <p class="font-medium">{{ template.name }}</p>
+              <p class="text-xs text-gray-500">{{ formatCurrency(template.totalPrice) }}</p>
+            </div>
+            <UButton size="xs" color="primary" variant="soft" @click="navigateTo(`/compare?id=${template.id}`)">
+              Comparar
+            </UButton>
+          </div>
+        </div>
+        <div v-else class="text-center py-4 text-gray-500">
+          Nenhum template comercial encontrado.
         </div>
       </UCard>
     </UModal>
