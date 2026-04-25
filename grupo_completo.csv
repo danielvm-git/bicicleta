@@ -1,0 +1,12 @@
+Marca,Linha,Configuracao,Trocador_Dianteiro,Trocador_Traseiro,Cambio_Dianteiro,Cambio_Traseiro,Cassete,Movimento_Central,Corrente,Pedivela,Tipo_Eixo
+Shimano,Alivio M3100,2x9 (18v),SL-M3100-L,SL-M3100-R,FD-M3120-M,RD-M3100-SGS,CS-HG200-9,BB-MT501,CN-HG53,FC-MT210-2,Integrado (MT210)
+Shimano,Deore M4100,2x10 (20v),SL-M4100-L,SL-M4100-R,FD-M4100-M,RD-M4120-SGS,CS-M4100-10,BB-MT501,CN-HG54,FC-M4100-2,Integrado (Hollowtech II)
+Shimano,Deore M5100,2x11 (22v),SL-M5100-L,SL-M5100-R,FD-M5100-M,RD-M5120-SGS,CS-M5100-11,BB-MT501,CN-HG601-11,FC-M5100-2,Integrado (Hollowtech II)
+Shimano,Deore M6100,1x12 (12v),N/A,SL-M6100-R,N/A,RD-M6100-SGS,CS-M6100-12,BB-MT501,CN-M6100,FC-M6100-1,Integrado (Hollowtech II)
+Shimano,CUES U4000,2x9 (18v),SL-U4000-L,SL-U4000-9R,FD-U4000-M,RD-U4020-SGS,CS-LG300-9,BB-UN300,CN-LG500,FC-U4000-2,Ponta Quadrada
+Shimano,CUES U6000,2x10 (20v),SL-U6000-L,SL-U6000-10R,FD-U6000-M,RD-U6020-10,CS-LG400-10,BB-MT501,CN-LG500,FC-U6000-2,Integrado
+Shimano,CUES U6000,2x11 (22v),SL-U6000-L,SL-U6000-11R,FD-U6000-M,RD-U6020-11,CS-LG400-11,BB-MT501,CN-LG500,FC-U6000-2,Integrado
+SRAM,SX Eagle,1x12 (12v),N/A,SX Eagle Trigger,N/A,SX Eagle 12v,PG-1210 Eagle,SRAM DUB BSA,SX Eagle,SX Eagle DUB,Integrado (DUB)
+Absolute,Wild,2x9 (18v),Absolute Wild L,Absolute Wild R,Absolute Wild FD,Absolute Wild RD,Absolute 9v,Ponta Quadrada,Absolute 9v,Absolute Wild 2v,Ponta Quadrada
+Absolute,Prime,2x10 (20v),Absolute Prime L,Absolute Prime R,Absolute Prime FD,Absolute Prime RD,Absolute Prime 10v,Absolute Integrado,Absolute 10v,Absolute Prime 2v,Integrado
+Absolute,Prime,1x12 (12v),N/A,Absolute Prime 12vR,N/A,Absolute Prime 12vRD,Absolute Prime 12v,Absolute Integrado,Absolute 12v,Absolute Prime 1v,Integrado
