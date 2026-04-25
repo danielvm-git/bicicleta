@@ -1,0 +1,16 @@
+[
+  {
+    "id": "813a202d",
+    "label": "bash",
+    "command": "bash",
+    "cwd": "/Users/me/Sites/bicicleta",
+    "ownerSessionFile": "/Users/me/.gsd/sessions/--Users-me-Sites-bicicleta--/2026-04-25T03-14-43-739Z_694ab9cb-a824-4775-9792-bb9933b1a1c9.jsonl",
+    "persistAcrossSessions": false,
+    "startedAt": 1777086913482,
+    "processType": "shell",
+    "group": null,
+    "readyPattern": null,
+    "readyPort": null,
+    "pid": 85360
+  }
+]
