@@ -1,62 +1,81 @@
 import type { BikeComponent, CompatibilityIssue } from "~/types/bike";
 
-export const validateBike = (
-  components: BikeComponent[]
-): CompatibilityIssue[] => {
-  const issues: CompatibilityIssue[] = [];
-  if (components.length === 0) return issues;
+type RuleFn = (components: BikeComponent[]) => CompatibilityIssue[];
 
-  // 1. Drivetrain speeds check
-  const drivetrainCategories = [
-    "Cassete",
-    "Câmbio Traseiro",
-    "Câmbio Dianteiro",
-    "Alavanca de Câmbio",
-    "Transmissão",
-  ];
+const DRIVETRAIN_CATEGORIES = [
+  "Cassete",
+  "Câmbio Traseiro",
+  "Câmbio Dianteiro",
+  "Alavanca de Câmbio",
+  "Transmissão",
+] as const;
+
+const DRIVETRAIN_CATEGORY_SET = new Set<string>(DRIVETRAIN_CATEGORIES);
+
+function isDrivetrainCategory(category: string): boolean {
+  return DRIVETRAIN_CATEGORY_SET.has(category);
+}
+
+const ruleDrivetrainSpeeds: RuleFn = (components) => {
   const selectedSpeeds = components
-    .filter((c) => drivetrainCategories.includes(c.category) && c.speeds)
+    .filter((c) => isDrivetrainCategory(c.category) && c.speeds)
     .map((c) => c.speeds);
-
   const uniqueSpeeds = new Set(selectedSpeeds);
-  if (uniqueSpeeds.size > 1) {
-    issues.push({
-      severity: "error",
-      message: `Incompatibilidade de velocidades: misturando ${Array.from(uniqueSpeeds).join(", ")}`,
-    });
+  if (uniqueSpeeds.size <= 1) {
+    return [];
   }
+  const involved = components.filter(
+    (c) => isDrivetrainCategory(c.category) && Boolean(c.speeds)
+  );
+  return [
+    {
+      ruleId: "drivetrain_speed_mismatch",
+      severity: "error" as const,
+      message: `Incompatibilidade de velocidades: misturando ${Array.from(uniqueSpeeds).join(", ")}`,
+      relatedComponentIds: involved.map((c) => c.id),
+    },
+  ];
+};
 
-  // 2. Rear Axle check (Quadro vs Cubo)
+const ruleBoostRearAxle: RuleFn = (components) => {
   const frame = components.find((c) => c.category === "Quadro");
   const hubs = components.filter((c) => c.category === "Cubo");
-
-  if (frame?.axleType?.includes("Boost 148mm")) {
-    const nonBoostHub = hubs.find(
-      (h) => h.axleType && !h.axleType.includes("148")
-    );
-    if (nonBoostHub) {
-      issues.push({
-        severity: "error",
-        message:
-          "Cubo traseiro incompatível: Quadro Boost exige cubo Boost 148mm.",
-        category: "Cubo",
-      });
-    }
+  if (!frame?.axleType?.includes("Boost 148mm")) {
+    return [];
   }
+  const nonBoostHub = hubs.find(
+    (h) => h.axleType && !h.axleType.includes("148")
+  );
+  if (!nonBoostHub) {
+    return [];
+  }
+  return [
+    {
+      ruleId: "boost_rear_axle",
+      severity: "error" as const,
+      message:
+        "Cubo traseiro incompatível: Quadro Boost exige cubo Boost 148mm.",
+      componentId: nonBoostHub.id,
+      category: "Cubo",
+    },
+  ];
+};
 
-  // 3. Steering check (Quadro vs Suspensão)
+const ruleSteeringFrameVsSuspension: RuleFn = (components) => {
+  const frame = components.find((c) => c.category === "Quadro");
   const suspension = components.find((c) => c.category === "Suspensão");
-  const headset = components.find((c) => c.category === "Caixa de Direção");
-
+  const out: CompatibilityIssue[] = [];
   if (frame?.steeringType && suspension?.steeringType) {
     if (
       frame.steeringType === "Over" &&
       suspension.steeringType === "Tapered"
     ) {
-      issues.push({
+      out.push({
+        ruleId: "steering_over_tapered_error",
         severity: "error",
         message:
           "Direção incompatível: Quadro 'Over' não suporta suspensão 'Tapered'.",
+        componentId: suspension.id,
         category: "Suspensão",
       });
     }
@@ -64,33 +83,93 @@ export const validateBike = (
       frame.steeringType === "Tapered" &&
       suspension.steeringType === "Over"
     ) {
-      issues.push({
+      out.push({
+        ruleId: "steering_tapered_over_warning",
         severity: "warning",
         message:
           "Aviso: Suspensão 'Over' em quadro 'Tapered' exige caixa de direção com redutor.",
+        componentId: suspension.id,
         category: "Suspensão",
       });
     }
   }
+  return out;
+};
 
-  if (headset?.model && frame?.steeringType) {
-    const headsetModel = headset.model.toLowerCase();
-    const isHeadsetTapered =
-      headsetModel.includes("52") ||
-      headsetModel.includes("56") ||
-      headsetModel.includes("tapered");
-    if (frame.steeringType === "Over" && isHeadsetTapered) {
-      issues.push({
-        severity: "error",
+const ruleHeadsetVsFrame: RuleFn = (components) => {
+  const frame = components.find((c) => c.category === "Quadro");
+  const headset = components.find((c) => c.category === "Caixa de Direção");
+  if (!headset?.model || !frame?.steeringType) {
+    return [];
+  }
+  const headsetModel = headset.model.toLowerCase();
+  const isHeadsetTapered =
+    headsetModel.includes("52") ||
+    headsetModel.includes("56") ||
+    headsetModel.includes("tapered");
+  if (frame.steeringType === "Over" && isHeadsetTapered) {
+    return [
+      {
+        ruleId: "steering_headset_tapered_on_over_error",
+        severity: "error" as const,
         message:
           "Caixa de Direção incompatível: Quadro 'Over' (44mm) não suporta caixa 'Tapered'.",
+        componentId: headset.id,
         category: "Caixa de Direção",
-      });
-    }
+      },
+    ];
   }
+  return [];
+};
 
+const COMPATIBILITY_RULES: RuleFn[] = [
+  ruleDrivetrainSpeeds,
+  ruleBoostRearAxle,
+  ruleSteeringFrameVsSuspension,
+  ruleHeadsetVsFrame,
+];
+
+/**
+ * CompatibilityEngine: runs all **Rule**s; public **seam** for **Bike** validation.
+ */
+export const validateBike = (
+  components: BikeComponent[]
+): CompatibilityIssue[] => {
+  if (components.length === 0) {
+    return [];
+  }
+  const issues: CompatibilityIssue[] = [];
+  for (const rule of COMPATIBILITY_RULES) {
+    issues.push(...rule(components));
+  }
   return issues;
 };
+
+/**
+ * Whether a **CompatibilityIssue** should mark a builder row as “incompatible” for sorting,
+ * given a candidate **Component** (replaces fragile `message.includes(model)` where possible).
+ */
+export function issueRelevantForBuilderPreview(
+  issue: CompatibilityIssue,
+  component: BikeComponent
+): boolean {
+  if (issue.severity === "error") {
+    return true;
+  }
+  if (issue.message.includes(component.model)) {
+    return true;
+  }
+  if (issue.componentId != null && issue.componentId === component.id) {
+    return true;
+  }
+  if (issue.relatedComponentIds?.includes(component.id)) {
+    return true;
+  }
+  if (issue.category && issue.category === component.category) {
+    return true;
+  }
+  return false;
+}
 
 export const checkComponentCompatibility = (
   component: BikeComponent,
@@ -98,24 +177,18 @@ export const checkComponentCompatibility = (
 ): { compatible: boolean; reason?: string } => {
   const frame = bikeComponents.find((c) => c.category === "Quadro");
 
-  // 1. Drivetrain speeds
-  const drivetrainCategories = [
-    "Cassete",
-    "Câmbio Traseiro",
-    "Câmbio Dianteiro",
-    "Alavanca de Câmbio",
-    "Transmissão",
-  ];
-  if (drivetrainCategories.includes(component.category) && component.speeds) {
+  if (isDrivetrainCategory(component.category) && component.speeds) {
     const existing = bikeComponents.find(
-      (c) => drivetrainCategories.includes(c.category) && c.speeds
+      (c) => isDrivetrainCategory(c.category) && c.speeds
     );
     if (existing && existing.speeds !== component.speeds) {
-      return { compatible: false, reason: `Exige ${existing.speeds}` };
+      return {
+        compatible: false,
+        reason: `Exige ${existing.speeds}`,
+      };
     }
   }
 
-  // 2. Rear Axle (Hub vs Frame)
   if (
     component.category === "Cubo" &&
     frame?.axleType?.includes("Boost 148mm")
@@ -134,7 +207,6 @@ export const checkComponentCompatibility = (
     }
   }
 
-  // 3. Steering
   if (
     component.category === "Suspensão" &&
     frame?.steeringType === "Over" &&

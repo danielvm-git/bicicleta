@@ -21,8 +21,10 @@ describe("CompatibilityEngine", () => {
     ];
     const issues = validateBike(bike);
     expect(issues).toHaveLength(1);
+    expect(issues[0].ruleId).toBe("drivetrain_speed_mismatch");
     expect(issues[0].severity).toBe("error");
     expect(issues[0].message).toContain("12v, 11v");
+    expect(issues[0].relatedComponentIds).toBeDefined();
   });
 
   it("should detect non-boost hub on boost frame", () => {
@@ -32,8 +34,10 @@ describe("CompatibilityEngine", () => {
     ];
     const issues = validateBike(bike);
     expect(issues).toHaveLength(1);
+    expect(issues[0].ruleId).toBe("boost_rear_axle");
     expect(issues[0].severity).toBe("error");
     expect(issues[0].message).toContain("Quadro Boost exige cubo Boost 148mm");
+    expect(issues[0].componentId).toBe(bike[1].id);
   });
 
   it("should warn about Over fork in Tapered frame", () => {
@@ -43,6 +47,7 @@ describe("CompatibilityEngine", () => {
     ];
     const issues = validateBike(bike);
     expect(issues).toHaveLength(1);
+    expect(issues[0].ruleId).toBe("steering_tapered_over_warning");
     expect(issues[0].severity).toBe("warning");
     expect(issues[0].message).toContain("exige caixa de direção com redutor");
   });
@@ -54,6 +59,7 @@ describe("CompatibilityEngine", () => {
     ];
     const issues = validateBike(bike);
     expect(issues).toHaveLength(1);
+    expect(issues[0].ruleId).toBe("steering_over_tapered_error");
     expect(issues[0].severity).toBe("error");
     expect(issues[0].message).toContain("não suporta suspensão");
   });

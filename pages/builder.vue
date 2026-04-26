@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { toValue } from "vue";
 const bike = useBikeBuilder();
 const { loggedIn } = useNeonAuth();
+
+const issuesList = computed(() => toValue(bike.issues));
+const totalPriceValue = computed(() => toValue(bike.totalPrice));
 
 const { data: categories } = await useFetch("/api/categories");
 const { data: allComponents } = await useFetch("/api/components");
@@ -140,10 +144,10 @@ const isOutdated = (date: string | Date | null) => {
 };
 
 const hasCompatibilityError = computed(() =>
-  bike.issues.some((i) => i.severity === "error")
+  issuesList.value.some((i) => i.severity === "error")
 );
 const hasCompatibilityWarning = computed(() =>
-  bike.issues.some((i) => i.severity === "warning")
+  issuesList.value.some((i) => i.severity === "warning")
 );
 </script>
 
@@ -171,14 +175,14 @@ const hasCompatibilityWarning = computed(() =>
         <div class="text-right">
           <p class="text-sm text-gray-500">Total Estimado</p>
           <p class="text-2xl font-bold text-primary">
-            {{ formatCurrency(bike.totalPrice) }}
+            {{ formatCurrency(totalPriceValue) }}
           </p>
         </div>
       </div>
     </div>
 
     <UAlert
-      v-if="bike.issues.length > 0"
+      v-if="issuesList.length > 0"
       :color="hasCompatibilityError ? 'red' : 'orange'"
       variant="soft"
       icon="i-heroicons-exclamation-triangle"
@@ -187,7 +191,7 @@ const hasCompatibilityWarning = computed(() =>
     >
       <template #description>
         <ul class="list-disc list-inside">
-          <li v-for="issue in bike.issues" :key="issue.message">
+          <li v-for="issue in issuesList" :key="issue.ruleId + issue.message">
             <span :class="{ 'font-bold': issue.severity === 'error' }">{{
               issue.message
             }}</span>

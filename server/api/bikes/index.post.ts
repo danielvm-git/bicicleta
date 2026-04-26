@@ -5,15 +5,8 @@ import { rethrowH3Error } from "~/server/utils/http";
 import { checkRateLimit } from "~/server/utils/rateLimit";
 import { bikePostBodySchema } from "~/server/api/bikes/bikePostBody";
 import { validateBike } from "~/utils/compatibility";
+import { sumComponentPrices } from "~/utils/bikePrice";
 import { getNeonSession, getNeonUserId } from "~/server/utils/neonSession";
-
-function sumComponentPrices(components: { price: string | null }[]) {
-  return components.reduce((sum, c) => {
-    const p = parseFloat(c.price || "0");
-    const n = Number.isFinite(p) && p >= 0 ? p : 0;
-    return sum + n;
-  }, 0);
-}
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);

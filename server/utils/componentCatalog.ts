@@ -2,6 +2,17 @@ import { components } from "~/server/database/schema";
 import { and, eq, ilike, or, type SQL } from "drizzle-orm";
 
 /**
+ * `name` on `defineCachedEventHandler` for each catalog endpoint — single source of truth
+ * so invalidation stays aligned with handlers.
+ */
+export const CATALOG_CACHE_HANDLER_NAME = {
+  components: "api-components",
+  categories: "api-categories",
+  brands: "api-brands",
+  lines: "api-lines",
+} as const;
+
+/**
  * Standard **Component** facet + text filters (list endpoints). Keeps the catalog
  * query seam in one place.
  */
@@ -53,10 +64,7 @@ export async function invalidateComponentCatalogCaches() {
   const keys = await storage.getKeys();
   for (const key of keys) {
     if (
-      key.includes("api-components") ||
-      key.includes("api-categories") ||
-      key.includes("api-brands") ||
-      key.includes("api-lines")
+      Object.values(CATALOG_CACHE_HANDLER_NAME).some((n) => key.includes(n))
     ) {
       await storage.removeItem(key);
     }

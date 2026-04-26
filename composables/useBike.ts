@@ -1,6 +1,10 @@
 import { ref, computed, reactive, toRaw } from "vue";
-import type { BikeComponent, CompatibilityIssue } from "../types/bike";
-import { validateBike } from "~/utils/compatibility";
+import type { BikeComponent } from "../types/bike";
+import {
+  issueRelevantForBuilderPreview,
+  validateBike,
+} from "~/utils/compatibility";
+import { sumComponentPrices } from "~/utils/bikePrice";
 
 export interface BikeState {
   name: string;
@@ -17,14 +21,10 @@ export const createBike = (initialState?: Partial<BikeState>) => {
 
   const safeNonNegative = (n: number) => (!Number.isFinite(n) || n < 0 ? 0 : n);
 
-  // Leverage: Price calculation hidden behind a simple getter
-  const totalPrice = computed(() => {
-    return Object.values(state.components).reduce((total, component) => {
-      const raw = parseFloat(String(component.price));
-      const price = safeNonNegative(raw);
-      return total + price;
-    }, 0);
-  });
+  // Leverage: Price aggregate shared with server POST /api/bikes (see utils/bikePrice)
+  const totalPrice = computed(() =>
+    sumComponentPrices(Object.values(state.components))
+  );
 
   // Leverage: Weight calculation hidden behind a simple getter
   const totalWeight = computed(() => {
@@ -52,8 +52,8 @@ export const createBike = (initialState?: Partial<BikeState>) => {
       [component.category]: component,
     };
     const tempIssues = validateBike(Object.values(tempComponents));
-    const relevantIssues = tempIssues.filter(
-      (i) => i.message.includes(component.model) || i.severity === "error"
+    const relevantIssues = tempIssues.filter((i) =>
+      issueRelevantForBuilderPreview(i, component)
     );
 
     if (relevantIssues.length > 0) {

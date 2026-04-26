@@ -2,6 +2,7 @@ import { db } from "../database/db";
 import { components } from "../database/schema";
 import {
   andComponentFilters,
+  CATALOG_CACHE_HANDLER_NAME,
   componentCatalogFilters,
 } from "~/server/utils/componentCatalog";
 
@@ -24,7 +25,7 @@ export default defineCachedEventHandler(
   },
   {
     maxAge: 60 * 15,
-    name: "api-components",
+    name: CATALOG_CACHE_HANDLER_NAME.components,
     getKey: (event) => {
       const query = getQuery(event);
       return JSON.stringify(query);

@@ -99,4 +99,12 @@ Ownership uses the **Neon Auth user `id`**, not the legacy GitHub numeric id. If
 
 ## Database
 
+### First-time local database
+
+1. Copy [`.env.example`](.env.example) to `.env` and set **`DATABASE_URL`** to your Neon (or other Postgres) connection string.
+2. Apply the Drizzle schema to that database: **`npm run setup:db`** (alias for `drizzle-kit push`, same as `npm run db:push`). This creates tables such as `bikes` and `components` from [server/database/schema.ts](server/database/schema.ts).
+3. Restart **`npm run dev`**.
+
+If the server logs `relation "bikes" does not exist` (for example on `GET /api/bikes/public`), the app is connected to a database where the schema has not been applied—fix the URL if needed, then run **`npm run setup:db`** again.
+
 Apply new migrations (for example `0006_add_fk_cascade.sql`) with your usual process (`drizzle-kit` migrate or `drizzle-kit push` in development). The repo also documents cascade FKs in [server/database/schema.ts](server/database/schema.ts).

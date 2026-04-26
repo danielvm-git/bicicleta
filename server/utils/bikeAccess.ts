@@ -1,5 +1,6 @@
 import { bikes } from "~/server/database/schema";
-import { and, eq } from "drizzle-orm";
+import { and, eq, or, type SQL } from "drizzle-orm";
+import type { PgColumn } from "drizzle-orm/pg-core";
 
 /**
  * List bikes: "mine" (query.user === true) vs public catalog.
@@ -8,7 +9,7 @@ import { and, eq } from "drizzle-orm";
 export function resolveBikesListFilter(
   userParam: unknown,
   userId: string | undefined
-): { mode: "empty" } | { mode: "ok"; where: ReturnType<typeof eq> } {
+): { mode: "empty" } | { mode: "ok"; where: SQL<unknown> } {
   const userOnly =
     userParam === "true" ||
     (Array.isArray(userParam) && userParam[0] === "true");
@@ -21,21 +22,32 @@ export function resolveBikesListFilter(
   return { mode: "ok", where: eq(bikes.isPublic, true) };
 }
 
+/** First argument to Drizzle relational `findFirst({ where })` is column fields, not the table. */
+type BikesReadWhereFields = {
+  slug: PgColumn;
+  isPublic: PgColumn;
+  userId: PgColumn;
+};
+
+type RelationalWhere = (
+  fields: BikesReadWhereFields,
+  operators: { eq: typeof eq; and: typeof and; or: typeof or }
+) => SQL<unknown> | undefined;
+
 /**
  * Single-bike read: public, or owned by the current user, or (when anonymous) public only.
  */
 export function whereBikeBySlugForReader(
   slug: string,
   userId: string | undefined
-) {
-  // Drizzle relational `where` uses a generated column module; keep callback untyped.
-  return (tbl: any, { eq, and, or: orFn }: any) => {
+): RelationalWhere {
+  return (fields, { eq, and, or: orFn }): SQL<unknown> => {
     if (!userId) {
-      return and(eq(tbl.slug, slug), eq(tbl.isPublic, true));
+      return and(eq(fields.slug, slug), eq(fields.isPublic, true))!;
     }
     return and(
-      eq(tbl.slug, slug),
-      orFn(eq(tbl.isPublic, true), eq(tbl.userId, userId))
-    );
+      eq(fields.slug, slug),
+      orFn(eq(fields.isPublic, true), eq(fields.userId, userId))
+    )!;
   };
 }
