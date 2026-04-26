@@ -33,12 +33,8 @@
           "name": "bike_components_bike_id_bikes_id_fk",
           "tableFrom": "bike_components",
           "tableTo": "bikes",
-          "columnsFrom": [
-            "bike_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bike_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -46,12 +42,8 @@
           "name": "bike_components_component_id_components_id_fk",
           "tableFrom": "bike_components",
           "tableTo": "components",
-          "columnsFrom": [
-            "component_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["component_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -122,9 +114,7 @@
         "bikes_slug_unique": {
           "name": "bikes_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       }
     },
@@ -164,12 +154,8 @@
           "name": "component_prices_component_id_components_id_fk",
           "tableFrom": "component_prices",
           "tableTo": "components",
-          "columnsFrom": [
-            "component_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["component_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

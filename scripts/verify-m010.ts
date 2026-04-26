@@ -48,7 +48,9 @@ async function verify() {
     process.exit(1);
   }
 
-  console.log("\n✅ Sucesso: Todos os componentes têm functionalGroup mapeado!");
+  console.log(
+    "\n✅ Sucesso: Todos os componentes têm functionalGroup mapeado!"
+  );
   process.exit(0);
 }
 
