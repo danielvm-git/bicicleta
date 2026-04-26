@@ -9,6 +9,12 @@ dist
 # Node dependencies
 node_modules
 
+# Playwright
+playwright-report/
+playwright/.cache/
+test-results/
+playwright-junit.xml
+
 # Logs
 logs
 *.log
