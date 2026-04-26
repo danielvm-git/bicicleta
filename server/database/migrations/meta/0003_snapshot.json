@@ -1,0 +1,332 @@
+{
+  "id": "990f8d78-a008-4c8e-8ff5-966747e79cbf",
+  "prevId": "1651b2a5-2fa7-4fcb-ba26-b26db1f7d0d2",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "public.build_components": {
+      "name": "build_components",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "build_id": {
+          "name": "build_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "component_id": {
+          "name": "component_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "build_components_build_id_builds_id_fk": {
+          "name": "build_components_build_id_builds_id_fk",
+          "tableFrom": "build_components",
+          "tableTo": "builds",
+          "columnsFrom": [
+            "build_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "build_components_component_id_components_id_fk": {
+          "name": "build_components_component_id_components_id_fk",
+          "tableFrom": "build_components",
+          "tableTo": "components",
+          "columnsFrom": [
+            "component_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.builds": {
+      "name": "builds",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_price": {
+          "name": "total_price",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.component_prices": {
+      "name": "component_prices",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "component_id": {
+          "name": "component_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "component_prices_component_id_components_id_fk": {
+          "name": "component_prices_component_id_components_id_fk",
+          "tableFrom": "component_prices",
+          "tableTo": "components",
+          "columnsFrom": [
+            "component_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.components": {
+      "name": "components",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "category": {
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "model": {
+          "name": "model",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "brand": {
+          "name": "brand",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "line": {
+          "name": "line",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "weight": {
+          "name": "weight",
+          "type": "numeric(10, 3)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "speeds": {
+          "name": "speeds",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "steering_type": {
+          "name": "steering_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "axle_type": {
+          "name": "axle_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suspension_travel": {
+          "name": "suspension_travel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.groups": {
+      "name": "groups",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "brand": {
+          "name": "brand",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "line": {
+          "name": "line",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "configuration": {
+          "name": "configuration",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "front_shifter": {
+          "name": "front_shifter",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rear_shifter": {
+          "name": "rear_shifter",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "front_derailleur": {
+          "name": "front_derailleur",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rear_derailleur": {
+          "name": "rear_derailleur",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cassette": {
+          "name": "cassette",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bottom_bracket": {
+          "name": "bottom_bracket",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "chain": {
+          "name": "chain",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "crankset": {
+          "name": "crankset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "axle_type": {
+          "name": "axle_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
