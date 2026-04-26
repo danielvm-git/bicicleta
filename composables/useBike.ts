@@ -1,4 +1,4 @@
-import { ref, computed, reactive, toRaw } from "vue";
+import { computed } from "vue";
 import type { BikeComponent } from "../types/bike";
 import {
   issueRelevantForBuilderPreview,
@@ -12,43 +12,47 @@ export interface BikeState {
   components: Record<string, BikeComponent>;
 }
 
-export const createBike = (initialState?: Partial<BikeState>) => {
-  const state = reactive<BikeState>({
-    name: initialState?.name || "Nova Bike",
-    description: initialState?.description || "",
-    components: initialState?.components || {},
-  });
+// Global singleton for the builder
+export const useBikeBuilder = () => {
+  const state = useState<BikeState>("builder-selected-components", () => ({
+    name: "Nova Bike",
+    description: "",
+    components: {},
+  }));
 
   const safeNonNegative = (n: number) => (!Number.isFinite(n) || n < 0 ? 0 : n);
 
   // Leverage: Price aggregate shared with server POST /api/bikes (see utils/bikePrice)
   const totalPrice = computed(() =>
-    sumComponentPrices(Object.values(state.components))
+    sumComponentPrices(Object.values(state.value.components))
   );
 
   // Leverage: Weight calculation hidden behind a simple getter
   const totalWeight = computed(() => {
-    const total = Object.values(state.components).reduce((acc, component) => {
-      const w = component.weight ? parseFloat(String(component.weight)) : 0;
-      return acc + safeNonNegative(w);
-    }, 0);
+    const total = Object.values(state.value.components).reduce(
+      (acc, component) => {
+        const w = component.weight ? parseFloat(String(component.weight)) : 0;
+        return acc + safeNonNegative(w);
+      },
+      0
+    );
     return Math.round(total * 1000) / 1000;
   });
 
   // Locality: Compatibility check integrated into the model
   const issues = computed(() => {
-    return validateBike(Object.values(state.components));
+    return validateBike(Object.values(state.value.components));
   });
 
   // Methods
   const selectComponent = (component: BikeComponent) => {
-    state.components[component.category] = component;
+    state.value.components[component.category] = component;
   };
 
   const checkCompatibility = (component: BikeComponent) => {
     // Basic implementation: check if this component would cause issues if added
     const tempComponents = {
-      ...state.components,
+      ...state.value.components,
       [component.category]: component,
     };
     const tempIssues = validateBike(Object.values(tempComponents));
@@ -63,25 +67,25 @@ export const createBike = (initialState?: Partial<BikeState>) => {
   };
 
   const removeComponent = (category: string) => {
-    delete state.components[category];
+    delete state.value.components[category];
   };
 
   const clear = () => {
-    state.components = {};
-    state.name = "Nova Bike";
-    state.description = "";
+    state.value.components = {};
+    state.value.name = "Nova Bike";
+    state.value.description = "";
   };
 
   // Locality: Persistence logic inside the module
   const save = async (customName?: string) => {
-    if (customName) state.name = customName;
+    if (customName) state.value.name = customName;
 
     return await $fetch<{ id: number; slug: string }>("/api/bikes", {
       method: "POST",
       body: {
-        name: state.name,
-        description: state.description,
-        componentIds: Object.values(state.components).map((c) => c.id),
+        name: state.value.name,
+        description: state.value.description,
+        componentIds: Object.values(state.value.components).map((c) => c.id),
         totalPrice: totalPrice.value,
       },
     });
@@ -94,7 +98,7 @@ export const createBike = (initialState?: Partial<BikeState>) => {
     return shareUrl;
   };
 
-  return {
+  return reactive({
     state,
     totalPrice,
     totalWeight,
@@ -105,11 +109,5 @@ export const createBike = (initialState?: Partial<BikeState>) => {
     clear,
     save,
     share,
-  };
-};
-
-// Global singleton for the builder
-export const useBikeBuilder = () => {
-  const bike = useState("current-bike", () => createBike());
-  return bike.value;
+  });
 };

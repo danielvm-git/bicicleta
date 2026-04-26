@@ -4,6 +4,7 @@ export interface BikeComponent {
   model: string;
   brand?: string | null;
   line?: string | null;
+  functionalGroup?: string | null;
   link?: string | null;
   price: string;
   weight?: string | null;

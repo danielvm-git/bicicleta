@@ -61,20 +61,32 @@ const componentsMap = computed(() => {
 
 const groupItems = computed(() => {
   if (!hierarchy.value) return [];
-  return Object.keys(hierarchy.value).map((group) => ({
-    label: group,
-    slot: group,
-    categories: hierarchy.value[group],
-    defaultOpen: true,
-  }));
+  return Object.keys(hierarchy.value).map((group) => {
+    const categories = hierarchy.value[group] as string[];
+    const selectedCount = categories.filter(
+      (cat) => bike.state.components[cat]
+    ).length;
+
+    return {
+      label: `${group} (${selectedCount}/${categories.length})`,
+      slot: group,
+      categories,
+      defaultOpen: true,
+    };
+  });
 });
 
 const getCategoryItems = (categories: string[]) => {
-  return categories.map((category) => ({
-    label: category,
-    slot: category,
-    defaultOpen: false,
-  }));
+  return categories.map((category) => {
+    const selected = bike.state.components[category];
+    return {
+      label: selected
+        ? `${category}: ${selected.brand} ${selected.model}`
+        : category,
+      slot: category,
+      defaultOpen: false,
+    };
+  });
 };
 
 const saveBike = async () => {
@@ -184,9 +196,17 @@ const hasCompatibilityWarning = computed(() =>
         </UButton>
         <div class="text-right">
           <p class="text-sm text-gray-500">Total Estimado</p>
-          <p class="text-2xl font-bold text-primary">
-            {{ formatCurrency(totalPriceValue) }}
-          </p>
+          <div class="flex items-baseline justify-end gap-2">
+            <p
+              v-if="bike.totalWeight > 0"
+              class="text-sm text-gray-400 font-medium"
+            >
+              {{ bike.totalWeight }} kg
+            </p>
+            <p class="text-2xl font-bold text-primary">
+              {{ formatCurrency(totalPriceValue) }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -210,7 +230,18 @@ const hasCompatibilityWarning = computed(() =>
       </template>
     </UAlert>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div
+      v-if="!hierarchy"
+      class="flex flex-col items-center justify-center py-20"
+    >
+      <UIcon
+        name="i-heroicons-arrow-path"
+        class="animate-spin text-4xl text-primary mb-4"
+      />
+      <p class="text-gray-500">Carregando catálogo...</p>
+    </div>
+
+    <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2 no-print">
         <UAccordion
           :items="groupItems"
@@ -335,6 +366,9 @@ const hasCompatibilityWarning = computed(() =>
                 </p>
                 <p class="truncate text-sm">
                   {{ comp.brand }} {{ comp.model }}
+                  <span v-if="comp.weight" class="text-xs text-gray-400">
+                    ({{ comp.weight }}kg)
+                  </span>
                 </p>
               </div>
               <div class="text-right ml-4">
@@ -354,6 +388,13 @@ const hasCompatibilityWarning = computed(() =>
 
           <template #footer>
             <div class="flex flex-col gap-2 no-print">
+              <div
+                v-if="bike.totalWeight > 0"
+                class="flex justify-between items-center mb-2 px-1"
+              >
+                <span class="text-gray-500 font-medium">Peso Total:</span>
+                <span class="font-bold">{{ bike.totalWeight }} kg</span>
+              </div>
               <div class="flex gap-2">
                 <UButton
                   block
