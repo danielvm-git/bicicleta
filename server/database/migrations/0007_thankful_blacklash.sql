@@ -9,14 +9,15 @@ ALTER TABLE "bike_components" DROP CONSTRAINT "build_components_component_id_com
 ALTER TABLE "component_prices" DROP CONSTRAINT "component_prices_component_id_components_id_fk";
 --> statement-breakpoint
 ALTER TABLE "components" ADD COLUMN "functional_group" text;--> statement-breakpoint
-UPDATE "components" SET "functional_group" = CASE
-    WHEN "category" IN ('Cassete', 'Corrente', 'Câmbio Dianteiro', 'Câmbio Traseiro', 'Pedivela', 'Trocador', 'Movimento Central', 'Alavanca de Câmbio', 'Alavanca') THEN 'Transmissão'
-    WHEN "category" IN ('Guidão', 'Mesa', 'Canote', 'Selim', 'Manopla', 'Caixa de Direção', 'Suporte de Guidão', 'Canote de Selim') THEN 'Cockpit'
-    WHEN "category" IN ('Aro', 'Cubo', 'Raio', 'Par de Cubos') THEN 'Rodas'
-    WHEN "category" IN ('Pneu', 'Câmara', 'Tubeless') THEN 'Pneus'
+UPDATE components SET functional_group = CASE
+    WHEN "category" IN ('Cassete', 'Corrente', 'Câmbio Dianteiro', 'Câmbio Traseiro', 'Pedivela', 'Trocador', 'Movimento Central', 'Alavanca de Câmbio', 'Alavanca', 'Transmissão', 'Movimento', 'Pedal', 'Trocador Traseiro') THEN 'Transmissão'
+    WHEN "category" IN ('Guidão', 'Mesa', 'Canote', 'Selim', 'Manopla', 'Caixa de Direção', 'Suporte de Guidão', 'Canote de Selim', 'Cockpit') THEN 'Cockpit'
+    WHEN "category" IN ('Aro', 'Cubo', 'Raio', 'Par de Cubos', 'Rodas') THEN 'Rodas'
+    WHEN "category" IN ('Pneu', 'Câmara', 'Tubeless', 'Pneus', 'Câmara/tubeless') THEN 'Pneus'
     WHEN "category" IN ('Freio', 'Manete de Freio', 'Disco de Freio', 'Discos', 'Freios', 'Pinça') THEN 'Freios'
     WHEN "category" = 'Quadro' THEN 'Quadro'
     WHEN "category" IN ('Suspensão', 'Garfo') THEN 'Suspensão'
+    WHEN "category" IN ('Componente', 'Preço Pix', 'Build', 'Nero', 'Wild', 'Prime') THEN 'Sistema'
     ELSE 'Outros'
 END;--> statement-breakpoint
 DO $$ BEGIN
