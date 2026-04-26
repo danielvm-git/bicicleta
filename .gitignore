@@ -70,3 +70,6 @@ _bmad/**
 !_bmad/config.toml
 # Ctxo local cache (never committed)
 .ctxo/.cache/
+
+# ── GSD baseline (auto-generated) ──
+.mcp.json

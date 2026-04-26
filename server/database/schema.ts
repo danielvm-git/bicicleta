@@ -15,6 +15,7 @@ export const components = pgTable("components", {
   model: text("model").notNull(),
   brand: text("brand"),
   line: text("line"),
+  functionalGroup: text("functional_group"),
   link: text("link"),
   price: numeric("price", { precision: 10, scale: 2 }).notNull().default("0"),
   weight: numeric("weight", { precision: 10, scale: 3 }), // in kg, 3 decimals for grams
