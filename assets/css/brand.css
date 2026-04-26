@@ -1,0 +1,85 @@
+/**
+ * Daniel Builds — design tokens
+ * Fonts: Bricolage Grotesque + Source Serif 4
+ */
+:root {
+  /* Core palette */
+  --db-color-bg: #f4f0e8;
+  --db-color-bg-elevated: #fffcf7;
+  --db-color-surface: #ffffff;
+  --db-color-ink: #1a1d21;
+  --db-color-ink-muted: #4a5058;
+  --db-color-ink-faint: #6e7682;
+  --db-color-border: #d9d0c4;
+  --db-color-border-strong: #b8ae9e;
+
+  /* Accent: deep teal */
+  --db-color-accent: #0d6b6b;
+  --db-color-accent-hover: #0a5555;
+  --db-color-accent-subtle: #e6f3f2;
+
+  /* Feedback */
+  --db-color-ok: #2d6a4f;
+  --db-color-warn: #b45309;
+  --db-color-bad: #9b2335;
+
+  /* Type scale (fluid) */
+  --db-font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --db-font-body: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  
+  --db-radius: 0.5rem;
+  --db-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.05);
+  --db-motion: 180ms ease;
+}
+
+/* Global resets using tokens */
+body {
+  background-color: var(--db-color-bg);
+  color: var(--db-color-ink);
+  font-family: var(--db-font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nuxt UI Overrides */
+.border-db-border {
+  border-color: var(--db-color-border);
+}
+
+.bg-db-bg {
+  background-color: var(--db-color-bg);
+}
+
+.text-db-ink {
+  color: var(--db-color-ink);
+}
+
+/* Primary color override to match brand teal exactly */
+:root {
+  --color-primary-500: 13 107 107; /* #0d6b6b */
+  --color-primary-600: 10 85 85;  /* hover */
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--db-font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: var(--db-font-body);
+}
+
+/* Dark mode support */
+.dark {
+  --db-color-bg: #12141a;
+  --db-color-bg-elevated: #1a1d24;
+  --db-color-surface: #1f222b;
+  --db-color-ink: #e8eaed;
+  --db-color-ink-muted: #a8b0ba;
+  --db-color-ink-faint: #7a8494;
+  --db-color-border: #2e3440;
+  --db-color-border-strong: #3d4452;
+  --db-color-accent: #5ce0d6;
+  --db-color-accent-hover: #7ae8e0;
+  --db-color-accent-subtle: #152a2a;
+}

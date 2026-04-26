@@ -30,6 +30,8 @@ logs
 .gsd-id
 .mcp.json
 .bg-shell/
+_bmad-output/
+~$*.xlsx
 Thumbs.db
 *.swp
 *.swo
@@ -50,3 +52,10 @@ vendor/
 coverage/
 .cache/
 tmp/
+.openhands
+.claude
+.agents
+.agent/
+.artifacts/
+.gsd/
+*.db
