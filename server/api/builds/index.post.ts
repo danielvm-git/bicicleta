@@ -3,6 +3,8 @@ import { builds, buildComponents } from '~/server/database/schema';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+  const session = await getUserSession(event);
+  const userId = session.user?.githubId?.toString();
   
   if (!body.name || !body.componentIds || !Array.isArray(body.componentIds)) {
     throw createError({
@@ -28,10 +30,22 @@ export default defineEventHandler(async (event) => {
       }
     }
 
+    const baseSlug = name.toString().toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+    
+    const slug = `${baseSlug}-${Math.random().toString(36).substring(2, 8)}`;
+
     const [newBuild] = await db.insert(builds).values({
       name,
       description,
       totalPrice: totalPrice?.toString() || '0',
+      slug,
+      isPublic: body.isPublic !== undefined ? body.isPublic : true,
+      userId: userId || null,
     }).returning();
 
     if (componentIds.length > 0) {

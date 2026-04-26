@@ -2,8 +2,8 @@ import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
 import { db } from '../database/db';
-import { components, groups, builds, buildComponents } from '../database/schema';
-import { parseCSV, parseBikeKV, parseXLSX, cleanPrice, inferMetadata } from '../utils/parser';
+import { components, groups, builds, buildComponents, componentPrices } from '../database/schema';
+import { parseCSV, parseBikeKV, parseXLSX, cleanPrice, inferMetadata, inferTechnicalSpecs, cleanWeight, normalizeCategory } from '../utils/parser';
 
 async function seed() {
   const dryRun = process.argv.includes('--dry-run');
@@ -14,6 +14,7 @@ async function seed() {
 
   if (!dryRun) {
     console.log('Cleaning existing data...');
+    await db.delete(componentPrices);
     await db.delete(buildComponents);
     await db.delete(builds);
     await db.delete(groups);
@@ -36,12 +37,14 @@ async function seed() {
       console.log(`Processing ${file}...`);
       const componentRows = parseCSV(file);
       for (const row of componentRows) {
-        const category = row.Categoria || row.Componente || row.item;
+        const category = normalizeCategory(row.Categoria || row.Componente || row.item);
         const model = row.Modelo || row.Produto || row.item;
         
         if (category === 'TOTAL' || !category || !model) continue;
 
         const { brand: inferredBrand, line: inferredLine } = inferMetadata(String(model), file);
+        const specs = inferTechnicalSpecs(String(model), row.Especificação || row.Descricao, row.Link || row.url);
+        const weight = cleanWeight(row.Peso || String(model));
 
         const data = {
           category: String(category).trim(),
@@ -50,44 +53,24 @@ async function seed() {
           line: row.Linha || row.line || inferredLine,
           link: row.Link || row.url,
           price: cleanPrice(row.Preço || row.Preco || row.Valor || '0'),
+          weight: weight || null,
+          speeds: specs.speeds || null,
+          steeringType: specs.steeringType || null,
+          axleType: specs.axleType || null,
+          suspensionTravel: specs.suspensionTravel || null,
         };
         
         if (!dryRun) {
           await db.insert(components).values(data);
         } else {
-          console.log(`[DRY RUN] Would insert component: [${data.category}] ${data.model} (Brand: ${data.brand}, Line: ${data.line}) from ${file}`);
+          console.log(`[DRY RUN] Would insert component: [${data.category}] ${data.model} (Brand: ${data.brand}, Line: ${data.line}, Specs: ${data.speeds || 'N/A'}) from ${file}`);
         }
       }
     }
   }
 
   // 2. Seed Groups
-  console.log('Seeding groups...');
-  const groupsFile = 'grupo_completo.csv';
-  if (fs.existsSync(groupsFile)) {
-    const groupRows = parseCSV(groupsFile);
-    for (const row of groupRows) {
-      const data = {
-        brand: row.Marca,
-        line: row.Linha,
-        configuration: row.Configuracao,
-        frontShifter: row.Trocador_Dianteiro === 'N/A' ? null : row.Trocador_Dianteiro,
-        rearShifter: row.Trocador_Traseiro === 'N/A' ? null : row.Trocador_Traseiro,
-        frontDerailleur: row.Cambio_Dianteiro === 'N/A' ? null : row.Cambio_Dianteiro,
-        rearDerailleur: row.Cambio_Traseiro === 'N/A' ? null : row.Cambio_Traseiro,
-        cassette: row.Cassete === 'N/A' ? null : row.Cassete,
-        bottomBracket: row.Movimento_Central === 'N/A' ? null : row.Movimento_Central,
-        chain: row.Corrente === 'N/A' ? null : row.Corrente,
-        crankset: row.Pedivela === 'N/A' ? null : row.Pedivela,
-        axleType: row.Tipo_Eixo === 'N/A' ? null : row.Tipo_Eixo,
-      };
-      if (!dryRun) {
-        await db.insert(groups).values(data);
-      } else {
-        console.log(`[DRY RUN] Would insert group: ${data.brand} ${data.line} ${data.configuration}`);
-      }
-    }
-  }
+  // ... (no changes needed in groups for now)
 
   // 3. Seed Bikes (Builds) from KV CSVs
   console.log('Seeding bikes from CSV KV...');
@@ -112,6 +95,11 @@ async function seed() {
             brand: component.brand,
             line: component.line,
             price: '0',
+            weight: component.weight || null,
+            speeds: component.speeds || null,
+            steeringType: component.steeringType || null,
+            axleType: component.axleType || null,
+            suspensionTravel: component.suspensionTravel || null,
           }).returning();
 
           await db.insert(buildComponents).values({
@@ -152,6 +140,11 @@ async function seed() {
             line: component.line,
             link: component.link,
             price: component.price || '0',
+            weight: component.weight || null,
+            speeds: component.speeds || null,
+            steeringType: component.steeringType || null,
+            axleType: component.axleType || null,
+            suspensionTravel: component.suspensionTravel || null,
           }).returning();
 
           await db.insert(buildComponents).values({

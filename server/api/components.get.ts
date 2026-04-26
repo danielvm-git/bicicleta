@@ -2,7 +2,7 @@ import { db } from '../database/db'
 import { components } from '../database/schema'
 import { eq, and, ilike, or } from 'drizzle-orm'
 
-export default defineEventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   const query = getQuery(event)
   const category = query.category as string
   const brand = query.brand as string
@@ -33,4 +33,11 @@ export default defineEventHandler(async (event) => {
     .orderBy(components.category, components.brand, components.model)
   
   return result
+}, {
+  maxAge: 60 * 15,
+  name: 'api-components',
+  getKey: (event) => {
+    const query = getQuery(event)
+    return JSON.stringify(query)
+  }
 })

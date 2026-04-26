@@ -5,7 +5,8 @@ export default defineEventHandler(async () => {
     const templates = await db.query.builds.findMany({
       where: (builds, { ilike, or }) => or(
         ilike(builds.name, '%Template%'),
-        ilike(builds.description, '%Template%')
+        ilike(builds.description, '%Template%'),
+        ilike(builds.description, '%Importado de%')
       ),
       with: {
         buildComponents: {

@@ -25,3 +25,28 @@ logs
 
 # ── GSD self-heal: .gsd is a symlink to external state ──
 .gsd
+
+# ── GSD baseline (auto-generated) ──
+.gsd-id
+.mcp.json
+.bg-shell/
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.code-workspace
+node_modules/
+.next/
+dist/
+build/
+__pycache__/
+*.pyc
+.venv/
+venv/
+target/
+vendor/
+coverage/
+.cache/
+tmp/

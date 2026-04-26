@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { selectedComponents, selectComponent, removeComponent, totalPrice, clearBuild } = useBuilder()
+const { selectedComponents, selectComponent, removeComponent, totalPrice, totalWeight, compatibilityErrors, checkCompatibility, clearBuild } = useBuilder()
 
 const { data: categories } = await useFetch('/api/categories')
 const { data: allComponents } = await useFetch('/api/components')
@@ -23,10 +23,22 @@ watch(isOpen, (newVal) => {
 const componentsMap = computed(() => {
   const map: Record<string, any[]> = {}
   if (!allComponents.value) return map
+  
   allComponents.value.forEach(comp => {
     if (!map[comp.category]) map[comp.category] = []
     map[comp.category].push(comp)
   })
+
+  // Sort each category: compatible first
+  Object.keys(map).forEach(cat => {
+    map[cat].sort((a, b) => {
+      const aComp = checkCompatibility(a).compatible ? 0 : 1
+      const bComp = checkCompatibility(b).compatible ? 0 : 1
+      if (aComp !== bComp) return aComp - bComp
+      return (a.brand || '').localeCompare(b.brand || '') || a.model.localeCompare(b.model)
+    })
+  })
+
   return map
 })
 
@@ -43,7 +55,7 @@ const saveBuild = async () => {
   if (!name) return
 
   try {
-    await $fetch('/api/builds', {
+    const result: any = await $fetch('/api/builds', {
       method: 'POST',
       body: {
         name,
@@ -51,6 +63,13 @@ const saveBuild = async () => {
         totalPrice: totalPrice.value
       }
     })
+    
+    if (!loggedIn.value) {
+      const localIds = JSON.parse(localStorage.getItem('anonymous-build-ids') || '[]')
+      localIds.push(result.id)
+      localStorage.setItem('anonymous-build-ids', JSON.stringify(localIds))
+    }
+
     alert('Build salva com sucesso!')
     await refreshBuilds()
   } catch (e) {
@@ -69,20 +88,85 @@ const loadBuild = (build: any) => {
   isOpen.value = false
 }
 
+const shareBuild = async () => {
+  const name = prompt('Dê um nome para sua build para compartilhar:', 'Minha Build')
+  if (!name) return
+
+  try {
+    const result: any = await $fetch('/api/builds', {
+      method: 'POST',
+      body: {
+        name,
+        componentIds: Object.values(selectedComponents.value).map(c => c.id),
+        totalPrice: totalPrice.value
+      }
+    })
+    
+    if (!loggedIn.value) {
+      const localIds = JSON.parse(localStorage.getItem('anonymous-build-ids') || '[]')
+      localIds.push(result.id)
+      localStorage.setItem('anonymous-build-ids', JSON.stringify(localIds))
+    }
+
+    const shareUrl = `${window.location.origin}/b/${result.slug}`
+    await navigator.clipboard.writeText(shareUrl)
+    
+    alert(`Link de compartilhamento copiado para a área de transferência:\n${shareUrl}`)
+    await refreshBuilds()
+  } catch (e) {
+    console.error(e)
+    alert('Erro ao gerar link de compartilhamento.')
+  }
+}
+
 const formatCurrency = (value: number | string) => {
   const val = typeof value === 'string' ? parseFloat(value) : value
   return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val)
+}
+
+const printPage = () => {
+  window.print()
+}
+
+const timeAgo = (date: string | Date | null) => {
+  if (!date) return 'Sem dados'
+  const now = new Date()
+  const updated = new Date(date)
+  const diffTime = Math.abs(now.getTime() - updated.getTime())
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  
+  if (diffDays === 0) return 'Hoje'
+  if (diffDays === 1) return 'Ontem'
+  return `Há ${diffDays} dias`
+}
+
+const isOutdated = (date: string | Date | null) => {
+  if (!date) return true
+  const now = new Date()
+  const updated = new Date(date)
+  const diffTime = Math.abs(now.getTime() - updated.getTime())
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  return diffDays > 30
 }
 </script>
 
 <template>
   <UContainer class="py-8">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold">Simulador de Montagem</h1>
+      <h1 class="text-3xl font-display">Simulador de Montagem</h1>
       <div class="flex items-center gap-4">
         <UButton
           variant="ghost"
+          icon="i-heroicons-printer"
+          class="no-print"
+          @click="printPage"
+        >
+          Imprimir
+        </UButton>
+        <UButton
+          variant="ghost"
           icon="i-heroicons-folder-open"
+          class="no-print"
           @click="isOpen = true"
         >
           Minhas Montagens
@@ -94,8 +178,23 @@ const formatCurrency = (value: number | string) => {
       </div>
     </div>
 
+    <UAlert
+      v-if="compatibilityErrors.length > 0"
+      color="orange"
+      variant="soft"
+      icon="i-heroicons-exclamation-triangle"
+      title="Alertas de Compatibilidade"
+      class="mb-8"
+    >
+      <template #description>
+        <ul class="list-disc list-inside">
+          <li v-for="error in compatibilityErrors" :key="error">{{ error }}</li>
+        </ul>
+      </template>
+    </UAlert>
+
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2">
+      <div class="lg:col-span-2 no-print">
         <UAccordion :items="items" :ui="{ wrapper: 'flex flex-col gap-2' }">
           <template v-for="category in categories" :key="category" #[category]>
             <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
@@ -115,9 +214,24 @@ const formatCurrency = (value: number | string) => {
                   <span v-else>Selecione uma peça...</span>
                 </template>
                 <template #option="{ option }">
-                  <div class="flex justify-between w-full">
-                    <span class="truncate">{{ option.brand }} {{ option.model }}</span>
-                    <span class="text-gray-500">{{ formatCurrency(option.price) }}</span>
+                  <div class="flex justify-between w-full" :class="{ 'opacity-50': !checkCompatibility(option).compatible }">
+                    <div class="flex flex-col overflow-hidden">
+                      <div class="flex items-center gap-2">
+                        <span class="truncate">{{ option.brand }} {{ option.model }}</span>
+                        <UBadge v-if="option.speeds" size="xs" color="gray" variant="soft">{{ option.speeds }}</UBadge>
+                        <UBadge v-if="option.axleType" size="xs" color="gray" variant="soft">{{ option.axleType }}</UBadge>
+                        <UBadge v-if="!checkCompatibility(option).compatible" size="xs" color="red" variant="soft">
+                          {{ checkCompatibility(option).reason }}
+                        </UBadge>
+                      </div>
+                      <div class="flex items-center gap-2 mt-0.5">
+                        <span class="text-[10px] text-gray-400">
+                          Preço: {{ timeAgo(option.updatedAt) }}
+                        </span>
+                        <UBadge v-if="isOutdated(option.updatedAt)" size="xs" color="orange" variant="soft" class="text-[8px] px-1 py-0">Desatualizado</UBadge>
+                      </div>
+                    </div>
+                    <span class="text-gray-500 font-mono">{{ formatCurrency(option.price) }}</span>
                   </div>
                 </template>
               </USelectMenu>
@@ -129,7 +243,7 @@ const formatCurrency = (value: number | string) => {
       <div class="lg:col-span-1">
         <UCard>
           <template #header>
-            <h2 class="font-bold">Resumo da Build</h2>
+            <h2 class="font-display">Resumo da Build</h2>
           </template>
 
           <div v-if="Object.keys(selectedComponents).length === 0" class="text-center py-4 text-gray-500">
@@ -156,7 +270,7 @@ const formatCurrency = (value: number | string) => {
           </ul>
 
           <template #footer>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2 no-print">
               <div class="flex gap-2">
                 <UButton
                   block
@@ -174,6 +288,16 @@ const formatCurrency = (value: number | string) => {
                   @click="clearBuild"
                 />
               </div>
+              <UButton
+                block
+                variant="soft"
+                color="primary"
+                icon="i-heroicons-share"
+                :disabled="Object.keys(selectedComponents).length === 0"
+                @click="shareBuild"
+              >
+                Compartilhar Build
+              </UButton>
               <UButton
                 block
                 variant="outline"
@@ -252,3 +376,14 @@ const formatCurrency = (value: number | string) => {
     </UModal>
   </UContainer>
 </template>
+
+<style>
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
+</style>
