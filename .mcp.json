@@ -2,10 +2,21 @@
   "mcpServers": {
     "ctxo": {
       "command": "npx",
-      "args": ["@ctxo/cli", "mcp"]
+      "args": [
+        "@ctxo/cli",
+        "mcp"
+      ]
     },
     "context-mode": {
       "command": "context-mode"
+    },
+    "nuxt": {
+      "type": "http",
+      "url": "https://nuxt.com/mcp"
+    },
+    "neon": {
+      "type": "http",
+      "url": "https://mcp.neon.tech/mcp"
     }
   }
 }
