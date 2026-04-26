@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { selectedComponents, selectComponent, removeComponent, totalPrice, totalWeight, compatibilityErrors, checkCompatibility, clearBuild } = useBuilder()
+const { selectedComponents, selectComponent, removeComponent, totalPrice, totalWeight, compatibilityIssues, checkCompatibility, clearBuild } = useBuilder()
 
 const { data: categories } = await useFetch('/api/categories')
 const { data: allComponents } = await useFetch('/api/components')
@@ -148,6 +148,9 @@ const isOutdated = (date: string | Date | null) => {
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
   return diffDays > 30
 }
+
+const hasCompatibilityError = computed(() => compatibilityIssues.value.some(i => i.severity === 'error'))
+const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i => i.severity === 'warning'))
 </script>
 
 <template>
@@ -179,8 +182,8 @@ const isOutdated = (date: string | Date | null) => {
     </div>
 
     <UAlert
-      v-if="compatibilityErrors.length > 0"
-      color="orange"
+      v-if="compatibilityIssues.length > 0"
+      :color="hasCompatibilityError ? 'red' : 'orange'"
       variant="soft"
       icon="i-heroicons-exclamation-triangle"
       title="Alertas de Compatibilidade"
@@ -188,10 +191,13 @@ const isOutdated = (date: string | Date | null) => {
     >
       <template #description>
         <ul class="list-disc list-inside">
-          <li v-for="error in compatibilityErrors" :key="error">{{ error }}</li>
+          <li v-for="issue in compatibilityIssues" :key="issue.message">
+            <span :class="{ 'font-bold': issue.severity === 'error' }">{{ issue.message }}</span>
+          </li>
         </ul>
       </template>
     </UAlert>
+
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2 no-print">

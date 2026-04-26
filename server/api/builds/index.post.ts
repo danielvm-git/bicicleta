@@ -17,15 +17,26 @@ export default defineEventHandler(async (event) => {
 
   try {
     // Validate component existence
+    let componentsData: any[] = []
     if (componentIds.length > 0) {
-      const existingComponents = await db.query.components.findMany({
+      componentsData = await db.query.components.findMany({
         where: (components, { inArray }) => inArray(components.id, componentIds),
       });
 
-      if (existingComponents.length !== componentIds.length) {
+      if (componentsData.length !== componentIds.length) {
         throw createError({
           statusCode: 400,
           statusMessage: 'One or more component IDs are invalid',
+        });
+      }
+
+      // Deep validation using isomorphic CompatibilityEngine
+      const issues = validateBuild(componentsData);
+      const hardErrors = issues.filter(i => i.severity === 'error');
+      if (hardErrors.length > 0) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: `Compatibility Error: ${hardErrors.map(e => e.message).join('; ')}`,
         });
       }
     }
