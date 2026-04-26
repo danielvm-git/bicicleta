@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const bike = useBikeBuilder();
+const { loggedIn } = useUserSession();
 
 const { data: categories } = await useFetch("/api/categories");
 const { data: allComponents } = await useFetch("/api/components");
@@ -12,6 +13,7 @@ const {
   refresh: refreshBikes,
   pending: bikesPending,
 } = await useFetch("/api/bikes", {
+  query: computed(() => (loggedIn.value ? { user: "true" } : {})),
   lazy: true,
   server: false,
 });

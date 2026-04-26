@@ -4,6 +4,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui", "nuxt-auth-utils"],
   css: ["~/assets/css/brand.css"],
+  runtimeConfig: {
+    adminGithubIds:
+      process.env.NUXT_ADMIN_GITHUB_IDS || process.env.ADMIN_GITHUB_IDS || "",
+    rateLimitWindowMs: 60_000,
+    rateLimitMaxBikesPost: 30,
+    rateLimitMaxAdmin: 20,
+    rateLimitMaxScrape: 3,
+  },
   app: {
     head: {
       title: "Monta Bike",

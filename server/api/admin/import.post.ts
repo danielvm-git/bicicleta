@@ -8,8 +8,19 @@ import {
   cleanWeight,
   normalizeCategory,
 } from "~/server/utils/parser";
+import { requireAdminSession } from "~/server/utils/auth";
+import { checkRateLimit } from "~/server/utils/rateLimit";
+import { rethrowH3Error } from "~/server/utils/http";
 
 export default defineEventHandler(async (event) => {
+  await requireAdminSession(event);
+  const config = useRuntimeConfig(event);
+  const max =
+    (config as { rateLimitMaxAdmin?: number }).rateLimitMaxAdmin ?? 20;
+  const windowMs =
+    (config as { rateLimitWindowMs?: number }).rateLimitWindowMs ?? 60_000;
+  checkRateLimit(event, "admin-import", max, windowMs);
+
   const formData = await readMultipartFormData(event);
   if (!formData || formData.length === 0) {
     throw createError({ statusCode: 400, statusMessage: "No file uploaded" });
@@ -80,10 +91,7 @@ export default defineEventHandler(async (event) => {
       count: successCount,
       filename,
     };
-  } catch (error: any) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: error.message || "Error processing file",
-    });
+  } catch (error: unknown) {
+    rethrowH3Error(error, "admin.import.post");
   }
 });

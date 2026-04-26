@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
+import { unref } from "vue";
 import { useBikeBuilder } from "~/composables/useBike";
 
 describe("useBikeBuilder", () => {
@@ -139,8 +140,9 @@ describe("useBikeBuilder", () => {
       speeds: "11v",
     } as any);
 
-    expect(bike.issues.length).toBeGreaterThan(0);
-    const issue = bike.issues[0];
+    const issues = unref(bike.issues);
+    expect(issues.length).toBeGreaterThan(0);
+    const issue = issues[0]!;
     expect(issue.severity).toBe("error");
     expect(issue.message).toContain("12v");
     expect(issue.message).toContain("11v");
@@ -162,7 +164,7 @@ describe("useBikeBuilder", () => {
       axleType: "Quick Release",
     } as any);
 
-    const issue = bike.issues.find((i) => i.message.includes("Boost"));
+    const issue = unref(bike.issues).find((i) => i.message.includes("Boost"));
     expect(issue?.severity).toBe("error");
     expect(issue?.message).toContain("Boost 148mm");
   });
@@ -183,7 +185,7 @@ describe("useBikeBuilder", () => {
       steeringType: "Over",
     } as any);
 
-    const issue = bike.issues.find((i) => i.message.includes("redutor"));
+    const issue = unref(bike.issues).find((i) => i.message.includes("redutor"));
     expect(issue?.severity).toBe("warning");
   });
 });

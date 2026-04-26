@@ -1,10 +1,5 @@
 import { db } from "../database/db";
-import {
-  components,
-  groups,
-  builds,
-  buildComponents,
-} from "../database/schema";
+import { components, groups, bikes, bikeComponents } from "../database/schema";
 import { count, eq } from "drizzle-orm";
 
 async function verify() {
@@ -12,15 +7,15 @@ async function verify() {
 
   const [compCount] = await db.select({ value: count() }).from(components);
   const [groupCount] = await db.select({ value: count() }).from(groups);
-  const [buildCount] = await db.select({ value: count() }).from(builds);
-  const [buildCompCount] = await db
+  const [bikeCount] = await db.select({ value: count() }).from(bikes);
+  const [bikeCompCount] = await db
     .select({ value: count() })
-    .from(buildComponents);
+    .from(bikeComponents);
 
   console.log(`Components: ${compCount.value}`);
   console.log(`Groups: ${groupCount.value}`);
-  console.log(`Builds: ${buildCount.value}`);
-  console.log(`BuildComponents: ${buildCompCount.value}`);
+  console.log(`Bikes: ${bikeCount.value}`);
+  console.log(`Bike components: ${bikeCompCount.value}`);
 
   const [brandCoverage] = await db
     .select({ count: count(components.brand) })
@@ -32,23 +27,22 @@ async function verify() {
   console.log(`Components with Brand: ${brandCoverage.count}`);
   console.log(`Components with Line: ${lineCoverage.count}`);
 
-  // Sample check: get a build and its components using joins
-  const sampleBuilds = await db
+  const sampleBikes = await db
     .select({
-      buildName: builds.name,
+      bikeName: bikes.name,
       compCategory: components.category,
       compModel: components.model,
       compBrand: components.brand,
       compLine: components.line,
     })
-    .from(builds)
-    .leftJoin(buildComponents, eq(builds.id, buildComponents.buildId))
-    .leftJoin(components, eq(buildComponents.componentId, components.id))
+    .from(bikes)
+    .leftJoin(bikeComponents, eq(bikes.id, bikeComponents.bikeId))
+    .leftJoin(components, eq(bikeComponents.componentId, components.id))
     .limit(10);
 
-  if (sampleBuilds.length > 0) {
-    console.log(`Sample Build: ${sampleBuilds[0].buildName}`);
-    for (const row of sampleBuilds) {
+  if (sampleBikes.length > 0) {
+    console.log(`Sample bike: ${sampleBikes[0].bikeName}`);
+    for (const row of sampleBikes) {
       console.log(
         ` - [${row.compCategory}] ${row.compModel} (${row.compBrand} / ${row.compLine})`
       );

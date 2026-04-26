@@ -1,84 +1,136 @@
+import { randomBytes } from "node:crypto";
+import { z } from "zod";
 import { db } from "~/server/database/db";
 import { bikes, bikeComponents } from "~/server/database/schema";
+import { rethrowH3Error } from "~/server/utils/http";
+import { checkRateLimit } from "~/server/utils/rateLimit";
+import { validateBike } from "~/server/utils/compatibility";
+
+const postBodySchema = z
+  .object({
+    name: z.string().min(1).max(200),
+    description: z.string().max(2000).optional().nullable(),
+    componentIds: z.array(z.number().int().positive()).min(1),
+    isPublic: z.boolean().optional(),
+    totalPrice: z.union([z.number(), z.string()]).optional(),
+  })
+  .strict();
+
+function sumComponentPrices(components: { price: string | null }[]) {
+  return components.reduce((sum, c) => {
+    const p = parseFloat(c.price || "0");
+    const n = Number.isFinite(p) && p >= 0 ? p : 0;
+    return sum + n;
+  }, 0);
+}
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
+  const config = useRuntimeConfig(event);
   const session = await getUserSession(event);
   const userId = session.user?.githubId?.toString();
 
-  if (!body.name || !body.componentIds || !Array.isArray(body.componentIds)) {
+  const maxPost =
+    (config as { rateLimitMaxBikesPost?: number }).rateLimitMaxBikesPost ?? 30;
+  const windowMs =
+    (config as { rateLimitWindowMs?: number }).rateLimitWindowMs ?? 60_000;
+  checkRateLimit(event, "bikes-post", maxPost, windowMs);
+
+  const raw = await readBody(event);
+  const parsed = postBodySchema.safeParse(raw);
+  if (!parsed.success) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Missing required fields: name and componentIds (array)",
+      statusMessage: `Invalid body: ${parsed.error.message}`,
     });
   }
-
-  const { name, description, totalPrice, componentIds } = body;
+  const body = parsed.data;
 
   try {
-    // Validate component existence
-    let componentsData: any[] = [];
-    if (componentIds.length > 0) {
-      componentsData = await db.query.components.findMany({
-        where: (components, { inArray }) =>
-          inArray(components.id, componentIds),
+    const componentsData = await db.query.components.findMany({
+      where: (components, { inArray: inArr }) =>
+        inArr(components.id, body.componentIds),
+    });
+
+    if (componentsData.length !== body.componentIds.length) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: "One or more component IDs are invalid",
       });
+    }
 
-      if (componentsData.length !== componentIds.length) {
+    const issues = validateBike(componentsData);
+    const hardErrors = issues.filter((i) => i.severity === "error");
+    if (hardErrors.length > 0) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: `Compatibility Error: ${hardErrors.map((e) => e.message).join("; ")}`,
+      });
+    }
+
+    const totalPriceStr = sumComponentPrices(componentsData).toFixed(2);
+    if (body.totalPrice !== undefined) {
+      const client = parseFloat(String(body.totalPrice));
+      const server = parseFloat(totalPriceStr);
+      if (Number.isFinite(client) && Math.abs(client - server) > 0.02) {
         throw createError({
           statusCode: 400,
-          statusMessage: "One or more component IDs are invalid",
-        });
-      }
-
-      // Deep validation using isomorphic CompatibilityEngine
-      const issues = validateBike(componentsData);
-      const hardErrors = issues.filter((i) => i.severity === "error");
-      if (hardErrors.length > 0) {
-        throw createError({
-          statusCode: 400,
-          statusMessage: `Compatibility Error: ${hardErrors.map((e) => e.message).join("; ")}`,
+          statusMessage:
+            "Total price out of sync with selected components. Refresh and try again.",
         });
       }
     }
 
-    const baseSlug = name
+    const baseSlug = body.name
       .toString()
       .toLowerCase()
       .replace(/\s+/g, "-")
-      .replace(/[^\w\-]+/g, "")
-      .replace(/\-\-+/g, "-")
+      .replace(/[^\w-]+/g, "")
+      .replace(/--+/g, "-")
       .replace(/^-+/, "")
       .replace(/-+$/, "");
 
-    const slug = `${baseSlug}-${Math.random().toString(36).substring(2, 8)}`;
+    const maxAttempts = 5;
+    let lastError: unknown;
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const suffix = randomBytes(4).toString("hex");
+      const slug = `${baseSlug}-${suffix}`;
 
-    const [newBike] = await db
-      .insert(bikes)
-      .values({
-        name,
-        description,
-        totalPrice: totalPrice?.toString() || "0",
-        slug,
-        isPublic: body.isPublic !== undefined ? body.isPublic : true,
-        userId: userId || null,
-      })
-      .returning();
+      try {
+        return await db.transaction(async (tx) => {
+          const [newBike] = await tx
+            .insert(bikes)
+            .values({
+              name: body.name,
+              description: body.description ?? null,
+              totalPrice: totalPriceStr,
+              slug,
+              isPublic: body.isPublic !== undefined ? body.isPublic : true,
+              userId: userId || null,
+            })
+            .returning();
 
-    if (componentIds.length > 0) {
-      await db.insert(bikeComponents).values(
-        componentIds.map((id: number) => ({
-          bikeId: newBike.id,
-          componentId: id,
-        }))
-      );
+          await tx.insert(bikeComponents).values(
+            body.componentIds.map((id: number) => ({
+              bikeId: newBike.id,
+              componentId: id,
+            }))
+          );
+
+          return newBike;
+        });
+      } catch (e: unknown) {
+        const code =
+          (e as { code?: string })?.code ??
+          (e as { cause?: { code?: string } })?.cause?.code;
+        if (code === "23505" && attempt < maxAttempts - 1) {
+          lastError = e;
+          continue;
+        }
+        rethrowH3Error(e, "bikes.index.post");
+      }
     }
-
-    return newBike;
-  } catch (error: any) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: error.message || "Internal Server Error",
-    });
+    rethrowH3Error(lastError, "bikes.index.post");
+  } catch (error: unknown) {
+    rethrowH3Error(error, "bikes.index.post");
   }
 });

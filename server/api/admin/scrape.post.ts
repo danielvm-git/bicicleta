@@ -2,8 +2,18 @@ import { db } from "~/server/database/db";
 import { components, componentPrices } from "~/server/database/schema";
 import { scrapePrice } from "~/server/utils/scraper";
 import { eq, isNotNull, and, ne, or, ilike } from "drizzle-orm";
+import { requireAdminSession } from "~/server/utils/auth";
+import { checkRateLimit } from "~/server/utils/rateLimit";
 
 export default defineEventHandler(async (event) => {
+  await requireAdminSession(event);
+  const config = useRuntimeConfig(event);
+  const max =
+    (config as { rateLimitMaxScrape?: number }).rateLimitMaxScrape ?? 3;
+  const windowMs =
+    (config as { rateLimitWindowMs?: number }).rateLimitWindowMs ?? 60_000;
+  checkRateLimit(event, "admin-scrape", max, windowMs);
+
   // Dispara o scraping para uma pequena amostra para evitar timeouts de requisição HTTP
   const targets = await db
     .select()

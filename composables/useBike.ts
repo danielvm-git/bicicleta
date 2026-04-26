@@ -15,25 +15,22 @@ export const createBike = (initialState?: Partial<BikeState>) => {
     components: initialState?.components || {},
   });
 
+  const safeNonNegative = (n: number) => (!Number.isFinite(n) || n < 0 ? 0 : n);
+
   // Leverage: Price calculation hidden behind a simple getter
   const totalPrice = computed(() => {
     return Object.values(state.components).reduce((total, component) => {
-      const price =
-        typeof component.price === "string"
-          ? parseFloat(component.price)
-          : component.price;
-      return total + (isNaN(price) ? 0 : price);
+      const raw = parseFloat(String(component.price));
+      const price = safeNonNegative(raw);
+      return total + price;
     }, 0);
   });
 
   // Leverage: Weight calculation hidden behind a simple getter
   const totalWeight = computed(() => {
-    const total = Object.values(state.components).reduce((total, component) => {
-      const weight =
-        typeof component.weight === "string"
-          ? parseFloat(component.weight)
-          : component.weight;
-      return total + (isNaN(weight || 0) ? 0 : weight || 0);
+    const total = Object.values(state.components).reduce((acc, component) => {
+      const w = component.weight ? parseFloat(String(component.weight)) : 0;
+      return acc + safeNonNegative(w);
     }, 0);
     return Math.round(total * 1000) / 1000;
   });
@@ -79,7 +76,7 @@ export const createBike = (initialState?: Partial<BikeState>) => {
   const save = async (customName?: string) => {
     if (customName) state.name = customName;
 
-    const result: any = await $fetch("/api/bikes", {
+    return await $fetch<{ id: number; slug: string }>("/api/bikes", {
       method: "POST",
       body: {
         name: state.name,
@@ -88,7 +85,6 @@ export const createBike = (initialState?: Partial<BikeState>) => {
         totalPrice: totalPrice.value,
       },
     });
-    return result;
   };
 
   const share = async (customName?: string) => {

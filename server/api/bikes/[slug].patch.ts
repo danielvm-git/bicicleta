@@ -1,15 +1,35 @@
+import { z } from "zod";
 import { db } from "~/server/database/db";
 import { bikes } from "~/server/database/schema";
-import { eq, and } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
+import { rethrowH3Error } from "~/server/utils/http";
+
+const patchBodySchema = z
+  .object({
+    isPublic: z.boolean(),
+  })
+  .strict();
 
 export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");
   const session = await getUserSession(event);
-  const body = await readBody(event);
+  const raw = await readBody(event);
 
   if (!slug || !session.user) {
     throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
   }
+  if (session.user.githubId == null) {
+    throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
+  }
+
+  const parsed = patchBodySchema.safeParse(raw);
+  if (!parsed.success) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: `Invalid body: ${parsed.error.message}`,
+    });
+  }
+  const body = parsed.data;
 
   try {
     const [updated] = await db
@@ -18,7 +38,7 @@ export default defineEventHandler(async (event) => {
       .where(
         and(
           eq(bikes.slug, slug),
-          eq(bikes.userId, session.user.githubId.toString())
+          eq(bikes.userId, String(session.user.githubId))
         )
       )
       .returning();
@@ -31,10 +51,7 @@ export default defineEventHandler(async (event) => {
     }
 
     return updated;
-  } catch (error: any) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: error.message || "Internal Server Error",
-    });
+  } catch (error: unknown) {
+    rethrowH3Error(error, "bikes.[slug].patch");
   }
 });

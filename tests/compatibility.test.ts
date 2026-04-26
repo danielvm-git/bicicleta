@@ -10,7 +10,7 @@ describe("CompatibilityEngine", () => {
     id: Math.random(),
     category,
     model: "Test Model",
-    price: 0,
+    price: "0",
     ...data,
   });
 

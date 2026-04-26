@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { data: bikes, pending } = await useFetch("/api/bikes/public");
+const { data: publicPage, pending } = await useFetch("/api/bikes/public");
+
+const bikes = computed(() => publicPage.value?.items ?? []);
 
 const formatCurrency = (value: number | string) => {
   const val = typeof value === "string" ? parseFloat(value) : value;
@@ -11,15 +13,15 @@ const formatCurrency = (value: number | string) => {
 
 const getSummary = (bike: any) => {
   const frame = bike.bikeComponents.find(
-    (bc: any) => bc.component.category === "Quadro"
+    (bc: any) => bc.component?.category === "Quadro"
   );
   const fork = bike.bikeComponents.find(
-    (bc: any) => bc.component.category === "Suspensão"
+    (bc: any) => bc.component?.category === "Suspensão"
   );
 
   let parts = [];
-  if (frame) parts.push(frame.component.model);
-  if (fork) parts.push(fork.component.model);
+  if (frame?.component) parts.push(frame.component.model);
+  if (fork?.component) parts.push(fork.component.model);
 
   return parts.length > 0 ? parts.join(" • ") : "Montagem personalizada";
 };
@@ -73,9 +75,13 @@ useSeoMeta({
               v-for="bc in bike.bikeComponents.slice(0, 4)"
               :key="bc.id"
             >
-              <UBadge size="xs" color="gray" variant="soft">{{
-                bc.component.category
-              }}</UBadge>
+              <UBadge
+                v-if="bc.component"
+                size="xs"
+                color="gray"
+                variant="soft"
+                >{{ bc.component.category }}</UBadge
+              >
             </template>
             <span
               v-if="bike.bikeComponents.length > 4"

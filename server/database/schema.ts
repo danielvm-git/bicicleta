@@ -25,14 +25,11 @@ export const components = pgTable("components", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-export const componentsRelations = relations(components, ({ many }) => ({
-  buildComponents: many(buildComponents),
-  prices: many(componentPrices),
-}));
-
 export const componentPrices = pgTable("component_prices", {
   id: serial("id").primaryKey(),
-  componentId: integer("component_id").references(() => components.id),
+  componentId: integer("component_id").references(() => components.id, {
+    onDelete: "cascade",
+  }),
   price: numeric("price", { precision: 10, scale: 2 }).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
@@ -82,9 +79,18 @@ export const bikesRelations = relations(bikes, ({ many }) => ({
 
 export const bikeComponents = pgTable("bike_components", {
   id: serial("id").primaryKey(),
-  bikeId: integer("bike_id").references(() => bikes.id),
-  componentId: integer("component_id").references(() => components.id),
+  bikeId: integer("bike_id").references(() => bikes.id, {
+    onDelete: "cascade",
+  }),
+  componentId: integer("component_id").references(() => components.id, {
+    onDelete: "cascade",
+  }),
 });
+
+export const componentsRelations = relations(components, ({ many }) => ({
+  bikeComponents: many(bikeComponents),
+  prices: many(componentPrices),
+}));
 
 export const bikeComponentsRelations = relations(bikeComponents, ({ one }) => ({
   bike: one(bikes, {

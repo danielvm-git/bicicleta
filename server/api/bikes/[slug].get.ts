@@ -1,7 +1,9 @@
 import { db } from "~/server/database/db";
+import { rethrowH3Error } from "~/server/utils/http";
 
 export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");
+  const session = await getUserSession(event);
 
   if (!slug) {
     throw createError({
@@ -10,9 +12,19 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const userId = session.user?.githubId?.toString();
+
   try {
     const bike = await db.query.bikes.findFirst({
-      where: (bikes, { eq }) => eq(bikes.slug, slug),
+      where: (bikes, { eq, and, or: orFn }) => {
+        if (!userId) {
+          return and(eq(bikes.slug, slug), eq(bikes.isPublic, true));
+        }
+        return and(
+          eq(bikes.slug, slug),
+          orFn(eq(bikes.isPublic, true), eq(bikes.userId, userId))
+        );
+      },
       with: {
         bikeComponents: {
           with: {
@@ -30,10 +42,7 @@ export default defineEventHandler(async (event) => {
     }
 
     return bike;
-  } catch (error: any) {
-    throw createError({
-      statusCode: error.statusCode || 500,
-      statusMessage: error.message || "Internal Server Error",
-    });
+  } catch (error: unknown) {
+    rethrowH3Error(error, "bikes.[slug].get");
   }
 });
