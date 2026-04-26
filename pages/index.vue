@@ -1,5 +1,5 @@
 <script setup lang="ts">
-await navigateTo('/components')
+await navigateTo("/components");
 </script>
 
 <template>

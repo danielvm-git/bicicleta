@@ -1,156 +1,147 @@
 <script setup lang="ts">
-const { selectedComponents, selectComponent, removeComponent, totalPrice, totalWeight, compatibilityIssues, checkCompatibility, clearBuild } = useBuilder()
+const bike = useBikeBuilder();
 
-const { data: categories } = await useFetch('/api/categories')
-const { data: allComponents } = await useFetch('/api/components')
+const { data: categories } = await useFetch("/api/categories");
+const { data: allComponents } = await useFetch("/api/components");
 
-// Persistência de builds
-const isOpen = ref(false)
-const isCompareOpen = ref(false)
-const { data: buildsList, refresh: refreshBuilds, pending: buildsPending } = await useFetch('/api/builds', {
+// Persistência de bikes
+const isOpen = ref(false);
+const isCompareOpen = ref(false);
+const {
+  data: bikesList,
+  refresh: refreshBikes,
+  pending: bikesPending,
+} = await useFetch("/api/bikes", {
   lazy: true,
-  server: false
-})
-const { data: templates, pending: templatesPending } = await useFetch('/api/builds/templates', {
-  lazy: true,
-  server: false
-})
+  server: false,
+});
+const { data: templates, pending: templatesPending } = await useFetch(
+  "/api/bikes/templates",
+  {
+    lazy: true,
+    server: false,
+  }
+);
 
 watch(isOpen, (newVal) => {
-  if (newVal) refreshBuilds()
-})
+  if (newVal) refreshBikes();
+});
 
 const componentsMap = computed(() => {
-  const map: Record<string, any[]> = {}
-  if (!allComponents.value) return map
-  
-  allComponents.value.forEach(comp => {
-    if (!map[comp.category]) map[comp.category] = []
-    map[comp.category].push(comp)
-  })
+  const map: Record<string, any[]> = {};
+  if (!allComponents.value) return map;
+
+  allComponents.value.forEach((comp) => {
+    if (!map[comp.category]) map[comp.category] = [];
+    map[comp.category].push(comp);
+  });
 
   // Sort each category: compatible first
-  Object.keys(map).forEach(cat => {
+  Object.keys(map).forEach((cat) => {
     map[cat].sort((a, b) => {
-      const aComp = checkCompatibility(a).compatible ? 0 : 1
-      const bComp = checkCompatibility(b).compatible ? 0 : 1
-      if (aComp !== bComp) return aComp - bComp
-      return (a.brand || '').localeCompare(b.brand || '') || a.model.localeCompare(b.model)
-    })
-  })
+      const aComp = bike.checkCompatibility(a).compatible ? 0 : 1;
+      const bComp = bike.checkCompatibility(b).compatible ? 0 : 1;
+      if (aComp !== bComp) return aComp - bComp;
+      return (
+        (a.brand || "").localeCompare(b.brand || "") ||
+        a.model.localeCompare(b.model)
+      );
+    });
+  });
 
-  return map
-})
+  return map;
+});
 
 const items = computed(() => {
-  return (categories.value || []).map(category => ({
+  return (categories.value || []).map((category) => ({
     label: category,
     slot: category,
-    defaultOpen: false
-  }))
-})
+    defaultOpen: false,
+  }));
+});
 
-const saveBuild = async () => {
-  const name = prompt('Dê um nome para sua build:', 'Minha Build')
-  if (!name) return
-
-  try {
-    const result: any = await $fetch('/api/builds', {
-      method: 'POST',
-      body: {
-        name,
-        componentIds: Object.values(selectedComponents.value).map(c => c.id),
-        totalPrice: totalPrice.value
-      }
-    })
-    
-    if (!loggedIn.value) {
-      const localIds = JSON.parse(localStorage.getItem('anonymous-build-ids') || '[]')
-      localIds.push(result.id)
-      localStorage.setItem('anonymous-build-ids', JSON.stringify(localIds))
-    }
-
-    alert('Build salva com sucesso!')
-    await refreshBuilds()
-  } catch (e) {
-    console.error(e)
-    alert('Erro ao salvar build.')
-  }
-}
-
-const loadBuild = (build: any) => {
-  const newSelected: Record<string, any> = {}
-  build.buildComponents.forEach((bc: any) => {
-    const comp = bc.component
-    newSelected[comp.category] = comp
-  })
-  selectedComponents.value = newSelected
-  isOpen.value = false
-}
-
-const shareBuild = async () => {
-  const name = prompt('Dê um nome para sua build para compartilhar:', 'Minha Build')
-  if (!name) return
+const saveBike = async () => {
+  const name = prompt("Dê um nome para sua bike:", bike.state.name);
+  if (!name) return;
 
   try {
-    const result: any = await $fetch('/api/builds', {
-      method: 'POST',
-      body: {
-        name,
-        componentIds: Object.values(selectedComponents.value).map(c => c.id),
-        totalPrice: totalPrice.value
-      }
-    })
-    
-    if (!loggedIn.value) {
-      const localIds = JSON.parse(localStorage.getItem('anonymous-build-ids') || '[]')
-      localIds.push(result.id)
-      localStorage.setItem('anonymous-build-ids', JSON.stringify(localIds))
-    }
-
-    const shareUrl = `${window.location.origin}/b/${result.slug}`
-    await navigator.clipboard.writeText(shareUrl)
-    
-    alert(`Link de compartilhamento copiado para a área de transferência:\n${shareUrl}`)
-    await refreshBuilds()
+    await bike.save(name);
+    alert("Bike salva com sucesso!");
+    await refreshBikes();
   } catch (e) {
-    console.error(e)
-    alert('Erro ao gerar link de compartilhamento.')
+    console.error(e);
+    alert("Erro ao salvar bike.");
   }
-}
+};
+
+const loadBike = (bikeData: any) => {
+  bike.clear();
+  bike.state.name = bikeData.name;
+  bike.state.description = bikeData.description;
+  bikeData.bikeComponents.forEach((bc: any) => {
+    bike.selectComponent(bc.component);
+  });
+  isOpen.value = false;
+};
+
+const shareBike = async () => {
+  const name = prompt(
+    "Dê um nome para sua bike para compartilhar:",
+    bike.state.name
+  );
+  if (!name) return;
+
+  try {
+    const shareUrl = await bike.share(name);
+    alert(
+      `Link de compartilhamento copiado para a área de transferência:\n${shareUrl}`
+    );
+    await refreshBikes();
+  } catch (e) {
+    console.error(e);
+    alert("Erro ao gerar link de compartilhamento.");
+  }
+};
 
 const formatCurrency = (value: number | string) => {
-  const val = typeof value === 'string' ? parseFloat(value) : value
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val)
-}
+  const val = typeof value === "string" ? parseFloat(value) : value;
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(val);
+};
 
 const printPage = () => {
-  window.print()
-}
+  window.print();
+};
 
 const timeAgo = (date: string | Date | null) => {
-  if (!date) return 'Sem dados'
-  const now = new Date()
-  const updated = new Date(date)
-  const diffTime = Math.abs(now.getTime() - updated.getTime())
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-  
-  if (diffDays === 0) return 'Hoje'
-  if (diffDays === 1) return 'Ontem'
-  return `Há ${diffDays} dias`
-}
+  if (!date) return "Sem dados";
+  const now = new Date();
+  const updated = new Date(date);
+  const diffTime = Math.abs(now.getTime() - updated.getTime());
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return "Hoje";
+  if (diffDays === 1) return "Ontem";
+  return `Há ${diffDays} dias`;
+};
 
 const isOutdated = (date: string | Date | null) => {
-  if (!date) return true
-  const now = new Date()
-  const updated = new Date(date)
-  const diffTime = Math.abs(now.getTime() - updated.getTime())
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
-  return diffDays > 30
-}
+  if (!date) return true;
+  const now = new Date();
+  const updated = new Date(date);
+  const diffTime = Math.abs(now.getTime() - updated.getTime());
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays > 30;
+};
 
-const hasCompatibilityError = computed(() => compatibilityIssues.value.some(i => i.severity === 'error'))
-const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i => i.severity === 'warning'))
+const hasCompatibilityError = computed(() =>
+  bike.issues.some((i) => i.severity === "error")
+);
+const hasCompatibilityWarning = computed(() =>
+  bike.issues.some((i) => i.severity === "warning")
+);
 </script>
 
 <template>
@@ -176,13 +167,15 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
         </UButton>
         <div class="text-right">
           <p class="text-sm text-gray-500">Total Estimado</p>
-          <p class="text-2xl font-bold text-primary">{{ formatCurrency(totalPrice) }}</p>
+          <p class="text-2xl font-bold text-primary">
+            {{ formatCurrency(bike.totalPrice) }}
+          </p>
         </div>
       </div>
     </div>
 
     <UAlert
-      v-if="compatibilityIssues.length > 0"
+      v-if="bike.issues.length > 0"
       :color="hasCompatibilityError ? 'red' : 'orange'"
       variant="soft"
       icon="i-heroicons-exclamation-triangle"
@@ -191,13 +184,14 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
     >
       <template #description>
         <ul class="list-disc list-inside">
-          <li v-for="issue in compatibilityIssues" :key="issue.message">
-            <span :class="{ 'font-bold': issue.severity === 'error' }">{{ issue.message }}</span>
+          <li v-for="issue in bike.issues" :key="issue.message">
+            <span :class="{ 'font-bold': issue.severity === 'error' }">{{
+              issue.message
+            }}</span>
           </li>
         </ul>
       </template>
     </UAlert>
-
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2 no-print">
@@ -205,39 +199,73 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
           <template v-for="category in categories" :key="category" #[category]>
             <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
               <USelectMenu
-                v-model="selectedComponents[category]"
+                v-model="bike.state.components[category]"
                 :options="componentsMap[category] || []"
                 placeholder="Selecione uma peça..."
                 searchable
                 option-attribute="model"
                 by="id"
-                @update:model-value="val => selectComponent(val)"
+                @update:model-value="(val) => bike.selectComponent(val)"
               >
                 <template #label>
-                  <span v-if="selectedComponents[category]" class="truncate">
-                    {{ selectedComponents[category].brand }} {{ selectedComponents[category].model }}
+                  <span v-if="bike.state.components[category]" class="truncate">
+                    {{ bike.state.components[category].brand }}
+                    {{ bike.state.components[category].model }}
                   </span>
                   <span v-else>Selecione uma peça...</span>
                 </template>
                 <template #option="{ option }">
-                  <div class="flex justify-between w-full" :class="{ 'opacity-50': !checkCompatibility(option).compatible }">
+                  <div
+                    class="flex justify-between w-full"
+                    :class="{
+                      'opacity-50': !bike.checkCompatibility(option).compatible,
+                    }"
+                  >
                     <div class="flex flex-col overflow-hidden">
                       <div class="flex items-center gap-2">
-                        <span class="truncate">{{ option.brand }} {{ option.model }}</span>
-                        <UBadge v-if="option.speeds" size="xs" color="gray" variant="soft">{{ option.speeds }}</UBadge>
-                        <UBadge v-if="option.axleType" size="xs" color="gray" variant="soft">{{ option.axleType }}</UBadge>
-                        <UBadge v-if="!checkCompatibility(option).compatible" size="xs" color="red" variant="soft">
-                          {{ checkCompatibility(option).reason }}
+                        <span class="truncate"
+                          >{{ option.brand }} {{ option.model }}</span
+                        >
+                        <UBadge
+                          v-if="option.speeds"
+                          size="xs"
+                          color="gray"
+                          variant="soft"
+                          >{{ option.speeds }}</UBadge
+                        >
+                        <UBadge
+                          v-if="option.axleType"
+                          size="xs"
+                          color="gray"
+                          variant="soft"
+                          >{{ option.axleType }}</UBadge
+                        >
+                        <UBadge
+                          v-if="!bike.checkCompatibility(option).compatible"
+                          size="xs"
+                          color="red"
+                          variant="soft"
+                        >
+                          {{ bike.checkCompatibility(option).reason }}
                         </UBadge>
                       </div>
                       <div class="flex items-center gap-2 mt-0.5">
                         <span class="text-[10px] text-gray-400">
                           Preço: {{ timeAgo(option.updatedAt) }}
                         </span>
-                        <UBadge v-if="isOutdated(option.updatedAt)" size="xs" color="orange" variant="soft" class="text-[8px] px-1 py-0">Desatualizado</UBadge>
+                        <UBadge
+                          v-if="isOutdated(option.updatedAt)"
+                          size="xs"
+                          color="orange"
+                          variant="soft"
+                          class="text-[8px] px-1 py-0"
+                          >Desatualizado</UBadge
+                        >
                       </div>
                     </div>
-                    <span class="text-gray-500 font-mono">{{ formatCurrency(option.price) }}</span>
+                    <span class="text-gray-500 font-mono">{{
+                      formatCurrency(option.price)
+                    }}</span>
                   </div>
                 </template>
               </USelectMenu>
@@ -249,27 +277,40 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
       <div class="lg:col-span-1">
         <UCard>
           <template #header>
-            <h2 class="font-display">Resumo da Build</h2>
+            <h2 class="font-display">Resumo da Bike</h2>
           </template>
 
-          <div v-if="Object.keys(selectedComponents).length === 0" class="text-center py-4 text-gray-500">
+          <div
+            v-if="Object.keys(bike.state.components).length === 0"
+            class="text-center py-4 text-gray-500"
+          >
             Nenhuma peça selecionada.
           </div>
 
           <ul v-else class="divide-y divide-gray-200 dark:divide-gray-700">
-            <li v-for="(comp, cat) in selectedComponents" :key="cat" class="py-2 flex justify-between items-start">
+            <li
+              v-for="(comp, cat) in bike.state.components"
+              :key="cat"
+              class="py-2 flex justify-between items-start"
+            >
               <div class="flex-1 min-w-0">
-                <p class="text-xs font-semibold text-gray-500 uppercase">{{ cat }}</p>
-                <p class="truncate text-sm">{{ comp.brand }} {{ comp.model }}</p>
+                <p class="text-xs font-semibold text-gray-500 uppercase">
+                  {{ cat }}
+                </p>
+                <p class="truncate text-sm">
+                  {{ comp.brand }} {{ comp.model }}
+                </p>
               </div>
               <div class="text-right ml-4">
-                <p class="text-sm font-medium">{{ formatCurrency(comp.price) }}</p>
+                <p class="text-sm font-medium">
+                  {{ formatCurrency(comp.price) }}
+                </p>
                 <UButton
                   color="red"
                   variant="ghost"
                   icon="i-heroicons-trash"
                   size="2xs"
-                  @click="removeComponent(cat)"
+                  @click="bike.removeComponent(cat)"
                 />
               </div>
             </li>
@@ -282,16 +323,16 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
                   block
                   class="flex-1"
                   color="primary"
-                  :disabled="Object.keys(selectedComponents).length === 0"
-                  @click="saveBuild"
+                  :disabled="Object.keys(bike.state.components).length === 0"
+                  @click="saveBike"
                 >
-                  Salvar Build
+                  Salvar Bike
                 </UButton>
                 <UButton
                   variant="soft"
                   color="gray"
                   icon="i-heroicons-trash"
-                  @click="clearBuild"
+                  @click="bike.clear"
                 />
               </div>
               <UButton
@@ -299,10 +340,10 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
                 variant="soft"
                 color="primary"
                 icon="i-heroicons-share"
-                :disabled="Object.keys(selectedComponents).length === 0"
-                @click="shareBuild"
+                :disabled="Object.keys(bike.state.components).length === 0"
+                @click="shareBike"
               >
-                Compartilhar Build
+                Compartilhar Bike
               </UButton>
               <UButton
                 block
@@ -323,23 +364,45 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
       <UCard>
         <template #header>
           <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            <h3
+              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+            >
               Minhas Montagens
             </h3>
-            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+            <UButton
+              color="gray"
+              variant="ghost"
+              icon="i-heroicons-x-mark-20-solid"
+              class="-my-1"
+              @click="isOpen = false"
+            />
           </div>
         </template>
 
-        <div v-if="buildsPending" class="flex justify-center p-4">
+        <div v-if="bikesPending" class="flex justify-center p-4">
           <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
         </div>
-        <div v-else-if="buildsList && buildsList.length > 0" class="divide-y divide-gray-200 dark:divide-gray-700">
-          <div v-for="build in buildsList" :key="build.id" class="py-3 flex justify-between items-center">
+        <div
+          v-else-if="bikesList && bikesList.length > 0"
+          class="divide-y divide-gray-200 dark:divide-gray-700"
+        >
+          <div
+            v-for="bikeData in bikesList"
+            :key="bikeData.id"
+            class="py-3 flex justify-between items-center"
+          >
             <div>
-              <p class="font-medium">{{ build.name }}</p>
-              <p class="text-xs text-gray-500">{{ formatCurrency(build.totalPrice) }}</p>
+              <p class="font-medium">{{ bikeData.name }}</p>
+              <p class="text-xs text-gray-500">
+                {{ formatCurrency(bikeData.totalPrice) }}
+              </p>
             </div>
-            <UButton size="xs" color="primary" variant="soft" @click="loadBuild(build)">
+            <UButton
+              size="xs"
+              color="primary"
+              variant="soft"
+              @click="loadBike(bikeData)"
+            >
               Carregar
             </UButton>
           </div>
@@ -354,23 +417,45 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
       <UCard>
         <template #header>
           <div class="flex items-center justify-between">
-            <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+            <h3
+              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+            >
               Selecionar Bike Comercial para Comparar
             </h3>
-            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isCompareOpen = false" />
+            <UButton
+              color="gray"
+              variant="ghost"
+              icon="i-heroicons-x-mark-20-solid"
+              class="-my-1"
+              @click="isCompareOpen = false"
+            />
           </div>
         </template>
 
         <div v-if="templatesPending" class="flex justify-center p-4">
           <UIcon name="i-heroicons-arrow-path" class="animate-spin text-2xl" />
         </div>
-        <div v-else-if="templates && templates.length > 0" class="divide-y divide-gray-200 dark:divide-gray-700">
-          <div v-for="template in templates" :key="template.id" class="py-3 flex justify-between items-center">
+        <div
+          v-else-if="templates && templates.length > 0"
+          class="divide-y divide-gray-200 dark:divide-gray-700"
+        >
+          <div
+            v-for="template in templates"
+            :key="template.id"
+            class="py-3 flex justify-between items-center"
+          >
             <div>
               <p class="font-medium">{{ template.name }}</p>
-              <p class="text-xs text-gray-500">{{ formatCurrency(template.totalPrice) }}</p>
+              <p class="text-xs text-gray-500">
+                {{ formatCurrency(template.totalPrice) }}
+              </p>
             </div>
-            <UButton size="xs" color="primary" variant="soft" @click="navigateTo(`/compare?id=${template.id}`)">
+            <UButton
+              size="xs"
+              color="primary"
+              variant="soft"
+              @click="navigateTo(`/compare?id=${template.id}`)"
+            >
               Comparar
             </UButton>
           </div>
@@ -382,6 +467,7 @@ const hasCompatibilityWarning = computed(() => compatibilityIssues.value.some(i 
     </UModal>
   </UContainer>
 </template>
+/template>
 
 <style>
 @media print {

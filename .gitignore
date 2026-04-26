@@ -28,7 +28,7 @@ logs
 
 # ── GSD baseline (auto-generated) ──
 .gsd-id
-.mcp.json
+# Project MCP (Claude Code, root) — versioned; same intent as .cursor/ and .gemini/ (see docs/mcp-and-ides.md)
 .bg-shell/
 _bmad-output/
 ~$*.xlsx
@@ -60,3 +60,5 @@ tmp/
 .gsd/
 *.db
 _bmad
+# Ctxo local cache (never committed)
+.ctxo/.cache/

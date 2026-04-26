@@ -33,12 +33,8 @@
           "name": "build_components_build_id_builds_id_fk",
           "tableFrom": "build_components",
           "tableTo": "builds",
-          "columnsFrom": [
-            "build_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["build_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -46,12 +42,8 @@
           "name": "build_components_component_id_components_id_fk",
           "tableFrom": "build_components",
           "tableTo": "components",
-          "columnsFrom": [
-            "component_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["component_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -122,9 +114,7 @@
         "builds_slug_unique": {
           "name": "builds_slug_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "slug"
-          ]
+          "columns": ["slug"]
         }
       }
     },
@@ -164,12 +154,8 @@
           "name": "component_prices_component_id_components_id_fk",
           "tableFrom": "component_prices",
           "tableTo": "components",
-          "columnsFrom": [
-            "component_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["component_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

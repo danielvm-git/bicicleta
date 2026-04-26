@@ -15,7 +15,7 @@ export interface BikeComponent {
 }
 
 export interface CompatibilityIssue {
-  severity: 'error' | 'warning';
+  severity: "error" | "warning";
   message: string;
   category?: string;
   reason?: string;

@@ -24,9 +24,10 @@
   --db-color-bad: #9b2335;
 
   /* Type scale (fluid) */
-  --db-font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --db-font-display:
+    "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --db-font-body: "Source Serif 4", "Georgia", "Times New Roman", serif;
-  
+
   --db-radius: 0.5rem;
   --db-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.05);
   --db-motion: 180ms ease;
@@ -56,10 +57,16 @@ body {
 /* Primary color override to match brand teal exactly */
 :root {
   --color-primary-500: 13 107 107; /* #0d6b6b */
-  --color-primary-600: 10 85 85;  /* hover */
+  --color-primary-600: 10 85 85; /* hover */
 }
 
-h1, h2, h3, h4, h5, h6, .font-display {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
   font-family: var(--db-font-display);
   font-weight: 700;
   letter-spacing: -0.02em;

@@ -4,13 +4,13 @@ export default defineOAuthGitHubEventHandler({
       user: {
         githubId: user.id,
         name: user.login,
-        avatar: user.avatar_url
-      }
+        avatar: user.avatar_url,
+      },
     });
-    return sendRedirect(event, '/builder');
+    return sendRedirect(event, "/builder");
   },
   onError(event, error) {
-    console.error('GitHub OAuth error:', error);
-    return sendRedirect(event, '/');
+    console.error("GitHub OAuth error:", error);
+    return sendRedirect(event, "/");
   },
 });

@@ -1,57 +1,64 @@
 <script setup lang="ts">
-const { loggedIn, user } = useUserSession()
+const { loggedIn, user } = useUserSession();
 
 if (!loggedIn.value) {
-  navigateTo('/')
+  navigateTo("/");
 }
 
-const { data: builds, refresh, pending } = await useFetch('/api/builds', {
-  query: { user: 'true' }
-})
+const {
+  data: bikes,
+  refresh,
+  pending,
+} = await useFetch("/api/bikes", {
+  query: { user: "true" },
+});
 
-const anonymousIds = ref<number[]>([])
+const anonymousIds = ref<number[]>([]);
 
 onMounted(() => {
-  const ids = localStorage.getItem('anonymous-build-ids')
+  const ids = localStorage.getItem("anonymous-bike-ids");
   if (ids) {
-    anonymousIds.value = JSON.parse(ids)
+    anonymousIds.value = JSON.parse(ids);
   }
-})
+});
 
-const claimBuilds = async () => {
-  if (anonymousIds.value.length === 0) return
+const claimBikes = async () => {
+  if (anonymousIds.value.length === 0) return;
   try {
-    await $fetch('/api/auth/claim', {
-      method: 'POST',
-      body: { ids: anonymousIds.value }
-    })
-    localStorage.removeItem('anonymous-build-ids')
-    anonymousIds.value = []
-    await refresh()
-    alert('Suas montagens locais foram vinculadas com sucesso!')
+    await $fetch("/api/auth/claim", {
+      method: "POST",
+      body: { ids: anonymousIds.value },
+    });
+    localStorage.removeItem("anonymous-bike-ids");
+    anonymousIds.value = [];
+    await refresh();
+    alert("Suas montagens locais foram vinculadas com sucesso!");
   } catch (e) {
-    console.error(e)
-    alert('Erro ao vincular montagens.')
+    console.error(e);
+    alert("Erro ao vincular montagens.");
   }
-}
+};
 
 const formatCurrency = (value: number | string) => {
-  const val = typeof value === 'string' ? parseFloat(value) : value
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val)
-}
+  const val = typeof value === "string" ? parseFloat(value) : value;
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(val);
+};
 
-const togglePublic = async (build: any) => {
+const togglePublic = async (bike: any) => {
   try {
-    await $fetch(`/api/builds/${build.slug}`, {
-      method: 'PATCH', // I'll need to implement this endpoint too, or update components one
-      body: { isPublic: !build.isPublic }
-    })
-    await refresh()
+    await $fetch(`/api/bikes/${bike.slug}`, {
+      method: "PATCH",
+      body: { isPublic: !bike.isPublic },
+    });
+    await refresh();
   } catch (e) {
-    console.error(e)
-    alert('Erro ao atualizar privacidade.')
+    console.error(e);
+    alert("Erro ao atualizar privacidade.");
   }
-}
+};
 </script>
 
 <template>
@@ -60,13 +67,17 @@ const togglePublic = async (build: any) => {
       <UAvatar :src="user.avatar" size="xl" />
       <div>
         <h1 class="text-3xl font-display">Meu Perfil</h1>
-        <p class="text-gray-500">@{{ user.name }} • GitHub ID: {{ user.githubId }}</p>
+        <p class="text-gray-500">
+          @{{ user.name }} • GitHub ID: {{ user.githubId }}
+        </p>
       </div>
     </div>
 
     <div class="mb-8 flex justify-between items-center">
       <h2 class="text-2xl font-display">Minhas Montagens</h2>
-      <UButton to="/builder" icon="i-heroicons-plus" color="primary">Nova Build</UButton>
+      <UButton to="/builder" icon="i-heroicons-plus" color="primary"
+        >Nova Bike</UButton
+      >
     </div>
 
     <UAlert
@@ -79,42 +90,69 @@ const togglePublic = async (build: any) => {
       class="mb-8"
     >
       <template #footer>
-        <UButton size="xs" color="primary" @click="claimBuilds">Vincular Agora</UButton>
+        <UButton size="xs" color="primary" @click="claimBikes"
+          >Vincular Agora</UButton
+        >
       </template>
     </UAlert>
 
-    <div v-if="pending" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      v-if="pending"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
       <USkeleton v-for="i in 3" :key="i" class="h-48 w-full" />
     </div>
 
-    <div v-else-if="builds && builds.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <UCard v-for="build in builds" :key="build.id">
+    <div
+      v-else-if="bikes && bikes.length > 0"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
+      <UCard v-for="bike in bikes" :key="bike.id">
         <template #header>
           <div class="flex justify-between items-start">
-            <h3 class="font-bold truncate">{{ build.name }}</h3>
-            <UBadge :color="build.isPublic ? 'green' : 'gray'" variant="soft">
-              {{ build.isPublic ? 'Pública' : 'Privada' }}
+            <h3 class="font-bold truncate">{{ bike.name }}</h3>
+            <UBadge :color="bike.isPublic ? 'green' : 'gray'" variant="soft">
+              {{ bike.isPublic ? "Pública" : "Privada" }}
             </UBadge>
           </div>
         </template>
 
         <div>
-          <p class="text-2xl font-bold text-primary">{{ formatCurrency(build.totalPrice) }}</p>
-          <p class="text-xs text-gray-500 mt-2">Criada em: {{ new Date(build.createdAt).toLocaleDateString() }}</p>
+          <p class="text-2xl font-bold text-primary">
+            {{ formatCurrency(bike.totalPrice) }}
+          </p>
+          <p class="text-xs text-gray-500 mt-2">
+            Criada em: {{ new Date(bike.createdAt).toLocaleDateString() }}
+          </p>
         </div>
 
         <template #footer>
           <div class="flex gap-2">
-            <UButton :to="`/b/${build.slug}`" variant="soft" size="xs" icon="i-heroicons-eye">Ver</UButton>
-            <UButton variant="soft" color="gray" size="xs" icon="i-heroicons-globe-alt" @click="togglePublic(build)">
-              {{ build.isPublic ? 'Privar' : 'Publicar' }}
+            <UButton
+              :to="`/b/${bike.slug}`"
+              variant="soft"
+              size="xs"
+              icon="i-heroicons-eye"
+              >Ver</UButton
+            >
+            <UButton
+              variant="soft"
+              color="gray"
+              size="xs"
+              icon="i-heroicons-globe-alt"
+              @click="togglePublic(bike)"
+            >
+              {{ bike.isPublic ? "Privar" : "Publicar" }}
             </UButton>
           </div>
         </template>
       </UCard>
     </div>
 
-    <div v-else class="text-center py-12 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg">
+    <div
+      v-else
+      class="text-center py-12 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg"
+    >
       <UIcon name="i-heroicons-bicycle" class="text-6xl text-gray-400 mb-4" />
       <p class="text-gray-500">Você ainda não salvou nenhuma montagem.</p>
       <UButton to="/builder" class="mt-4" variant="soft">Começar Agora</UButton>
