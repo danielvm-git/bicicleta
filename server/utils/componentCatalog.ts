@@ -10,6 +10,7 @@ export const CATALOG_CACHE_HANDLER_NAME = {
   categories: "api-categories",
   brands: "api-brands",
   lines: "api-lines",
+  hierarchy: "api-hierarchy",
 } as const;
 
 /**
