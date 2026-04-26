@@ -66,3 +66,16 @@ npm run test:e2e:debug
 ## Pact / Playwright utils
 
 - This repo does not add `@seontechnologies/playwright-utils` by default. Enable in `_bmad/tea/config.yaml` and follow the TEA fragment `overview.md` if you add typed API helpers and shared fixtures.
+
+## Known noise
+
+When `npm run test:e2e` boots the Nuxt dev server, Vite logs a few non-fatal pre-transform warnings:
+
+```
+ERROR  Pre-transform error: Failed to resolve import "#app-manifest" from
+"node_modules/nuxt/dist/app/composables/manifest.js"
+```
+
+Source ([`node_modules/nuxt/dist/app/composables/manifest.js`](../node_modules/nuxt/dist/app/composables/manifest.js) line 12): a dynamic `import("#app-manifest")` sits inside an SSR-only branch (`if (import.meta.server)`). Vite's pre-transform analyzer scans dynamic imports regardless of the runtime guard. The `#app-manifest` virtual module is only registered when `experimental.appManifest: true` is set in `nuxt.config.ts`, which this project does not enable.
+
+**Impact:** none. E2E passes (2/2), `nuxt build` succeeds, the browser never reaches that branch. If we ever want a fully clean dev-server log, set `experimental.appManifest: true` in `nuxt.config.ts` — out of scope for the test harness.
