@@ -65,6 +65,8 @@ tmp/
 .artifacts/
 .gsd/
 *.db
-_bmad
+# BMAD install / module tree (local); version the root config only
+_bmad/**
+!_bmad/config.toml
 # Ctxo local cache (never committed)
 .ctxo/.cache/

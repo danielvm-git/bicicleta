@@ -12,16 +12,16 @@
 
 [core]
 document_output_language = "English"
-output_folder = "{project-root}/_bmad-output"
+output_folder = "{project-root}/.gsd"
 
 [modules.bmm]
 project_name = "bicicleta"
-planning_artifacts = "{project-root}/_bmad-output/planning-artifacts"
-implementation_artifacts = "{project-root}/_bmad-output/implementation-artifacts"
+planning_artifacts = "{project-root}/.gsd/planning-artifacts"
+implementation_artifacts = "{project-root}/.gsd/implementation-artifacts"
 project_knowledge = "{project-root}/docs"
 
 [modules.tea]
-test_artifacts = "{project-root}/_bmad-output/test-artifacts"
+test_artifacts = "{project-root}/.gsd/test-artifacts"
 tea_use_playwright_utils = true
 tea_use_pactjs_utils = false
 tea_pact_mcp = "none"
@@ -32,9 +32,9 @@ test_stack_type = "auto"
 ci_platform = "auto"
 test_framework = "auto"
 risk_threshold = "p1"
-test_design_output = "_bmad-output/test-artifacts/test-design"
-test_review_output = "_bmad-output/test-artifacts/test-reviews"
-trace_output = "_bmad-output/test-artifacts/traceability"
+test_design_output = ".gsd/test-artifacts/test-design"
+test_review_output = ".gsd/test-artifacts/test-reviews"
+trace_output = ".gsd/test-artifacts/traceability"
 
 [agents.bmad-agent-analyst]
 module = "bmm"
