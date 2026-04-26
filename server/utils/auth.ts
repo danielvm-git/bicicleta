@@ -1,5 +1,6 @@
 import type { H3Event } from "h3";
-import { getNeonSession, getSessionUser } from "~/server/utils/neonSession";
+import { getSessionUser } from "~/utils/neonAuth";
+import { getNeonSession } from "~/server/utils/neonSession";
 
 /**
  * Requires a valid Neon / Better Auth session and `user.role === "admin"`.

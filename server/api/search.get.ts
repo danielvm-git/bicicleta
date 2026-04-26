@@ -1,6 +1,7 @@
 import { db } from "~/server/database/db";
 import { components, bikes } from "~/server/database/schema";
-import { ilike, or, and, eq } from "drizzle-orm";
+import { and, eq, or, ilike } from "drizzle-orm";
+import { globalSearchComponentsWhere } from "~/server/utils/componentCatalog";
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event).q as string;
@@ -10,12 +11,7 @@ export default defineEventHandler(async (event) => {
     db
       .select()
       .from(components)
-      .where(
-        or(
-          ilike(components.model, `%${query}%`),
-          ilike(components.brand, `%${query}%`)
-        )
-      )
+      .where(globalSearchComponentsWhere(query))
       .limit(10),
     db
       .select()

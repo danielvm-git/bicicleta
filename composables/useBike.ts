@@ -1,6 +1,6 @@
 import { ref, computed, reactive, toRaw } from "vue";
 import type { BikeComponent, CompatibilityIssue } from "../types/bike";
-import { validateBike } from "../server/utils/compatibility";
+import { validateBike } from "~/utils/compatibility";
 
 export interface BikeState {
   name: string;

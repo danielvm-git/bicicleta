@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { validateBike } from "../server/utils/compatibility";
+import { validateBike } from "~/utils/compatibility";
 import type { BikeComponent } from "../types/bike";
 
 describe("CompatibilityEngine", () => {

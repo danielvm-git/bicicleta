@@ -1,6 +1,7 @@
 import { db } from "~/server/database/db";
 import { rethrowH3Error } from "~/server/utils/http";
 import { getNeonSession, getNeonUserId } from "~/server/utils/neonSession";
+import { whereBikeBySlugForReader } from "~/server/utils/bikeAccess";
 
 export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");
@@ -17,15 +18,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const bike = await db.query.bikes.findFirst({
-      where: (bikes, { eq, and, or: orFn }) => {
-        if (!userId) {
-          return and(eq(bikes.slug, slug), eq(bikes.isPublic, true));
-        }
-        return and(
-          eq(bikes.slug, slug),
-          orFn(eq(bikes.isPublic, true), eq(bikes.userId, userId))
-        );
-      },
+      where: whereBikeBySlugForReader(slug, userId),
       with: {
         bikeComponents: {
           with: {

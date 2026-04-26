@@ -1,6 +1,7 @@
 import { createAuthClient } from "@neondatabase/auth";
 import { BetterAuthVanillaAdapter } from "@neondatabase/auth/vanilla";
 import type { NeonGetSessionResult } from "~/types/neon-auth";
+import { getNeonAuthUserFromSession } from "~/utils/neonAuth";
 
 function createClient() {
   if (!import.meta.client) {
@@ -19,13 +20,7 @@ export function useNeonAuth() {
     }
   );
 
-  const user = computed(() => {
-    const d = data.value;
-    if (!d) {
-      return null;
-    }
-    return d.data?.user ?? d.user ?? null;
-  });
+  const user = computed(() => getNeonAuthUserFromSession(data.value));
 
   const loggedIn = computed(() => !!user.value?.id);
   const pending = computed(

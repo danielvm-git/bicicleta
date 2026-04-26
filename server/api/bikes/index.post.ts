@@ -1,21 +1,11 @@
 import { randomBytes } from "node:crypto";
-import { z } from "zod";
 import { db } from "~/server/database/db";
 import { bikes, bikeComponents } from "~/server/database/schema";
 import { rethrowH3Error } from "~/server/utils/http";
 import { checkRateLimit } from "~/server/utils/rateLimit";
-import { validateBike } from "~/server/utils/compatibility";
+import { bikePostBodySchema } from "~/server/api/bikes/bikePostBody";
+import { validateBike } from "~/utils/compatibility";
 import { getNeonSession, getNeonUserId } from "~/server/utils/neonSession";
-
-const postBodySchema = z
-  .object({
-    name: z.string().min(1).max(200),
-    description: z.string().max(2000).optional().nullable(),
-    componentIds: z.array(z.number().int().positive()).min(1),
-    isPublic: z.boolean().optional(),
-    totalPrice: z.union([z.number(), z.string()]).optional(),
-  })
-  .strict();
 
 function sumComponentPrices(components: { price: string | null }[]) {
   return components.reduce((sum, c) => {
@@ -37,7 +27,7 @@ export default defineEventHandler(async (event) => {
   checkRateLimit(event, "bikes-post", maxPost, windowMs);
 
   const raw = await readBody(event);
-  const parsed = postBodySchema.safeParse(raw);
+  const parsed = bikePostBodySchema.safeParse(raw);
   if (!parsed.success) {
     throw createError({
       statusCode: 400,
