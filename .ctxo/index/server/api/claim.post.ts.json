@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "c2337205521947a932c3db92c2f25a1a5f6cc0166c8e020ba887224365d7a355",
+  "edges": [],
+  "file": "server/api/claim.post.ts",
+  "intent": [],
+  "lastModified": 1777235957,
+  "symbols": []
+}

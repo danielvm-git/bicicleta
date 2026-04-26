@@ -1,0 +1,51 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 5,
+      "symbolId": "server/utils/neonSession.ts::getNeonSession::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "server/utils/neonSession.ts::getNeonUserId::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "server/utils/neonSession.ts::getSessionUser::function"
+    }
+  ],
+  "contentHash": "b49eaa6230018b21e3386c21d6c64ac7f0ad45ff23df0457602f9b6a0bc2bb6b",
+  "edges": [],
+  "file": "server/utils/neonSession.ts",
+  "intent": [],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 30,
+      "endOffset": 917,
+      "kind": "function",
+      "name": "getNeonSession",
+      "startLine": 8,
+      "startOffset": 284,
+      "symbolId": "server/utils/neonSession.ts::getNeonSession::function"
+    },
+    {
+      "endLine": 43,
+      "endOffset": 1200,
+      "kind": "function",
+      "name": "getNeonUserId",
+      "startLine": 35,
+      "startOffset": 997,
+      "symbolId": "server/utils/neonSession.ts::getNeonUserId::function"
+    },
+    {
+      "endLine": 50,
+      "endOffset": 1395,
+      "kind": "function",
+      "name": "getSessionUser",
+      "startLine": 48,
+      "startOffset": 1275,
+      "symbolId": "server/utils/neonSession.ts::getSessionUser::function"
+    }
+  ]
+}

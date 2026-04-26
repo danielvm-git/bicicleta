@@ -2,7 +2,7 @@
 const isSearchOpen = ref(false);
 const searchQuery = ref("");
 
-const { loggedIn, user, clear } = useUserSession();
+const { loggedIn, user, signOut, signInWithGitHub } = useNeonAuth();
 
 const userMenuItems = [
   [
@@ -23,7 +23,9 @@ const userMenuItems = [
     {
       label: "Sair",
       icon: "i-heroicons-log-out",
-      click: clear,
+      click: () => {
+        void signOut();
+      },
     },
   ],
 ];
@@ -146,18 +148,17 @@ defineShortcuts({
 
           <UButton
             v-if="!loggedIn"
-            to="/api/auth/github"
             icon="i-simple-icons-github"
             color="black"
             variant="solid"
             size="sm"
             label="Entrar"
-            external
+            @click="signInWithGitHub"
           />
           <UDropdown v-else :items="userMenuItems" :ui="{ width: 'w-48' }">
             <UAvatar
-              :src="user?.avatar"
-              :alt="user?.name"
+              :src="user?.image ?? undefined"
+              :alt="user?.name ?? undefined"
               size="sm"
               class="cursor-pointer"
             />

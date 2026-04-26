@@ -1,0 +1,48 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "d1bad502eda65b108ea0eb6850d63244e06446e9b26bfedbe809675ed9d283cb",
+  "edges": [],
+  "file": "types/bike.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    },
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T15:51:48-03:00",
+      "hash": "5a7751570b55b07d88c8ced1872353a579f0cabe",
+      "kind": "commit",
+      "message": "feat(core): implement isomorphic compatibility engine and server-side validation"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 14,
+      "endOffset": 359,
+      "kind": "interface",
+      "name": "BikeComponent",
+      "startLine": 0,
+      "startOffset": 0,
+      "symbolId": "types/bike.ts::BikeComponent::interface"
+    },
+    {
+      "endLine": 21,
+      "endOffset": 492,
+      "kind": "interface",
+      "name": "CompatibilityIssue",
+      "startLine": 16,
+      "startOffset": 361,
+      "symbolId": "types/bike.ts::CompatibilityIssue::interface"
+    }
+  ]
+}

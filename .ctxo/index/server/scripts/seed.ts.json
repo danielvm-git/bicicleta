@@ -1,0 +1,106 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "91b8cd2ac80a107d38bd68ea9c729c6122b5a86a4dfd83dde02bc2148d414840",
+  "edges": [
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::groups::variable"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::bikes::variable"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::bikeComponents::variable"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::componentPrices::variable"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::parseCSV::function"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::parseBikeKV::function"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::parseXLSX::function"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::cleanPrice::function"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::inferMetadata::function"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::inferTechnicalSpecs::function"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::cleanWeight::function"
+    },
+    {
+      "from": "server/scripts/seed.ts::seed::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::normalizeCategory::function"
+    }
+  ],
+  "file": "server/scripts/seed.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T13:38:06-03:00",
+      "hash": "2580ff12c1dc3e8615c89d8da5f8abdecdeacad6",
+      "kind": "commit",
+      "message": "gsd snapshot: pre-dispatch, uncommitted changes after 2179m inactivity"
+    },
+    {
+      "date": "2026-04-25T00:39:57-03:00",
+      "hash": "e605ad52fbf00b7cfaec0adfd9231e7ddb76f38b",
+      "kind": "commit",
+      "message": "feat: Data Normalization & Re-Seed: Capture Brand and Line during seedi…"
+    },
+    {
+      "date": "2026-04-25T00:22:55-03:00",
+      "hash": "0dcabcacdb964ae17ac2facdfb053c3b0633f248",
+      "kind": "commit",
+      "message": "feat: Implementar Engine de Dados (Parser & Seed) para ingestão de CSV/…"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

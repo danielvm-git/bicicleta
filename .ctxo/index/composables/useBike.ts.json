@@ -1,0 +1,69 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "7ebc3db036c85441d45af80861773dc552bd70e4a6c9bc1fa23cf64da43c0c74",
+  "edges": [
+    {
+      "from": "composables/useBike.ts::BikeState::interface",
+      "kind": "imports",
+      "to": "types/bike.ts::BikeComponent::interface",
+      "typeOnly": true
+    },
+    {
+      "from": "composables/useBike.ts::BikeState::interface",
+      "kind": "imports",
+      "to": "types/bike.ts::CompatibilityIssue::interface",
+      "typeOnly": true
+    },
+    {
+      "from": "composables/useBike.ts::BikeState::interface",
+      "kind": "imports",
+      "to": "server/utils/compatibility.ts::validateBike::variable"
+    }
+  ],
+  "file": "composables/useBike.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    },
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 8,
+      "endOffset": 303,
+      "kind": "interface",
+      "name": "BikeState",
+      "startLine": 4,
+      "startOffset": 189,
+      "symbolId": "composables/useBike.ts::BikeState::interface"
+    },
+    {
+      "endLine": 108,
+      "endOffset": 3273,
+      "kind": "variable",
+      "name": "createBike",
+      "startLine": 10,
+      "startOffset": 318,
+      "symbolId": "composables/useBike.ts::createBike::variable"
+    },
+    {
+      "endLine": 114,
+      "endOffset": 3433,
+      "kind": "variable",
+      "name": "useBikeBuilder",
+      "startLine": 111,
+      "startOffset": 3325,
+      "symbolId": "composables/useBike.ts::useBikeBuilder::variable"
+    }
+  ]
+}

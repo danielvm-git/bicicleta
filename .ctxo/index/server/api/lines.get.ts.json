@@ -1,0 +1,34 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "0e9e161045152d5ac8e7b0d746861796db5f45068c29014e14d3b11606eb3749",
+  "edges": [
+    {
+      "from": "server/api/lines.get.ts::lines.get::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/api/lines.get.ts::lines.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    }
+  ],
+  "file": "server/api/lines.get.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-25T00:41:59-03:00",
+      "hash": "ba0bf9983d372ccfc87ee5ee63dfa70dcf59088c",
+      "kind": "commit",
+      "message": "feat: Implement Nitro API endpoints for component filtering and listing."
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "server/utils/auth.ts::requireAdminSession::function"
+    }
+  ],
+  "contentHash": "bdfe0e62462b2abd5964e873cbca74ad1ce723f4dcf0fb5c08904ec818251da0",
+  "edges": [],
+  "file": "server/utils/auth.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 22,
+      "endOffset": 691,
+      "kind": "function",
+      "name": "requireAdminSession",
+      "startLine": 7,
+      "startOffset": 285,
+      "symbolId": "server/utils/auth.ts::requireAdminSession::function"
+    }
+  ]
+}

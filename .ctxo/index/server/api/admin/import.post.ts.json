@@ -1,0 +1,29 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "cda767bb19cfdebe1cdd8d9379830c5313752ddf2de7edfd3ef3a208aff551e5",
+  "edges": [],
+  "file": "server/api/admin/import.post.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    },
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T15:04:20-03:00",
+      "hash": "3974e0c246e10799c0a3e05e1c92167849515997",
+      "kind": "commit",
+      "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

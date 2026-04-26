@@ -1,0 +1,5 @@
+# Ctxo generated index mirrors — not hand-edited source
+.ctxo/
+
+# Hand-maintained CSV — Prettier has no CSV parser
+docs/bugs/bug-log.csv

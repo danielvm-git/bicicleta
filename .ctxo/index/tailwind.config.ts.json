@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "aa6dcf3d3c6219c768d7ae84920a8584942ac7d8671d1a5218177de8254ecbaa",
+  "edges": [],
+  "file": "tailwind.config.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T15:04:20-03:00",
+      "hash": "3974e0c246e10799c0a3e05e1c92167849515997",
+      "kind": "commit",
+      "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

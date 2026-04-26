@@ -3,6 +3,7 @@ import { db } from "~/server/database/db";
 import { bikes } from "~/server/database/schema";
 import { and, eq } from "drizzle-orm";
 import { rethrowH3Error } from "~/server/utils/http";
+import { getNeonSession, getNeonUserId } from "~/server/utils/neonSession";
 
 const patchBodySchema = z
   .object({
@@ -12,13 +13,11 @@ const patchBodySchema = z
 
 export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");
-  const session = await getUserSession(event);
+  const session = await getNeonSession(event);
+  const userId = getNeonUserId(session);
   const raw = await readBody(event);
 
-  if (!slug || !session.user) {
-    throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
-  }
-  if (session.user.githubId == null) {
+  if (!slug || !userId) {
     throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
   }
 
@@ -35,12 +34,7 @@ export default defineEventHandler(async (event) => {
     const [updated] = await db
       .update(bikes)
       .set({ isPublic: body.isPublic })
-      .where(
-        and(
-          eq(bikes.slug, slug),
-          eq(bikes.userId, String(session.user.githubId))
-        )
-      )
+      .where(and(eq(bikes.slug, slug), eq(bikes.userId, userId)))
       .returning();
 
     if (!updated) {

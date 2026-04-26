@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 8,
+      "symbolId": "server/utils/rateLimit.ts::checkRateLimit::function"
+    }
+  ],
+  "contentHash": "a0eaec34fa65f5154afb956d22c620edf6a449ed0dbb7a37b0688360605ee36e",
+  "edges": [
+    {
+      "from": "server/utils/rateLimit.ts::checkRateLimit::function",
+      "kind": "calls",
+      "to": "server/utils/rateLimit.ts::prune::function"
+    }
+  ],
+  "file": "server/utils/rateLimit.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 50,
+      "endOffset": 1223,
+      "kind": "function",
+      "name": "checkRateLimit",
+      "startLine": 19,
+      "startOffset": 405,
+      "symbolId": "server/utils/rateLimit.ts::checkRateLimit::function"
+    }
+  ]
+}

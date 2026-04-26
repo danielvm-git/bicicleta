@@ -1,0 +1,40 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "58792c4ddbb8468c5d738e8f43a8feec0c0c1c995f7ad56c995f38a63f403d29",
+  "edges": [
+    {
+      "from": "server/api/brands.get.ts::brands.get::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/api/brands.get.ts::brands.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    }
+  ],
+  "file": "server/api/brands.get.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T13:38:06-03:00",
+      "hash": "2580ff12c1dc3e8615c89d8da5f8abdecdeacad6",
+      "kind": "commit",
+      "message": "gsd snapshot: pre-dispatch, uncommitted changes after 2179m inactivity"
+    },
+    {
+      "date": "2026-04-25T00:41:59-03:00",
+      "hash": "ba0bf9983d372ccfc87ee5ee63dfa70dcf59088c",
+      "kind": "commit",
+      "message": "feat: Implement Nitro API endpoints for component filtering and listing."
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

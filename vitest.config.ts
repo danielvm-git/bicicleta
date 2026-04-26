@@ -2,6 +2,7 @@ import { defineVitestConfig } from "@nuxt/test-utils/config";
 
 export default defineVitestConfig({
   test: {
+    setupFiles: ["./tests/vitest-setup.ts"],
     environment: "nuxt",
     globals: true,
     // Playwright E2E lives in tests/e2e/*.spec.ts — exclude from Vitest

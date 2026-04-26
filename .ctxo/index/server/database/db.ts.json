@@ -1,0 +1,45 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "f9ea4b3ef4a1b2c0481ed865ca8c550b28ad66d989318f04dddf3f39b486bd91",
+  "edges": [
+    {
+      "from": "server/database/db.ts::db::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::schema::variable"
+    }
+  ],
+  "file": "server/database/db.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-25T00:22:55-03:00",
+      "hash": "0dcabcacdb964ae17ac2facdfb053c3b0633f248",
+      "kind": "commit",
+      "message": "feat: Implementar Engine de Dados (Parser & Seed) para ingestão de CSV/…"
+    },
+    {
+      "date": "2026-04-25T00:19:20-03:00",
+      "hash": "7a99f891c1abe0162f796b5c4625c4e51d854c8e",
+      "kind": "commit",
+      "message": "feat: Definir schema Drizzle e conexão com Neon DB."
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 8,
+      "endOffset": 313,
+      "kind": "variable",
+      "name": "db",
+      "startLine": 8,
+      "startOffset": 284,
+      "symbolId": "server/database/db.ts::db::variable"
+    }
+  ]
+}

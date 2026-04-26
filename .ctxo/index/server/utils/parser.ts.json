@@ -1,0 +1,260 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 1,
+      "symbolId": "server/utils/parser.ts::parseCSVContent::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "server/utils/parser.ts::parseCSV::function"
+    },
+    {
+      "cyclomatic": 4,
+      "symbolId": "server/utils/parser.ts::parseKV::function"
+    },
+    {
+      "cyclomatic": 7,
+      "symbolId": "server/utils/parser.ts::cleanPrice::function"
+    },
+    {
+      "cyclomatic": 8,
+      "symbolId": "server/utils/parser.ts::cleanWeight::function"
+    },
+    {
+      "cyclomatic": 28,
+      "symbolId": "server/utils/parser.ts::inferTechnicalSpecs::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "server/utils/parser.ts::normalizeCategory::function"
+    },
+    {
+      "cyclomatic": 14,
+      "symbolId": "server/utils/parser.ts::inferMetadata::function"
+    },
+    {
+      "cyclomatic": 6,
+      "symbolId": "server/utils/parser.ts::parseBikeKV::function"
+    },
+    {
+      "cyclomatic": 15,
+      "symbolId": "server/utils/parser.ts::parseXLSX::function"
+    }
+  ],
+  "contentHash": "88d2a1d5317a341cf7b341088f6c72ffbc730881da6fe3eaefed64efda34004f",
+  "edges": [
+    {
+      "from": "server/utils/parser.ts::parseCSV::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::parseCSVContent::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseBikeKV::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::parseKV::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseBikeKV::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::inferMetadata::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseBikeKV::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::inferTechnicalSpecs::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseBikeKV::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::cleanWeight::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseBikeKV::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::normalizeCategory::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseBikeKV::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::cleanPrice::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseXLSX::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::normalizeCategory::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseXLSX::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::cleanPrice::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseXLSX::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::inferMetadata::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseXLSX::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::inferTechnicalSpecs::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseXLSX::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::cleanWeight::function"
+    },
+    {
+      "from": "server/utils/parser.ts::parseXLSX::function",
+      "kind": "calls",
+      "to": "server/utils/parser.ts::cleanPrice::function"
+    }
+  ],
+  "file": "server/utils/parser.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T13:38:06-03:00",
+      "hash": "2580ff12c1dc3e8615c89d8da5f8abdecdeacad6",
+      "kind": "commit",
+      "message": "gsd snapshot: pre-dispatch, uncommitted changes after 2179m inactivity"
+    },
+    {
+      "date": "2026-04-25T00:39:57-03:00",
+      "hash": "e605ad52fbf00b7cfaec0adfd9231e7ddb76f38b",
+      "kind": "commit",
+      "message": "feat: Data Normalization & Re-Seed: Capture Brand and Line during seedi…"
+    },
+    {
+      "date": "2026-04-25T00:22:55-03:00",
+      "hash": "0dcabcacdb964ae17ac2facdfb053c3b0633f248",
+      "kind": "commit",
+      "message": "feat: Implementar Engine de Dados (Parser & Seed) para ingestão de CSV/…"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 47,
+      "endOffset": 963,
+      "kind": "function",
+      "name": "parseCSVContent",
+      "startLine": 40,
+      "startOffset": 774,
+      "symbolId": "server/utils/parser.ts::parseCSVContent::function"
+    },
+    {
+      "endLine": 52,
+      "endOffset": 1127,
+      "kind": "function",
+      "name": "parseCSV",
+      "startLine": 49,
+      "startOffset": 965,
+      "symbolId": "server/utils/parser.ts::parseCSV::function"
+    },
+    {
+      "endLine": 71,
+      "endOffset": 1567,
+      "kind": "function",
+      "name": "parseKV",
+      "startLine": 54,
+      "startOffset": 1129,
+      "symbolId": "server/utils/parser.ts::parseKV::function"
+    },
+    {
+      "endLine": 98,
+      "endOffset": 2696,
+      "kind": "function",
+      "name": "cleanPrice",
+      "startLine": 73,
+      "startOffset": 1569,
+      "symbolId": "server/utils/parser.ts::cleanPrice::function"
+    },
+    {
+      "endLine": 128,
+      "endOffset": 3534,
+      "kind": "function",
+      "name": "cleanWeight",
+      "startLine": 100,
+      "startOffset": 2698,
+      "symbolId": "server/utils/parser.ts::cleanWeight::function"
+    },
+    {
+      "endLine": 195,
+      "endOffset": 5297,
+      "kind": "function",
+      "name": "inferTechnicalSpecs",
+      "startLine": 130,
+      "startOffset": 3536,
+      "symbolId": "server/utils/parser.ts::inferTechnicalSpecs::function"
+    },
+    {
+      "endLine": 237,
+      "endOffset": 6320,
+      "kind": "function",
+      "name": "normalizeCategory",
+      "startLine": 197,
+      "startOffset": 5299,
+      "symbolId": "server/utils/parser.ts::normalizeCategory::function"
+    },
+    {
+      "endLine": 337,
+      "endOffset": 7932,
+      "kind": "function",
+      "name": "inferMetadata",
+      "startLine": 239,
+      "startOffset": 6322,
+      "symbolId": "server/utils/parser.ts::inferMetadata::function"
+    },
+    {
+      "endLine": 374,
+      "endOffset": 8797,
+      "kind": "function",
+      "name": "parseBikeKV",
+      "startLine": 339,
+      "startOffset": 7934,
+      "symbolId": "server/utils/parser.ts::parseBikeKV::function"
+    },
+    {
+      "endLine": 425,
+      "endOffset": 10156,
+      "kind": "function",
+      "name": "parseXLSX",
+      "startLine": 376,
+      "startOffset": 8799,
+      "symbolId": "server/utils/parser.ts::parseXLSX::function"
+    },
+    {
+      "endLine": 16,
+      "endOffset": 339,
+      "kind": "interface",
+      "name": "ComponentRow",
+      "startLine": 4,
+      "startOffset": 87,
+      "symbolId": "server/utils/parser.ts::ComponentRow::interface"
+    },
+    {
+      "endLine": 31,
+      "endOffset": 639,
+      "kind": "interface",
+      "name": "GroupRow",
+      "startLine": 18,
+      "startOffset": 341,
+      "symbolId": "server/utils/parser.ts::GroupRow::interface"
+    },
+    {
+      "endLine": 38,
+      "endOffset": 772,
+      "kind": "interface",
+      "name": "BikeRow",
+      "startLine": 33,
+      "startOffset": 641,
+      "symbolId": "server/utils/parser.ts::BikeRow::interface"
+    }
+  ]
+}

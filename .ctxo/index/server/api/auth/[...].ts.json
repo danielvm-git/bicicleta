@@ -1,0 +1,10 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "9cc13f417ef81a216fea2b228f30701d98b80b493c89b3fff7057aa0bc960cef",
+  "edges": [],
+  "file": "server/api/auth/[...].ts",
+  "intent": [],
+  "lastModified": 1777235957,
+  "symbols": []
+}

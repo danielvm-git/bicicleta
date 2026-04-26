@@ -1,0 +1,44 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "6ef9d120d80730ebb6e8e314d6f2a5738a0080b23491a22228c84acf97574113",
+  "edges": [
+    {
+      "from": "server/scripts/scrape-prices.ts::scrape-prices::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/scripts/scrape-prices.ts::scrape-prices::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    },
+    {
+      "from": "server/scripts/scrape-prices.ts::scrape-prices::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::componentPrices::variable"
+    },
+    {
+      "from": "server/scripts/scrape-prices.ts::scrape-prices::variable",
+      "kind": "imports",
+      "to": "server/utils/scraper.ts::scrapePrice::function"
+    }
+  ],
+  "file": "server/scripts/scrape-prices.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T15:04:20-03:00",
+      "hash": "3974e0c246e10799c0a3e05e1c92167849515997",
+      "kind": "commit",
+      "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

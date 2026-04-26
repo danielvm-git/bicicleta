@@ -1,16 +1,25 @@
 <script setup lang="ts">
-const { loggedIn, user } = useUserSession();
+import { ofetch } from "ofetch";
 
-if (!loggedIn.value) {
-  navigateTo("/");
-}
+const { loggedIn, user, pending: sessionPending } = useNeonAuth();
+
+watch(
+  [loggedIn, sessionPending],
+  () => {
+    if (!sessionPending.value && !loggedIn.value) {
+      void navigateTo("/");
+    }
+  },
+  { immediate: true }
+);
 
 const {
   data: bikes,
   refresh,
-  pending,
+  pending: bikesPending,
 } = await useFetch("/api/bikes", {
   query: { user: "true" },
+  credentials: "include",
 });
 
 const anonymousIds = ref<number[]>([]);
@@ -25,9 +34,10 @@ onMounted(() => {
 const claimBikes = async () => {
   if (anonymousIds.value.length === 0) return;
   try {
-    await $fetch("/api/auth/claim", {
+    await $fetch("/api/claim", {
       method: "POST",
       body: { ids: anonymousIds.value },
+      credentials: "include",
     });
     localStorage.removeItem("anonymous-bike-ids");
     anonymousIds.value = [];
@@ -49,9 +59,10 @@ const formatCurrency = (value: number | string) => {
 
 const togglePublic = async (bike: any) => {
   try {
-    await $fetch(`/api/bikes/${bike.slug}`, {
+    await ofetch(`/api/bikes/${bike.slug}`, {
       method: "PATCH",
       body: { isPublic: !bike.isPublic },
+      credentials: "include",
     });
     await refresh();
   } catch (e) {
@@ -64,11 +75,13 @@ const togglePublic = async (bike: any) => {
 <template>
   <UContainer class="py-8">
     <div v-if="loggedIn && user" class="flex items-center gap-4 mb-12">
-      <UAvatar :src="user.avatar" size="xl" />
+      <UAvatar :src="user.image ?? undefined" size="xl" />
       <div>
         <h1 class="text-3xl font-display">Meu Perfil</h1>
         <p class="text-gray-500">
-          @{{ user.name }} • GitHub ID: {{ user.githubId }}
+          <template v-if="user?.name">@{{ user.name }} · </template>ID:
+          {{ user.id
+          }}<template v-if="user?.email"> · {{ user.email }}</template>
         </p>
       </div>
     </div>
@@ -97,7 +110,7 @@ const togglePublic = async (bike: any) => {
     </UAlert>
 
     <div
-      v-if="pending"
+      v-if="bikesPending"
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
     >
       <USkeleton v-for="i in 3" :key="i" class="h-48 w-full" />
@@ -122,7 +135,12 @@ const togglePublic = async (bike: any) => {
             {{ formatCurrency(bike.totalPrice) }}
           </p>
           <p class="text-xs text-gray-500 mt-2">
-            Criada em: {{ new Date(bike.createdAt).toLocaleDateString() }}
+            Criada em:
+            {{
+              bike.createdAt
+                ? new Date(bike.createdAt).toLocaleDateString()
+                : "—"
+            }}
           </p>
         </div>
 

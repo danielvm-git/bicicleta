@@ -1,9 +1,10 @@
 import { db } from "~/server/database/db";
 import { rethrowH3Error } from "~/server/utils/http";
+import { getNeonSession, getNeonUserId } from "~/server/utils/neonSession";
 
 export default defineEventHandler(async (event) => {
   const slug = getRouterParam(event, "slug");
-  const session = await getUserSession(event);
+  const session = await getNeonSession(event);
 
   if (!slug) {
     throw createError({
@@ -12,7 +13,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const userId = session.user?.githubId?.toString();
+  const userId = getNeonUserId(session);
 
   try {
     const bike = await db.query.bikes.findFirst({

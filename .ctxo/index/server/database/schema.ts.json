@@ -1,0 +1,129 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "c8a19c02c6e7dad82bd2059ff0d8da4f89e221324ffddb0cb79d96702b4ab3b7",
+  "edges": [],
+  "file": "server/database/schema.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    },
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T13:38:06-03:00",
+      "hash": "2580ff12c1dc3e8615c89d8da5f8abdecdeacad6",
+      "kind": "commit",
+      "message": "gsd snapshot: pre-dispatch, uncommitted changes after 2179m inactivity"
+    },
+    {
+      "date": "2026-04-25T00:59:49-03:00",
+      "hash": "88d223a5083f981f3b1354abc3fcfa855b33bcf3",
+      "kind": "commit",
+      "message": "feat: Endpoints Nitro para persistência e listagem de builds com suport…"
+    },
+    {
+      "date": "2026-04-25T00:34:47-03:00",
+      "hash": "755939dce48506bdb5f345e4225a65c048daf110",
+      "kind": "commit",
+      "message": "feat: Expandir schema da tabela components com brand e line."
+    },
+    {
+      "date": "2026-04-25T00:19:20-03:00",
+      "hash": "7a99f891c1abe0162f796b5c4625c4e51d854c8e",
+      "kind": "commit",
+      "message": "feat: Definir schema Drizzle e conexão com Neon DB."
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 25,
+      "endOffset": 745,
+      "kind": "variable",
+      "name": "components",
+      "startLine": 11,
+      "startOffset": 169,
+      "symbolId": "server/database/schema.ts::components::variable"
+    },
+    {
+      "endLine": 34,
+      "endOffset": 1065,
+      "kind": "variable",
+      "name": "componentPrices",
+      "startLine": 27,
+      "startOffset": 761,
+      "symbolId": "server/database/schema.ts::componentPrices::variable"
+    },
+    {
+      "endLine": 44,
+      "endOffset": 1283,
+      "kind": "variable",
+      "name": "componentPricesRelations",
+      "startLine": 36,
+      "startOffset": 1081,
+      "symbolId": "server/database/schema.ts::componentPricesRelations::variable"
+    },
+    {
+      "endLine": 60,
+      "endOffset": 1799,
+      "kind": "variable",
+      "name": "groups",
+      "startLine": 46,
+      "startOffset": 1299,
+      "symbolId": "server/database/schema.ts::groups::variable"
+    },
+    {
+      "endLine": 73,
+      "endOffset": 2203,
+      "kind": "variable",
+      "name": "bikes",
+      "startLine": 62,
+      "startOffset": 1815,
+      "symbolId": "server/database/schema.ts::bikes::variable"
+    },
+    {
+      "endLine": 77,
+      "endOffset": 2313,
+      "kind": "variable",
+      "name": "bikesRelations",
+      "startLine": 75,
+      "startOffset": 2219,
+      "symbolId": "server/database/schema.ts::bikesRelations::variable"
+    },
+    {
+      "endLine": 87,
+      "endOffset": 2603,
+      "kind": "variable",
+      "name": "bikeComponents",
+      "startLine": 79,
+      "startOffset": 2329,
+      "symbolId": "server/database/schema.ts::bikeComponents::variable"
+    },
+    {
+      "endLine": 92,
+      "endOffset": 2756,
+      "kind": "variable",
+      "name": "componentsRelations",
+      "startLine": 89,
+      "startOffset": 2619,
+      "symbolId": "server/database/schema.ts::componentsRelations::variable"
+    },
+    {
+      "endLine": 103,
+      "endOffset": 3047,
+      "kind": "variable",
+      "name": "bikeComponentsRelations",
+      "startLine": 94,
+      "startOffset": 2772,
+      "symbolId": "server/database/schema.ts::bikeComponentsRelations::variable"
+    }
+  ]
+}

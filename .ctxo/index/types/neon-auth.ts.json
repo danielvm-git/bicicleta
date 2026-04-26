@@ -1,0 +1,29 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "4ae7fcedbedd15c4db8a111536923009979c352d78e78455a1598c90a3b30e55",
+  "edges": [],
+  "file": "types/neon-auth.ts",
+  "intent": [],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 9,
+      "endOffset": 257,
+      "kind": "type",
+      "name": "NeonAuthUser",
+      "startLine": 1,
+      "startOffset": 61,
+      "symbolId": "types/neon-auth.ts::NeonAuthUser::type"
+    },
+    {
+      "endLine": 15,
+      "endOffset": 461,
+      "kind": "type",
+      "name": "NeonGetSessionResult",
+      "startLine": 12,
+      "startOffset": 320,
+      "symbolId": "types/neon-auth.ts::NeonGetSessionResult::type"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "e3988a8ee6c499847c516254fb88deeaca831a8dfc2f44f7a8d82c22588f77ef",
+  "edges": [
+    {
+      "from": "server/scripts/verify-data.ts::verify-data::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/scripts/verify-data.ts::verify-data::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    },
+    {
+      "from": "server/scripts/verify-data.ts::verify-data::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::groups::variable"
+    },
+    {
+      "from": "server/scripts/verify-data.ts::verify-data::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::bikes::variable"
+    },
+    {
+      "from": "server/scripts/verify-data.ts::verify-data::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::bikeComponents::variable"
+    }
+  ],
+  "file": "server/scripts/verify-data.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    },
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-25T00:39:57-03:00",
+      "hash": "e605ad52fbf00b7cfaec0adfd9231e7ddb76f38b",
+      "kind": "commit",
+      "message": "feat: Data Normalization & Re-Seed: Capture Brand and Line during seedi…"
+    },
+    {
+      "date": "2026-04-25T00:28:27-03:00",
+      "hash": "0c4302987041c420fb78a733d3bc8efbc257a906",
+      "kind": "commit",
+      "message": "feat: Executar ingestão completa e validar persistência no Neon DB."
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

@@ -5,6 +5,7 @@ import { bikes, bikeComponents } from "~/server/database/schema";
 import { rethrowH3Error } from "~/server/utils/http";
 import { checkRateLimit } from "~/server/utils/rateLimit";
 import { validateBike } from "~/server/utils/compatibility";
+import { getNeonSession, getNeonUserId } from "~/server/utils/neonSession";
 
 const postBodySchema = z
   .object({
@@ -26,8 +27,8 @@ function sumComponentPrices(components: { price: string | null }[]) {
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
-  const session = await getUserSession(event);
-  const userId = session.user?.githubId?.toString();
+  const session = await getNeonSession(event);
+  const userId = getNeonUserId(session);
 
   const maxPost =
     (config as { rateLimitMaxBikesPost?: number }).rateLimitMaxBikesPost ?? 30;

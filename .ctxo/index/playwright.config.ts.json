@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "42975c3d7ed028a36a5872972958f30added46bfc0fe49445d12c9da6d91a614",
+  "edges": [],
+  "file": "playwright.config.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:26:16-03:00",
+      "hash": "9f9acd5c53abbf575ab37a3c3c29f561a88e2204",
+      "kind": "commit",
+      "message": "chore(test): add Playwright E2E and Husky preflight pipeline"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

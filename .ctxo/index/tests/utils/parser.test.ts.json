@@ -1,0 +1,44 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "2b69c2ab48d3944dd257ae6951b6868582459568803a9cf8295ebabb93a0bbec",
+  "edges": [
+    {
+      "from": "tests/utils/parser.test.ts::parser.test::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::cleanWeight::function"
+    },
+    {
+      "from": "tests/utils/parser.test.ts::parser.test::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::inferTechnicalSpecs::function"
+    },
+    {
+      "from": "tests/utils/parser.test.ts::parser.test::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::cleanPrice::function"
+    },
+    {
+      "from": "tests/utils/parser.test.ts::parser.test::variable",
+      "kind": "imports",
+      "to": "server/utils/parser.ts::normalizeCategory::function"
+    }
+  ],
+  "file": "tests/utils/parser.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T15:04:20-03:00",
+      "hash": "3974e0c246e10799c0a3e05e1c92167849515997",
+      "kind": "commit",
+      "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

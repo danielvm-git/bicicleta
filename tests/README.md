@@ -32,7 +32,7 @@ npm test -- --run
 
 ## E2E (Playwright)
 
-**Requires** a working `DATABASE_URL` and a **32+ character** `NUXT_SESSION_PASSWORD` (nuxt-auth-utils) so `/api/*` and session routes work. Put these in `.env` (see `.env.example`). The Playwright `webServer` injects a dev default session secret when `NUXT_SESSION_PASSWORD` is missing or too short, so E2E can run without hand-editing env for quick checks — use a real secret in CI.
+**Requires** a working `DATABASE_URL` for data-backed pages. For flows that call **Neon Auth** (`/api/auth/*`, session cookies), set `NUXT_NEON_AUTH_BASE_URL` from the Neon console (see root `README.md`). E2E that only hit public pages can run without it; the auth proxy’s `get-session` stub returns a logged-out session when the variable is missing.
 
 ```bash
 # Browsers (first time, CI, or new machine)
@@ -67,15 +67,6 @@ npm run test:e2e:debug
 
 - This repo does not add `@seontechnologies/playwright-utils` by default. Enable in `_bmad/tea/config.yaml` and follow the TEA fragment `overview.md` if you add typed API helpers and shared fixtures.
 
-## Known noise
+## Resolved: dev server `#app-manifest` Vite errors
 
-When `npm run test:e2e` boots the Nuxt dev server, Vite logs a few non-fatal pre-transform warnings:
-
-```
-ERROR  Pre-transform error: Failed to resolve import "#app-manifest" from
-"node_modules/nuxt/dist/app/composables/manifest.js"
-```
-
-Source ([`node_modules/nuxt/dist/app/composables/manifest.js`](../node_modules/nuxt/dist/app/composables/manifest.js) line 12): a dynamic `import("#app-manifest")` sits inside an SSR-only branch (`if (import.meta.server)`). Vite's pre-transform analyzer scans dynamic imports regardless of the runtime guard. The `#app-manifest` virtual module is only registered when `experimental.appManifest: true` is set in `nuxt.config.ts`, which this project does not enable.
-
-**Impact:** none. E2E passes (2/2), `nuxt build` succeeds, the browser never reaches that branch. If we ever want a fully clean dev-server log, set `experimental.appManifest: true` in `nuxt.config.ts` — out of scope for the test harness.
+`nuxt.config.ts` sets `experimental.appManifest: false` so the dev server and Playwright `webServer` no longer log `Failed to resolve import "#app-manifest"` (Vite’s import analysis still follows the dynamic import in Nuxt’s manifest helper; disabling the feature avoids that path). This project does not use Nuxt’s client app manifest for route rules. If you need that behavior later, re-enable the flag and follow upstream fixes (e.g. [nuxt/nuxt#33606](https://github.com/nuxt/nuxt/issues/33606)).

@@ -1,0 +1,39 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "85a5b79de244892523b5f0968b6be8e906ff33529a4b70b156a9fe786cd2005d",
+  "edges": [
+    {
+      "from": "server/scripts/verify-m03-s01.ts::verify-m03-s01::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/scripts/verify-m03-s01.ts::verify-m03-s01::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    },
+    {
+      "from": "server/scripts/verify-m03-s01.ts::verify-m03-s01::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::componentPrices::variable"
+    }
+  ],
+  "file": "server/scripts/verify-m03-s01.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T15:04:20-03:00",
+      "hash": "3974e0c246e10799c0a3e05e1c92167849515997",
+      "kind": "commit",
+      "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

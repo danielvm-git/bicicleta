@@ -1,0 +1,29 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "027fc5fcdd5ee801219567bc543319402cffababc8feeb1e5e0f662f6f907830",
+  "edges": [],
+  "file": "vitest.config.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:26:16-03:00",
+      "hash": "9f9acd5c53abbf575ab37a3c3c29f561a88e2204",
+      "kind": "commit",
+      "message": "chore(test): add Playwright E2E and Husky preflight pipeline"
+    },
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-25T00:57:27-03:00",
+      "hash": "3a36e7b55de746854b4a8409dc2ec6ffe83f9dcd",
+      "kind": "commit",
+      "message": "feat: Setup de Vitest e implementação do composable useBuilder para o s…"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

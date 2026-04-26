@@ -1,19 +1,20 @@
 import { db } from "~/server/database/db";
 import { bikes } from "~/server/database/schema";
 import { inArray, isNull, and } from "drizzle-orm";
+import { getNeonSession, getNeonUserId } from "~/server/utils/neonSession";
+import { rethrowH3Error } from "~/server/utils/http";
 
 export default defineEventHandler(async (event) => {
-  const session = await getUserSession(event);
   const body = await readBody(event);
+  const session = await getNeonSession(event);
+  const userId = getNeonUserId(session);
 
-  if (!session.user?.githubId || !body.ids || !Array.isArray(body.ids)) {
+  if (!userId || !body.ids || !Array.isArray(body.ids)) {
     throw createError({
       statusCode: 400,
       statusMessage: "Unauthorized or missing IDs",
     });
   }
-
-  const userId = session.user.githubId.toString();
 
   try {
     const updated = await db
@@ -23,10 +24,7 @@ export default defineEventHandler(async (event) => {
       .returning();
 
     return { success: true, count: updated.length };
-  } catch (error: any) {
-    throw createError({
-      statusCode: 500,
-      statusMessage: error.message || "Internal Server Error",
-    });
+  } catch (error: unknown) {
+    rethrowH3Error(error, "claim.post");
   }
 });

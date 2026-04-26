@@ -1,0 +1,41 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "f85a9016402a4c1165b758d686c7114688c1790b06e996e45ce6e499428e03f9",
+  "edges": [],
+  "file": "nuxt.config.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    },
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T13:38:06-03:00",
+      "hash": "2580ff12c1dc3e8615c89d8da5f8abdecdeacad6",
+      "kind": "commit",
+      "message": "gsd snapshot: pre-dispatch, uncommitted changes after 2179m inactivity"
+    },
+    {
+      "date": "2026-04-25T00:45:07-03:00",
+      "hash": "4c56ab4495cfd3eb4ff4a0dc90088353eaaad0fd",
+      "kind": "commit",
+      "message": "feat: T04: UI Setup & Navigation Page: Configurar Nuxt UI e implementar…"
+    },
+    {
+      "date": "2026-04-25T00:17:40-03:00",
+      "hash": "661a2d8d44503590d73d43fe3ecf90830a131be1",
+      "kind": "commit",
+      "message": "feat: Inicializar Nuxt 3, Drizzle ORM e dependências de dados."
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

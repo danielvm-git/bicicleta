@@ -1,0 +1,36 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 7,
+      "symbolId": "composables/useNeonAuth.ts::useNeonAuth::function"
+    }
+  ],
+  "contentHash": "15cf7022d615ff3ceedb04e280200359123e69e32d251af2b5e7923b396cb203",
+  "edges": [
+    {
+      "from": "composables/useNeonAuth.ts::useNeonAuth::function",
+      "kind": "calls",
+      "to": "composables/useNeonAuth.ts::createClient::function"
+    },
+    {
+      "from": "composables/useNeonAuth.ts::useNeonAuth::function",
+      "kind": "calls",
+      "to": "composables/useNeonAuth.ts::createClient::function"
+    }
+  ],
+  "file": "composables/useNeonAuth.ts",
+  "intent": [],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 63,
+      "endOffset": 1432,
+      "kind": "function",
+      "name": "useNeonAuth",
+      "startLine": 13,
+      "startOffset": 431,
+      "symbolId": "composables/useNeonAuth.ts::useNeonAuth::function"
+    }
+  ]
+}

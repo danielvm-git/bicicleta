@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "60a53d3bc113ba6d76c4c37bc7440ce5421d278525a333587d0525b1ec635aa7",
+  "edges": [],
+  "file": "tests/server/bike-post-body.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}

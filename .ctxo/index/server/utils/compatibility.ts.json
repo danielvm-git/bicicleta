@@ -1,0 +1,55 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "2201f3c3d42dd226ed1690d4b056e9d028ef118c69c3b6aec54a4ef47c23f4a0",
+  "edges": [
+    {
+      "from": "server/utils/compatibility.ts::validateBike::variable",
+      "kind": "imports",
+      "to": "types/bike.ts::BikeComponent::interface",
+      "typeOnly": true
+    },
+    {
+      "from": "server/utils/compatibility.ts::validateBike::variable",
+      "kind": "imports",
+      "to": "types/bike.ts::CompatibilityIssue::interface",
+      "typeOnly": true
+    }
+  ],
+  "file": "server/utils/compatibility.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-26T15:51:48-03:00",
+      "hash": "5a7751570b55b07d88c8ced1872353a579f0cabe",
+      "kind": "commit",
+      "message": "feat(core): implement isomorphic compatibility engine and server-side validation"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 92,
+      "endOffset": 2734,
+      "kind": "variable",
+      "name": "validateBike",
+      "startLine": 2,
+      "startOffset": 89,
+      "symbolId": "server/utils/compatibility.ts::validateBike::variable"
+    },
+    {
+      "endLine": 146,
+      "endOffset": 4308,
+      "kind": "variable",
+      "name": "checkComponentCompatibility",
+      "startLine": 94,
+      "startOffset": 2750,
+      "symbolId": "server/utils/compatibility.ts::checkComponentCompatibility::variable"
+    }
+  ]
+}

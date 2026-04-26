@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "computedAt": "2026-04-26T20:39:17.906Z",
+  "commitSha": "a04fa09",
+  "modularity": 0.5872576177285318,
+  "communities": [
+    {
+      "symbolId": "composables/useBike.ts::BikeState::interface",
+      "communityId": 0,
+      "communityLabel": "BikeComponent area"
+    },
+    {
+      "symbolId": "composables/useBike.ts::createBike::variable",
+      "communityId": 1,
+      "communityLabel": "composables"
+    },
+    {
+      "symbolId": "composables/useBike.ts::useBikeBuilder::variable",
+      "communityId": 2,
+      "communityLabel": "useBikeBuilder area"
+    },
+    {
+      "symbolId": "composables/useNeonAuth.ts::useNeonAuth::function",
+      "communityId": 3,
+      "communityLabel": "useNeonAuth area"
+    },
+    {
+      "symbolId": "server/database/db.ts::db::variable",
+      "communityId": 4,
+      "communityLabel": "server/database"
+    },
+    {
+      "symbolId": "server/database/schema.ts::bikeComponents::variable",
+      "communityId": 5,
+      "communityLabel": "bikeComponents area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::bikeComponentsRelations::variable",
+      "communityId": 6,
+      "communityLabel": "bikeComponentsRelations area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::bikes::variable",
+      "communityId": 7,
+      "communityLabel": "bikes area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::bikesRelations::variable",
+      "communityId": 8,
+      "communityLabel": "bikesRelations area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::componentPrices::variable",
+      "communityId": 9,
+      "communityLabel": "componentPrices area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::componentPricesRelations::variable",
+      "communityId": 10,
+      "communityLabel": "componentPricesRelations area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::components::variable",
+      "communityId": 11,
+      "communityLabel": "components area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::componentsRelations::variable",
+      "communityId": 12,
+      "communityLabel": "componentsRelations area"
+    },
+    {
+      "symbolId": "server/database/schema.ts::groups::variable",
+      "communityId": 13,
+      "communityLabel": "groups area"
+    },
+    {
+      "symbolId": "server/utils/auth.ts::requireAdminSession::function",
+      "communityId": 14,
+      "communityLabel": "server/utils"
+    },
+    {
+      "symbolId": "server/utils/compatibility.ts::checkComponentCompatibility::variable",
+      "communityId": 15,
+      "communityLabel": "checkComponentCompatibility area"
+    },
+    {
+      "symbolId": "server/utils/compatibility.ts::validateBike::variable",
+      "communityId": 0,
+      "communityLabel": "BikeComponent area"
+    },
+    {
+      "symbolId": "server/utils/http.ts::rethrowH3Error::function",
+      "communityId": 16,
+      "communityLabel": "rethrowH3Error area"
+    },
+    {
+      "symbolId": "server/utils/neonSession.ts::getNeonSession::function",
+      "communityId": 17,
+      "communityLabel": "getNeonSession area"
+    },
+    {
+      "symbolId": "server/utils/neonSession.ts::getNeonUserId::function",
+      "communityId": 18,
+      "communityLabel": "getNeonUserId area"
+    },
+    {
+      "symbolId": "server/utils/neonSession.ts::getSessionUser::function",
+      "communityId": 19,
+      "communityLabel": "getSessionUser area"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::BikeRow::interface",
+      "communityId": 20,
+      "communityLabel": "BikeRow area"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::ComponentRow::interface",
+      "communityId": 21,
+      "communityLabel": "ComponentRow area"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::GroupRow::interface",
+      "communityId": 22,
+      "communityLabel": "GroupRow area"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::cleanPrice::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::cleanWeight::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::inferMetadata::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::inferTechnicalSpecs::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::normalizeCategory::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::parseBikeKV::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::parseCSV::function",
+      "communityId": 24,
+      "communityLabel": "parseCSVContent area"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::parseCSVContent::function",
+      "communityId": 24,
+      "communityLabel": "parseCSVContent area"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::parseKV::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/parser.ts::parseXLSX::function",
+      "communityId": 23,
+      "communityLabel": "server/utils/parser.ts"
+    },
+    {
+      "symbolId": "server/utils/rateLimit.ts::checkRateLimit::function",
+      "communityId": 25,
+      "communityLabel": "checkRateLimit area"
+    },
+    {
+      "symbolId": "server/utils/scraper.ts::ScrapeResult::interface",
+      "communityId": 26,
+      "communityLabel": "ScrapeResult area"
+    },
+    {
+      "symbolId": "server/utils/scraper.ts::scrapeML::function",
+      "communityId": 27,
+      "communityLabel": "server/utils/scraper.ts"
+    },
+    {
+      "symbolId": "server/utils/scraper.ts::scrapePrice::function",
+      "communityId": 27,
+      "communityLabel": "server/utils/scraper.ts"
+    },
+    {
+      "symbolId": "tests/support/helpers/env.ts::getApiUrl::function",
+      "communityId": 28,
+      "communityLabel": "tests/support/helpers/env.ts"
+    },
+    {
+      "symbolId": "tests/support/helpers/env.ts::getBaseUrl::function",
+      "communityId": 28,
+      "communityLabel": "tests/support/helpers/env.ts"
+    },
+    {
+      "symbolId": "types/bike.ts::BikeComponent::interface",
+      "communityId": 0,
+      "communityLabel": "BikeComponent area"
+    },
+    {
+      "symbolId": "types/bike.ts::CompatibilityIssue::interface",
+      "communityId": 0,
+      "communityLabel": "BikeComponent area"
+    },
+    {
+      "symbolId": "types/neon-auth.ts::NeonAuthUser::type",
+      "communityId": 29,
+      "communityLabel": "types"
+    },
+    {
+      "symbolId": "types/neon-auth.ts::NeonGetSessionResult::type",
+      "communityId": 30,
+      "communityLabel": "NeonGetSessionResult area"
+    }
+  ],
+  "godNodes": [],
+  "edgeQuality": "full",
+  "crossClusterEdges": 0
+}

@@ -2,11 +2,18 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "nuxt-auth-utils"],
+  /** Avoid Vite pre-transform "Failed to resolve #app-manifest" noise in dev; we do not rely on client app manifest / route rules. */
+  experimental: {
+    appManifest: false,
+  },
+  modules: ["@nuxt/ui"],
   css: ["~/assets/css/brand.css"],
   runtimeConfig: {
-    adminGithubIds:
-      process.env.NUXT_ADMIN_GITHUB_IDS || process.env.ADMIN_GITHUB_IDS || "",
+    /** Neon Console → Auth; proxy target for /api/auth/* (see server/api/auth/[...].ts) */
+    neonAuthBaseUrl:
+      process.env.NUXT_NEON_AUTH_BASE_URL ||
+      process.env.NEON_AUTH_BASE_URL ||
+      "",
     rateLimitWindowMs: 60_000,
     rateLimitMaxBikesPost: 30,
     rateLimitMaxAdmin: 20,

@@ -3,13 +3,6 @@ import { defineConfig, devices } from "@playwright/test";
 // Must match Nuxt dev output (localhost) so webServer readiness check passes
 const baseURL = process.env.BASE_URL ?? "http://localhost:3000";
 
-// nuxt-auth-utils / h3 session — min 32 chars; Playwright's webServer may not inherit a valid .env
-const nuxtSessionPassword =
-  process.env.NUXT_SESSION_PASSWORD &&
-  process.env.NUXT_SESSION_PASSWORD.length >= 32
-    ? process.env.NUXT_SESSION_PASSWORD
-    : "playwright-e2e-nuxt-session-secret-32char-min";
-
 export default defineConfig({
   testDir: "./tests/e2e",
   fullyParallel: true,
@@ -41,7 +34,6 @@ export default defineConfig({
     stderr: "pipe",
     env: {
       ...process.env,
-      NUXT_SESSION_PASSWORD: nuxtSessionPassword,
     },
   },
 });

@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "server/utils/http.ts::rethrowH3Error::function"
+    }
+  ],
+  "contentHash": "e1fcb54942e3191d02a36d2103b19cc985529b0cec2003294271395c1d739cbe",
+  "edges": [
+    {
+      "from": "server/utils/http.ts::rethrowH3Error::function",
+      "kind": "calls",
+      "to": "server/utils/http.ts::isH3OrHttpError::function"
+    }
+  ],
+  "file": "server/utils/http.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:25:18-03:00",
+      "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
+      "kind": "commit",
+      "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": [
+    {
+      "endLine": 24,
+      "endOffset": 711,
+      "kind": "function",
+      "name": "rethrowH3Error",
+      "startLine": 11,
+      "startOffset": 381,
+      "symbolId": "server/utils/http.ts::rethrowH3Error::function"
+    }
+  ]
+}

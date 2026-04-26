@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "66aac2244cd2a94dc88e5c87714909f63bc9e1c9cc748602cf6c91ad4f2beeee",
+  "edges": [],
+  "file": "drizzle.config.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T16:55:33-03:00",
+      "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
+      "kind": "commit",
+      "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
+    },
+    {
+      "date": "2026-04-25T00:19:20-03:00",
+      "hash": "7a99f891c1abe0162f796b5c4625c4e51d854c8e",
+      "kind": "commit",
+      "message": "feat: Definir schema Drizzle e conexão com Neon DB."
+    }
+  ],
+  "lastModified": 1777235957,
+  "symbols": []
+}
