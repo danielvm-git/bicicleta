@@ -6,7 +6,7 @@ const { loggedIn } = useNeonAuth();
 const issuesList = computed(() => toValue(bike.issues));
 const totalPriceValue = computed(() => toValue(bike.totalPrice));
 
-const { data: categories } = await useFetch("/api/categories");
+const { data: hierarchy } = await useFetch("/api/catalog/hierarchy");
 const { data: allComponents } = await useFetch("/api/components");
 
 // Persistência de bikes
@@ -59,13 +59,23 @@ const componentsMap = computed(() => {
   return map;
 });
 
-const items = computed(() => {
-  return (categories.value || []).map((category) => ({
+const groupItems = computed(() => {
+  if (!hierarchy.value) return [];
+  return Object.keys(hierarchy.value).map((group) => ({
+    label: group,
+    slot: group,
+    categories: hierarchy.value[group],
+    defaultOpen: true,
+  }));
+});
+
+const getCategoryItems = (categories: string[]) => {
+  return categories.map((category) => ({
     label: category,
     slot: category,
     defaultOpen: false,
   }));
-});
+};
 
 const saveBike = async () => {
   const name = prompt("Dê um nome para sua bike:", bike.state.name);
@@ -202,80 +212,99 @@ const hasCompatibilityWarning = computed(() =>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2 no-print">
-        <UAccordion :items="items" :ui="{ wrapper: 'flex flex-col gap-2' }">
-          <template v-for="category in categories" :key="category" #[category]>
-            <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
-              <USelectMenu
-                v-model="bike.state.components[category]"
-                :options="componentsMap[category] || []"
-                placeholder="Selecione uma peça..."
-                searchable
-                option-attribute="model"
-                by="id"
-                @update:model-value="(val) => bike.selectComponent(val)"
-              >
-                <template #label>
-                  <span v-if="bike.state.components[category]" class="truncate">
-                    {{ bike.state.components[category].brand }}
-                    {{ bike.state.components[category].model }}
-                  </span>
-                  <span v-else>Selecione uma peça...</span>
-                </template>
-                <template #option="{ option }">
-                  <div
-                    class="flex justify-between w-full"
-                    :class="{
-                      'opacity-50': !bike.checkCompatibility(option).compatible,
-                    }"
-                  >
-                    <div class="flex flex-col overflow-hidden">
-                      <div class="flex items-center gap-2">
-                        <span class="truncate"
-                          >{{ option.brand }} {{ option.model }}</span
+        <UAccordion
+          :items="groupItems"
+          :ui="{ wrapper: 'flex flex-col gap-4' }"
+        >
+          <template v-for="item in groupItems" :key="item.slot" #[item.slot]>
+            <div class="pl-4 border-l-2 border-primary/20 flex flex-col gap-2">
+              <UAccordion :items="getCategoryItems(item.categories)">
+                <template
+                  v-for="category in item.categories"
+                  :key="category"
+                  #[category]
+                >
+                  <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
+                    <USelectMenu
+                      v-model="bike.state.components[category]"
+                      :options="componentsMap[category] || []"
+                      placeholder="Selecione uma peça..."
+                      searchable
+                      option-attribute="model"
+                      by="id"
+                      @update:model-value="(val) => bike.selectComponent(val)"
+                    >
+                      <template #label>
+                        <span
+                          v-if="bike.state.components[category]"
+                          class="truncate"
                         >
-                        <UBadge
-                          v-if="option.speeds"
-                          size="xs"
-                          color="gray"
-                          variant="soft"
-                          >{{ option.speeds }}</UBadge
-                        >
-                        <UBadge
-                          v-if="option.axleType"
-                          size="xs"
-                          color="gray"
-                          variant="soft"
-                          >{{ option.axleType }}</UBadge
-                        >
-                        <UBadge
-                          v-if="!bike.checkCompatibility(option).compatible"
-                          size="xs"
-                          color="red"
-                          variant="soft"
-                        >
-                          {{ bike.checkCompatibility(option).reason }}
-                        </UBadge>
-                      </div>
-                      <div class="flex items-center gap-2 mt-0.5">
-                        <span class="text-[10px] text-gray-400">
-                          Preço: {{ timeAgo(option.updatedAt) }}
+                          {{ bike.state.components[category].brand }}
+                          {{ bike.state.components[category].model }}
                         </span>
-                        <UBadge
-                          v-if="isOutdated(option.updatedAt)"
-                          size="xs"
-                          color="orange"
-                          variant="soft"
-                          class="text-[8px] px-1 py-0"
-                          >Desatualizado</UBadge
+                        <span v-else>Selecione uma peça...</span>
+                      </template>
+                      <template #option="{ option }">
+                        <div
+                          class="flex justify-between w-full"
+                          :class="{
+                            'opacity-50':
+                              !bike.checkCompatibility(option).compatible,
+                          }"
                         >
-                      </div>
-                    </div>
-                    <span class="text-gray-500 font-mono">{{
-                      formatCurrency(option.price)
-                    }}</span>
+                          <div class="flex flex-col overflow-hidden">
+                            <div class="flex items-center gap-2">
+                              <span class="truncate"
+                                >{{ option.brand }} {{ option.model }}</span
+                              >
+                              <UBadge
+                                v-if="option.speeds"
+                                size="xs"
+                                color="gray"
+                                variant="soft"
+                                >{{ option.speeds }}</UBadge
+                              >
+                              <UBadge
+                                v-if="option.axleType"
+                                size="xs"
+                                color="gray"
+                                variant="soft"
+                                >{{ option.axleType }}</UBadge
+                              >
+                              <UBadge
+                                v-if="
+                                  !bike.checkCompatibility(option).compatible
+                                "
+                                size="xs"
+                                color="red"
+                                variant="soft"
+                              >
+                                {{ bike.checkCompatibility(option).reason }}
+                              </UBadge>
+                            </div>
+                            <div class="flex items-center gap-2 mt-0.5">
+                              <span class="text-[10px] text-gray-400">
+                                Preço: {{ timeAgo(option.updatedAt) }}
+                              </span>
+                              <UBadge
+                                v-if="isOutdated(option.updatedAt)"
+                                size="xs"
+                                color="orange"
+                                variant="soft"
+                                class="text-[8px] px-1 py-0"
+                                >Desatualizado</UBadge
+                              >
+                            </div>
+                          </div>
+                          <span class="text-gray-500 font-mono">{{
+                            formatCurrency(option.price)
+                          }}</span>
+                        </div>
+                      </template>
+                    </USelectMenu>
                   </div>
                 </template>
-              </USelectMenu>
+              </UAccordion>
             </div>
           </template>
         </UAccordion>
@@ -474,7 +503,6 @@ const hasCompatibilityWarning = computed(() =>
     </UModal>
   </UContainer>
 </template>
-/template>
 
 <style>
 @media print {
