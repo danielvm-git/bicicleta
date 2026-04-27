@@ -1,31 +1,18 @@
 import { db } from "../database/db";
-import { components } from "../database/schema";
-import {
-  andComponentFilters,
-  CATALOG_CACHE_HANDLER_NAME,
-  componentCatalogFilters,
-} from "~/server/utils/componentCatalog";
+import { brands } from "../database/schema";
 
 export default defineCachedEventHandler(
   async (event) => {
-    const query = getQuery(event);
-    const category = query.category as string;
-
-    const filters = componentCatalogFilters({ category });
     const result = await db
-      .selectDistinct({ brand: components.brand })
-      .from(components)
-      .where(andComponentFilters(filters))
-      .orderBy(components.brand);
+      .select({ id: brands.id, name: brands.name })
+      .from(brands)
+      .orderBy(brands.name);
 
-    return result.map((r) => r.brand).filter(Boolean);
+    return result;
   },
   {
     maxAge: 60 * 60,
-    name: CATALOG_CACHE_HANDLER_NAME.brands,
-    getKey: (event) => {
-      const query = getQuery(event);
-      return (query.category as string) || "all";
-    },
+    name: "api-brands",
+    getKey: () => "all-brands",
   }
 );

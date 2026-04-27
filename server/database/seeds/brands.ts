@@ -1,5 +1,6 @@
 import { db } from "../db";
 import { components, brands } from "../schema";
+import { isNotNull, ne } from "drizzle-orm";
 
 /**
  * Generate a 3-letter brand ID from brand name
@@ -49,7 +50,7 @@ export async function seedBrands() {
   const uniqueBrands = await db
     .selectDistinct({ name: components.brand })
     .from(components)
-    .where((c) => c.brand !== null);
+    .where(isNotNull(components.brand));
 
   const brandNames = uniqueBrands
     .map((b) => b.name)
