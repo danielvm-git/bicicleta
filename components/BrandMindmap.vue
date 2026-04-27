@@ -250,7 +250,12 @@ onMounted(() => {
 .brand-flow .vue-flow__edge.animated .vue-flow__edge-path {
   @apply stroke-primary/40;
   stroke-dasharray: 8;
-  animation: flow-dash 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand-flow .vue-flow__edge.animated .vue-flow__edge-path {
+    animation: flow-dash 1s linear infinite;
+  }
 }
 
 @keyframes flow-dash {

@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logos Marcas de Bikes</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+      }
+
+      .subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1em;
+      }
+
+      .controls {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+      }
+
+      select,
+      input {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        background: white;
+        font-size: 1em;
+        cursor: pointer;
+      }
+
+      input[type="number"] {
+        width: 120px;
+      }
+
+      input[type="text"]#apiToken {
+        width: 300px;
+        font-family: monospace;
+        font-size: 0.9em;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: white;
+        color: #667eea;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+        text-align: center;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .card h3 {
+        color: #333;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+      }
+
+      .domain-input {
+        font-size: 0.75em;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 100%;
+        margin-bottom: 12px;
+        font-family: monospace;
+        color: #666;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 8px;
+        min-height: 180px;
+        margin-bottom: 12px;
+        position: relative;
+        overflow: hidden;
+        padding: 10px;
+      }
+
+      .logo-container img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .spinner {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .buttons {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .btn-small {
+        padding: 6px 10px;
+        font-size: 0.75em;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex: 1;
+      }
+
+      .btn-copy {
+        background: #667eea;
+        color: white;
+      }
+
+      .btn-copy:hover {
+        background: #764ba2;
+      }
+
+      .btn-copy.copied {
+        background: #4caf50;
+      }
+
+      .btn-open {
+        background: #ff9800;
+        color: white;
+      }
+
+      .btn-open:hover {
+        background: #e68900;
+      }
+
+      .url-display {
+        font-size: 0.65em;
+        color: #666;
+        padding: 8px;
+        background: #f9f9f9;
+        border-radius: 4px;
+        word-break: break-all;
+        font-family: monospace;
+        margin-bottom: 8px;
+      }
+
+      .setup-banner {
+        background: #fff3cd;
+        border: 2px solid #ffc107;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .setup-banner h2 {
+        margin-bottom: 15px;
+        font-size: 1.3em;
+        color: #d39e00;
+      }
+
+      .setup-steps {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .setup-steps li {
+        margin-left: 20px;
+      }
+
+      .setup-steps code {
+        background: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      .setup-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #ffc107;
+        color: #333;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+
+      .setup-link:hover {
+        background: #ffb300;
+      }
+
+      .footer {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚲 Logos Marcas de Bikes</h1>
+      <p class="subtitle">Powered by logo.dev</p>
+
+      <div class="setup-banner">
+        <h2>⚙️ Como configurar o token logo.dev</h2>
+        <ol class="setup-steps">
+          <li>
+            Acesse
+            <a
+              href="https://www.logo.dev/"
+              target="_blank"
+              style="color: #d39e00; font-weight: bold"
+              >logo.dev</a
+            >
+            e crie uma conta gratuita
+          </li>
+          <li>Vá em <strong>Configurações → API Keys</strong></li>
+          <li>
+            Copie o <strong>Publishable Key</strong> (começa com
+            <code>pk_</code>)
+          </li>
+          <li>Cole no campo abaixo e clique em "Atualizar"</li>
+        </ol>
+        <p>
+          <strong>✅ Certo:</strong> Use o Publishable Key que começa com
+          <code>pk_</code>
+        </p>
+      </div>
+
+      <div class="controls">
+        <label
+          >API Token (pk_...):
+          <input
+            type="text"
+            id="apiToken"
+            placeholder="pk_xxxxxxxxxxxxxxxx"
+            autocomplete="off"
+          />
+        </label>
+        <label
+          >Tamanho (px):
+          <input
+            type="number"
+            id="sizeInput"
+            value="180"
+            min="64"
+            max="512"
+            step="32"
+          />
+        </label>
+        <label
+          >Formato:
+          <select id="formatSelect">
+            <option value="webp" selected>WEBP</option>
+            <option value="png">PNG</option>
+            <option value="jpg">JPG</option>
+          </select>
+        </label>
+        <button onclick="regenerateLogos()">🔄 Atualizar</button>
+      </div>
+
+      <div class="grid" id="logoGrid"></div>
+
+      <div class="footer">
+        <p>
+          URLs logo.dev prontas para usar • Clique "Abrir" para ver o logo em um
+          novo navegador
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const brands = [
+        { name: "Absolute", domain: "absolutebikes.com" },
+        { name: "Caloi", domain: "caloi.com.br" },
+        { name: "Chaoyang", domain: "chaoyang.com" },
+        { name: "Colli", domain: "colli.com.br" },
+        { name: "Logan", domain: "logan.com.br" },
+        { name: "Microshift", domain: "microshift.com" },
+        { name: "Oggi", domain: "oggi.com.br" },
+        { name: "Pirelli", domain: "pirelli.com" },
+        { name: "Promax", domain: "promax.com" },
+        { name: "RockShox", domain: "rockshox.com" },
+        { name: "SR Suntour", domain: "srsuntour.com" },
+        { name: "SRAM", domain: "sram.com" },
+        { name: "Sense", domain: "sensebike.com.br" },
+        { name: "Shimano", domain: "shimano.com" },
+        { name: "Show", domain: "showbike.com.br" },
+        { name: "Soul", domain: "soul.com.br" },
+        { name: "SunRace", domain: "sunrace.com" },
+        { name: "TSW", domain: "tsw.com.br" },
+        { name: "Victoria", domain: "victoria.com.br" },
+        { name: "Vzan", domain: "vzan.com.br" },
+      ];
+
+      function getLogoUrl(domain, size, format, token) {
+        const url = `https://img.logo.dev/${domain}?size=${size}&format=${format}`;
+        return token ? `${url}&token=${token}` : url;
+      }
+
+      function createLogoCard(brand, size, format, token) {
+        const url = getLogoUrl(brand.domain, size, format, token);
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+                <h3>${brand.name}</h3>
+                <input type="text" class="domain-input" value="${brand.domain}" placeholder="Domínio" data-brand="${brand.name}">
+                <div class="logo-container loading">
+                    <div class="spinner"></div>
+                </div>
+                <div class="url-display">${url}</div>
+                <div class="buttons">
+                    <button class="btn-small btn-copy" onclick="copyUrl(this, '${url}')">📋 Copiar</button>
+                    <button class="btn-small btn-open" onclick="window.open('${url}', '_blank')">🔗 Abrir</button>
+                </div>
+            `;
+
+        const domainInput = card.querySelector(".domain-input");
+        const container = card.querySelector(".logo-container");
+        const urlDisplay = card.querySelector(".url-display");
+        const buttons = card.querySelectorAll("button");
+
+        domainInput.addEventListener("change", () => {
+          brand.domain = domainInput.value;
+          const newUrl = getLogoUrl(brand.domain, size, format, token);
+          urlDisplay.textContent = newUrl;
+          buttons[0].onclick = () => copyUrl(buttons[0], newUrl);
+          buttons[1].onclick = () => window.open(newUrl, "_blank");
+          loadLogoPreview(container, newUrl);
+        });
+
+        loadLogoPreview(container, url);
+
+        return card;
+      }
+
+      function loadLogoPreview(container, url) {
+        container.innerHTML = '<div class="spinner"></div>';
+        container.classList.add("loading");
+
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "Logo";
+
+        img.onload = () => {
+          container.classList.remove("loading");
+          container.innerHTML = "";
+          container.appendChild(img);
+        };
+
+        img.onerror = () => {
+          container.classList.remove("loading");
+          container.innerHTML = `
+                    <div style="text-align: center; color: #999;">
+                        <div style="font-size: 2em; margin-bottom: 8px;">⚠️</div>
+                        <small>Logo não encontrado ou token inválido</small>
+                    </div>
+                `;
+        };
+      }
+
+      function copyUrl(button, url) {
+        navigator.clipboard
+          .writeText(url)
+          .then(() => {
+            const originalText = button.textContent;
+            button.textContent = "✓ Copiado!";
+            button.classList.add("copied");
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.classList.remove("copied");
+            }, 2000);
+          })
+          .catch(() => {
+            alert("Erro ao copiar. Verifique as permissões.");
+          });
+      }
+
+      function regenerateLogos() {
+        const token = document.getElementById("apiToken").value;
+        const size = document.getElementById("sizeInput").value;
+        const format = document.getElementById("formatSelect").value;
+        const grid = document.getElementById("logoGrid");
+
+        if (!token) {
+          grid.innerHTML =
+            '<div style="grid-column: 1/-1; padding: 40px; text-align: center; color: #666;"><p style="font-size: 1.2em;">⚠️ Cole seu API token acima para carregar os logos</p></div>';
+          return;
+        }
+
+        grid.innerHTML = "";
+        brands.forEach((brand) => {
+          grid.appendChild(createLogoCard(brand, size, format, token));
+        });
+      }
+
+      window.addEventListener("load", () => {
+        const savedToken = localStorage.getItem("logoDevToken");
+        if (savedToken) {
+          document.getElementById("apiToken").value = savedToken;
+          regenerateLogos();
+        }
+      });
+
+      document.addEventListener("input", (e) => {
+        if (e.target.id === "apiToken") {
+          localStorage.setItem("logoDevToken", e.target.value);
+        }
+      });
+    </script>
+  </body>
+</html>

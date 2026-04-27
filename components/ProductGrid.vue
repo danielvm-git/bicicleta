@@ -23,21 +23,21 @@ const emit = defineEmits<{
       <div
         v-for="i in 6"
         :key="i"
-        class="h-80 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-2xl border border-gray-200 dark:border-gray-700"
+        class="h-80 bg-gray-100 dark:bg-gray-800 animate-pulse rounded-2xl border border-gray-300 dark:border-gray-700"
       ></div>
     </div>
 
     <div
       v-else-if="!components || components.length === 0"
-      class="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-2xl"
+      class="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-gray-300 dark:border-gray-800 rounded-2xl"
     >
-      <UIcon name="i-heroicons-inbox" class="w-12 h-12 text-gray-300 mb-4" />
+      <UIcon name="i-heroicons-inbox" class="w-12 h-12 text-gray-700 mb-4" />
       <h3
         class="font-display text-lg font-bold text-gray-700 dark:text-gray-300"
       >
         Nenhuma peça encontrada
       </h3>
-      <p class="text-gray-500 max-w-sm mt-2">
+      <p class="text-gray-600 max-w-sm mt-2">
         Não encontramos componentes para este nível de performance nesta
         categoria.
       </p>

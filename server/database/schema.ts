@@ -9,6 +9,15 @@ import {
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
+export const brands = pgTable("brands", {
+  id: text("id").primaryKey(), // Normalized brand name (e.g., "shimano", "sram")
+  name: text("name").notNull().unique(), // Display name (e.g., "Shimano", "SRAM")
+  url: text("url").notNull(),
+  logoFilename: text("logo_filename"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const components = pgTable("components", {
   id: serial("id").primaryKey(),
   category: text("category").notNull(),
@@ -90,9 +99,13 @@ export const bikeComponents = pgTable("bike_components", {
   }),
 });
 
-export const componentsRelations = relations(components, ({ many }) => ({
+export const componentsRelations = relations(components, ({ many, one }) => ({
   bikeComponents: many(bikeComponents),
   prices: many(componentPrices),
+  brandRelation: one(brands, {
+    fields: [components.brand],
+    references: [brands.id],
+  }),
 }));
 
 export const bikeComponentsRelations = relations(bikeComponents, ({ one }) => ({
@@ -104,4 +117,9 @@ export const bikeComponentsRelations = relations(bikeComponents, ({ one }) => ({
     fields: [bikeComponents.componentId],
     references: [components.id],
   }),
+}));
+
+export const brandsRelations = relations(brands, ({ many }) => ({
+  components: many(components),
+  groups: many(groups),
 }));

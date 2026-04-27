@@ -2,6 +2,7 @@
 import { toValue } from "vue";
 const bike = useBikeBuilder();
 const { loggedIn } = useNeonAuth();
+const i18n = useI18n();
 
 const issuesList = computed(() => toValue(bike.issues));
 const totalPriceValue = computed(() => toValue(bike.totalPrice));
@@ -12,6 +13,8 @@ const { data: allComponents } = await useFetch("/api/components");
 // Persistência de bikes
 const isOpen = ref(false);
 const isCompareOpen = ref(false);
+const isSaveBikeModalOpen = ref(false);
+const isShareBikeModalOpen = ref(false);
 const {
   data: bikesList,
   refresh: refreshBikes,
@@ -61,17 +64,21 @@ const componentsMap = computed(() => {
 
 const groupItems = computed(() => {
   if (!hierarchy.value) return [];
-  return Object.keys(hierarchy.value).map((group) => {
+  return Object.keys(hierarchy.value).map((group, index) => {
     const categories = hierarchy.value[group] as string[];
     const selectedCount = categories.filter(
       (cat) => bike.state.components[cat]
     ).length;
 
+    // Only first 2 groups open by default to reduce cognitive overload
+    const isDefaultOpen = index < 2;
+
     return {
       label: `${group} (${selectedCount}/${categories.length})`,
       slot: group,
       categories,
-      defaultOpen: true,
+      defaultOpen: isDefaultOpen,
+      completed: selectedCount === categories.length,
     };
   });
 });
@@ -89,46 +96,45 @@ const getCategoryItems = (categories: string[]) => {
   });
 };
 
-const saveBike = async () => {
-  const name = prompt("Dê um nome para sua bike:", bike.state.name);
-  if (!name) return;
-
+const saveBike = async (name: string) => {
   try {
     await bike.save(name);
-    alert("Bike salva com sucesso!");
+    const toast = useToast();
+    toast.add({
+      title: "Sucesso",
+      description: "Bike salva com sucesso!",
+      color: "green",
+    });
     await refreshBikes();
   } catch (e) {
     console.error(e);
-    alert("Erro ao salvar bike.");
+    const toast = useToast();
+    toast.add({
+      title: "Erro",
+      description: "Erro ao salvar bike.",
+      color: "red",
+    });
   }
 };
 
-const loadBike = (bikeData: any) => {
-  bike.clear();
-  bike.state.name = bikeData.name;
-  bike.state.description = bikeData.description;
-  bikeData.bikeComponents.forEach((bc: any) => {
-    bike.selectComponent(bc.component);
-  });
-  isOpen.value = false;
-};
-
-const shareBike = async () => {
-  const name = prompt(
-    "Dê um nome para sua bike para compartilhar:",
-    bike.state.name
-  );
-  if (!name) return;
-
+const shareBike = async (name: string) => {
   try {
     const shareUrl = await bike.share(name);
-    alert(
-      `Link de compartilhamento copiado para a área de transferência:\n${shareUrl}`
-    );
+    const toast = useToast();
+    toast.add({
+      title: "Link copiado",
+      description: `Link de compartilhamento: ${shareUrl}`,
+      color: "green",
+    });
     await refreshBikes();
   } catch (e) {
     console.error(e);
-    alert("Erro ao gerar link de compartilhamento.");
+    const toast = useToast();
+    toast.add({
+      title: "Erro",
+      description: "Erro ao gerar link de compartilhamento.",
+      color: "red",
+    });
   }
 };
 
@@ -176,7 +182,7 @@ const hasCompatibilityWarning = computed(() =>
 <template>
   <UContainer class="py-8">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-display">Simulador de Montagem</h1>
+      <h1 class="text-3xl font-display">{{ i18n.pages.builder.title }}</h1>
       <div class="flex items-center gap-4">
         <UButton
           variant="ghost"
@@ -197,11 +203,11 @@ const hasCompatibilityWarning = computed(() =>
           Minhas Montagens
         </UButton>
         <div class="text-right">
-          <p class="text-sm text-gray-500">Total Estimado</p>
+          <p class="text-sm text-gray-600">Total Estimado</p>
           <div class="flex items-baseline justify-end gap-2">
             <p
               v-if="bike.totalWeight > 0"
-              class="text-sm text-gray-400 font-medium"
+              class="text-sm text-gray-700 font-medium"
             >
               {{ bike.totalWeight }} kg
             </p>
@@ -240,7 +246,7 @@ const hasCompatibilityWarning = computed(() =>
         name="i-heroicons-arrow-path"
         class="animate-spin text-4xl text-primary mb-4"
       />
-      <p class="text-gray-500">Carregando catálogo...</p>
+      <p class="text-gray-600">Carregando catálogo...</p>
     </div>
 
     <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -249,6 +255,20 @@ const hasCompatibilityWarning = computed(() =>
           :items="groupItems"
           :ui="{ wrapper: 'flex flex-col gap-4' }"
         >
+          <template
+            v-for="item in groupItems"
+            :key="item.slot"
+            #[`${item.slot}-title`]
+          >
+            <div class="flex items-center justify-between w-full pr-2">
+              <span>{{ item.label }}</span>
+              <UIcon
+                v-if="item.completed"
+                name="i-heroicons-check-circle"
+                class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0"
+              />
+            </div>
+          </template>
           <template v-for="item in groupItems" :key="item.slot" #[item.slot]>
             <div class="pl-4 border-l-2 border-primary/20 flex flex-col gap-2">
               <UAccordion :items="getCategoryItems(item.categories)">
@@ -316,7 +336,7 @@ const hasCompatibilityWarning = computed(() =>
                               </UBadge>
                             </div>
                             <div class="flex items-center gap-2 mt-0.5">
-                              <span class="text-[10px] text-gray-400">
+                              <span class="text-[10px] text-gray-700">
                                 Preço: {{ timeAgo(option.updatedAt) }}
                               </span>
                               <UBadge
@@ -329,7 +349,7 @@ const hasCompatibilityWarning = computed(() =>
                               >
                             </div>
                           </div>
-                          <span class="text-gray-500 font-mono">{{
+                          <span class="text-gray-600 font-mono">{{
                             formatCurrency(option.price)
                           }}</span>
                         </div>
@@ -344,31 +364,31 @@ const hasCompatibilityWarning = computed(() =>
       </div>
 
       <div class="lg:col-span-1">
-        <UCard>
+        <UCard class="card-elevated">
           <template #header>
             <h2 class="font-display">Resumo da Bike</h2>
           </template>
 
-          <div
+          <EmptyState
             v-if="Object.keys(bike.state.components).length === 0"
-            class="text-center py-4 text-gray-500"
-          >
-            Nenhuma peça selecionada.
-          </div>
+            icon="i-heroicons-wrench"
+            title="Sua bicicleta está vazia"
+            description="Comece a selecionar componentes no painel à esquerda para montar sua bicicleta ideal."
+          />
 
-          <ul v-else class="divide-y divide-gray-200 dark:divide-gray-700">
+          <ul v-else class="divide-y divide-gray-300 dark:divide-gray-700">
             <li
               v-for="(comp, cat) in bike.state.components"
               :key="cat"
               class="py-2 flex justify-between items-start"
             >
               <div class="flex-1 min-w-0">
-                <p class="text-xs font-semibold text-gray-500 uppercase">
+                <p class="text-xs font-semibold text-gray-600 uppercase">
                   {{ cat }}
                 </p>
                 <p class="truncate text-sm">
                   {{ comp.brand }} {{ comp.model }}
-                  <span v-if="comp.weight" class="text-xs text-gray-400">
+                  <span v-if="comp.weight" class="text-xs text-gray-700">
                     ({{ comp.weight }}kg)
                   </span>
                 </p>
@@ -394,7 +414,7 @@ const hasCompatibilityWarning = computed(() =>
                 v-if="bike.totalWeight > 0"
                 class="flex justify-between items-center mb-2 px-1"
               >
-                <span class="text-gray-500 font-medium">Peso Total:</span>
+                <span class="text-gray-600 font-medium">Peso Total:</span>
                 <span class="font-bold">{{ bike.totalWeight }} kg</span>
               </div>
               <div class="flex gap-2">
@@ -403,7 +423,7 @@ const hasCompatibilityWarning = computed(() =>
                   class="flex-1"
                   color="primary"
                   :disabled="Object.keys(bike.state.components).length === 0"
-                  @click="saveBike"
+                  @click="isSaveBikeModalOpen = true"
                 >
                   Salvar Bike
                 </UButton>
@@ -420,7 +440,7 @@ const hasCompatibilityWarning = computed(() =>
                 color="primary"
                 icon="i-heroicons-share"
                 :disabled="Object.keys(bike.state.components).length === 0"
-                @click="shareBike"
+                @click="isShareBikeModalOpen = true"
               >
                 Compartilhar Bike
               </UButton>
@@ -444,7 +464,7 @@ const hasCompatibilityWarning = computed(() =>
         <template #header>
           <div class="flex items-center justify-between">
             <h3
-              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+              class="text-base font-semibold leading-6 text-gray-900 dark:text-white font-display"
             >
               Minhas Montagens
             </h3>
@@ -472,7 +492,7 @@ const hasCompatibilityWarning = computed(() =>
           >
             <div>
               <p class="font-medium">{{ bikeData.name }}</p>
-              <p class="text-xs text-gray-500">
+              <p class="text-xs text-gray-600">
                 {{ formatCurrency(bikeData.totalPrice) }}
               </p>
             </div>
@@ -486,7 +506,7 @@ const hasCompatibilityWarning = computed(() =>
             </UButton>
           </div>
         </div>
-        <div v-else class="text-center py-4 text-gray-500">
+        <div v-else class="text-center py-4 text-gray-600">
           Nenhuma montagem salva encontrada.
         </div>
       </UCard>
@@ -497,7 +517,7 @@ const hasCompatibilityWarning = computed(() =>
         <template #header>
           <div class="flex items-center justify-between">
             <h3
-              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+              class="text-base font-semibold leading-6 text-gray-900 dark:text-white font-display"
             >
               Selecionar Bike Comercial para Comparar
             </h3>
@@ -525,7 +545,7 @@ const hasCompatibilityWarning = computed(() =>
           >
             <div>
               <p class="font-medium">{{ template.name }}</p>
-              <p class="text-xs text-gray-500">
+              <p class="text-xs text-gray-600">
                 {{ formatCurrency(template.totalPrice) }}
               </p>
             </div>
@@ -539,11 +559,25 @@ const hasCompatibilityWarning = computed(() =>
             </UButton>
           </div>
         </div>
-        <div v-else class="text-center py-4 text-gray-500">
+        <div v-else class="text-center py-4 text-gray-600">
           Nenhum template comercial encontrado.
         </div>
       </UCard>
     </UModal>
+
+    <!-- Bikes Management Modals -->
+    <SaveBikeModal
+      v-model="isSaveBikeModalOpen"
+      title="Dê um nome para sua bike"
+      placeholder="ex: Minha Bike Custom"
+      :default-value="bike.state.name"
+      @confirm="saveBike"
+    />
+    <ShareBikeModal
+      v-model="isShareBikeModalOpen"
+      :default-value="bike.state.name"
+      @confirm="shareBike"
+    />
   </UContainer>
 </template>
 

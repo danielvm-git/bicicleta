@@ -120,21 +120,21 @@ const printPage = () => {
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-      <UCard>
+      <UCard class="card-elevated">
         <template #header>
-          <h2 class="font-bold">Sua Bike Atual</h2>
+          <h2 class="font-bold font-display">Sua Bike Atual</h2>
         </template>
         <div class="flex justify-between items-center">
-          <span class="text-gray-500">Total Estimado</span>
+          <span class="text-gray-600">Total Estimado</span>
           <span class="text-xl font-bold text-primary">{{
             formatCurrency(bike.totalPrice)
           }}</span>
         </div>
       </UCard>
 
-      <UCard>
+      <UCard class="card-elevated">
         <template #header>
-          <h2 class="font-bold">Bike Comercial (Template)</h2>
+          <h2 class="font-bold font-display">Bike Comercial (Template)</h2>
         </template>
         <div v-if="!templateId" class="no-print">
           <USelectMenu

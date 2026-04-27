@@ -32,10 +32,10 @@ const selectCategory = (id: string) => {
         :key="cat.id"
         @click="selectCategory(cat.id)"
         :aria-label="`Filtrar por categoria: ${cat.id}`"
-        class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors font-medium whitespace-nowrap md:whitespace-normal text-left"
+        class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium whitespace-nowrap md:whitespace-normal text-left border-l-4 border-l-transparent"
         :class="[
           modelValue === cat.id
-            ? 'bg-primary text-white shadow-sm'
+            ? 'bg-primary text-white shadow-sm border-l-white'
             : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-800',
         ]"
       >

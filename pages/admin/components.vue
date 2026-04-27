@@ -102,34 +102,52 @@ const saveEdit = async () => {
 
 <template>
   <UContainer class="py-8">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-display">Gestão de Componentes</h1>
-      <UInput
-        v-model="search"
-        icon="i-heroicons-magnifying-glass-20-solid"
-        size="sm"
-        color="white"
-        :trailing="false"
-        placeholder="Buscar peças..."
-        class="w-64"
-      />
+    <!-- Header Section -->
+    <div class="mb-12">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h1
+            class="text-4xl font-display font-black text-gray-900 dark:text-white mb-2"
+          >
+            Gestão de Componentes
+          </h1>
+          <p class="text-gray-600 dark:text-gray-400 max-w-2xl">
+            Gerencie o catálogo de peças, importe novos componentes e monitore a
+            atualização de preços automatizada.
+          </p>
+        </div>
+        <UInput
+          v-model="search"
+          icon="i-heroicons-magnifying-glass-20-solid"
+          size="md"
+          color="white"
+          :trailing="false"
+          placeholder="Buscar peças..."
+          class="w-72"
+        />
+      </div>
     </div>
 
-    <!-- Theme Selector Section -->
-    <div
-      class="mb-12 p-6 bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-2xl border border-primary/20"
-    >
-      <ThemeSelector />
+    <!-- Theme Selector Section - Collapsed Accordion -->
+    <div class="mb-8">
+      <UAccordion
+        :items="[{ label: '🎨 Tema de Visualização', slot: 'theme' }]"
+      >
+        <template #theme>
+          <ThemeSelector />
+        </template>
+      </UAccordion>
     </div>
 
     <!-- Admin Actions -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
       <div
-        class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+        class="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700 elevation-sm"
       >
-        <h2 class="font-bold mb-4 flex items-center gap-2">
-          <UIcon name="i-heroicons-cloud-arrow-up" />
+        <h2
+          class="font-bold font-display mb-4 flex items-center gap-2 text-gray-900 dark:text-white"
+        >
+          <UIcon name="i-heroicons-cloud-arrow-up" class="w-5 h-5" />
           Importar Novos Componentes (CSV)
         </h2>
         <div class="flex items-center gap-2">
@@ -158,10 +176,12 @@ const saveEdit = async () => {
       </div>
 
       <div
-        class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+        class="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700 elevation-sm"
       >
-        <h2 class="font-bold mb-4 flex items-center gap-2">
-          <UIcon name="i-heroicons-arrow-path" />
+        <h2
+          class="font-bold font-display mb-4 flex items-center gap-2 text-gray-900 dark:text-white"
+        >
+          <UIcon name="i-heroicons-arrow-path" class="w-5 h-5" />
           Automação de Preços (Scraping)
         </h2>
         <div class="flex items-center gap-4">
@@ -179,12 +199,12 @@ const saveEdit = async () => {
           v-if="scrapeResult"
           class="mt-4 text-xs font-medium"
           :class="
-            scrapeResult.successCount > 0 ? 'text-green-600' : 'text-gray-500'
+            scrapeResult.successCount > 0 ? 'text-green-600' : 'text-gray-600'
           "
         >
           Sumário: {{ scrapeResult.successCount }} sucessos,
           {{ scrapeResult.failCount }} falhas.
-          <span class="text-[10px] block text-gray-400"
+          <span class="text-[10px] block text-gray-600"
             >Finalizado em:
             {{ new Date(scrapeResult.timestamp).toLocaleString() }}</span
           >
@@ -192,33 +212,63 @@ const saveEdit = async () => {
       </div>
     </div>
 
-    <UTable
-      :rows="components || []"
-      :columns="columns"
-      :loading="pending"
-      class="w-full"
-    >
-      <template #price-data="{ row }">
-        {{ formatCurrency(row.price) }}
-      </template>
-      <template #actions-data="{ row }">
-        <UButton
-          variant="ghost"
-          color="gray"
-          icon="i-heroicons-pencil-square"
-          @click="openEdit(row)"
-        />
-      </template>
-    </UTable>
+    <!-- Table Section with Styling -->
+    <div class="card-elevated rounded-2xl overflow-hidden">
+      <div
+        class="bg-gray-50 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 px-6 py-4"
+      >
+        <h2
+          class="text-lg font-bold font-display text-gray-900 dark:text-white"
+        >
+          Componentes Cadastrados
+        </h2>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+          {{ components?.length || 0 }} componentes no sistema
+        </p>
+      </div>
+
+      <UTable
+        :rows="components || []"
+        :columns="columns"
+        :loading="pending"
+        class="w-full"
+        :ui="{
+          th: {
+            base: 'px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-900 dark:text-gray-50 bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-600',
+          },
+          td: {
+            base: 'px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-50 border-b border-gray-200 dark:border-gray-700',
+          },
+          tr: {
+            base: 'hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors',
+          },
+        }"
+      >
+        <template #price-data="{ row }">
+          <span class="font-semibold text-primary">{{
+            formatCurrency(row.price)
+          }}</span>
+        </template>
+        <template #actions-data="{ row }">
+          <UButton
+            variant="ghost"
+            color="gray"
+            icon="i-heroicons-pencil-square"
+            @click="openEdit(row)"
+            class="hover:bg-gray-200 dark:hover:bg-gray-600"
+          />
+        </template>
+      </UTable>
+    </div>
 
     <UModal v-model="isEditModalOpen">
-      <UCard v-if="selectedComponent">
+      <UCard v-if="selectedComponent" class="card-elevated">
         <template #header>
           <div class="flex items-center justify-between">
             <h3
-              class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+              class="text-lg font-bold font-display text-gray-900 dark:text-white"
             >
-              Editar Componente
+              ✏️ Editar Componente
             </h3>
             <UButton
               color="gray"
@@ -230,49 +280,64 @@ const saveEdit = async () => {
           </div>
         </template>
 
-        <div class="space-y-4">
-          <UFormGroup label="Modelo">
-            <UInput v-model="selectedComponent.model" />
+        <div class="space-y-6">
+          <UFormGroup label="Modelo" hint="Nome do modelo do componente">
+            <UInput
+              v-model="selectedComponent.model"
+              placeholder="ex: XC Comp"
+            />
           </UFormGroup>
 
-          <div class="grid grid-cols-2 gap-4">
-            <UFormGroup label="Marca">
-              <UInput v-model="selectedComponent.brand" />
+          <div class="grid grid-cols-2 gap-6">
+            <UFormGroup label="Marca" hint="Fabricante">
+              <UInput
+                v-model="selectedComponent.brand"
+                placeholder="ex: Trek"
+              />
             </UFormGroup>
-            <UFormGroup label="Linha">
-              <UInput v-model="selectedComponent.line" />
+            <UFormGroup label="Linha" hint="Série/Linha">
+              <UInput
+                v-model="selectedComponent.line"
+                placeholder="ex: Performance"
+              />
             </UFormGroup>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            <UFormGroup label="Preço (BRL)">
+          <div class="grid grid-cols-2 gap-6">
+            <UFormGroup label="Preço (BRL)" hint="Preço em reais">
               <UInput
                 v-model="selectedComponent.price"
                 type="number"
                 step="0.01"
+                placeholder="0.00"
               />
             </UFormGroup>
-            <UFormGroup label="Peso (kg)">
+            <UFormGroup label="Peso (kg)" hint="Peso aproximado">
               <UInput
                 v-model="selectedComponent.weight"
                 type="number"
                 step="0.001"
+                placeholder="0.000"
               />
             </UFormGroup>
           </div>
 
-          <UFormGroup label="Link">
-            <UInput v-model="selectedComponent.link" />
+          <UFormGroup label="Link" hint="URL do produto">
+            <UInput
+              v-model="selectedComponent.link"
+              type="url"
+              placeholder="https://"
+            />
           </UFormGroup>
 
-          <div class="grid grid-cols-2 gap-4">
-            <UFormGroup label="Velocidades">
+          <div class="grid grid-cols-2 gap-6">
+            <UFormGroup label="Velocidades" hint="ex: 12v, 11v">
               <UInput
                 v-model="selectedComponent.speeds"
                 placeholder="ex: 12v"
               />
             </UFormGroup>
-            <UFormGroup label="Axle Type">
+            <UFormGroup label="Axle Type" hint="ex: Boost 148mm">
               <UInput
                 v-model="selectedComponent.axleType"
                 placeholder="ex: Boost 148mm"
@@ -282,16 +347,17 @@ const saveEdit = async () => {
         </div>
 
         <template #footer>
-          <div class="flex justify-end gap-2">
+          <div class="flex justify-end gap-3">
             <UButton
               color="gray"
-              variant="ghost"
+              variant="soft"
               @click="isEditModalOpen = false"
-              >Cancelar</UButton
             >
-            <UButton color="primary" @click="saveEdit"
-              >Salvar Alterações</UButton
-            >
+              Cancelar
+            </UButton>
+            <UButton color="primary" @click="saveEdit" icon="i-heroicons-check">
+              Salvar Alterações
+            </UButton>
           </div>
         </template>
       </UCard>

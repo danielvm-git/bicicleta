@@ -22,7 +22,7 @@ const handleImageError = () => {
 
 <template>
   <div
-    class="flex flex-col bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-md transition-shadow group"
+    class="flex flex-col bg-white dark:bg-gray-800 rounded-2xl border border-gray-300 dark:border-gray-700 overflow-hidden elevation-sm hover:elevation-md transition-all group"
   >
     <!-- Image -->
     <div
@@ -41,7 +41,7 @@ const handleImageError = () => {
       <UIcon
         v-else
         name="i-heroicons-photo"
-        class="w-12 h-12 text-gray-300 dark:text-gray-700"
+        class="w-12 h-12 text-gray-700 dark:text-gray-700"
       />
       <div
         class="absolute top-2 right-2 px-2 py-1 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded text-[10px] font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wider"
@@ -65,7 +65,7 @@ const handleImageError = () => {
 
       <div class="mt-auto pt-4 flex items-center justify-between">
         <!-- Price placeholder -->
-        <span class="text-sm font-medium text-gray-500"> Sob consulta </span>
+        <span class="text-sm font-medium text-gray-600"> Sob consulta </span>
 
         <UButton
           :color="isSelected ? 'green' : 'primary'"
