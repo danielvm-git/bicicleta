@@ -31,6 +31,7 @@ const selectCategory = (id: string) => {
         v-for="cat in categories"
         :key="cat.id"
         @click="selectCategory(cat.id)"
+        :aria-label="`Filtrar por categoria: ${cat.id}`"
         class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors font-medium whitespace-nowrap md:whitespace-normal text-left"
         :class="[
           modelValue === cat.id
@@ -42,6 +43,7 @@ const selectCategory = (id: string) => {
           :name="cat.icon"
           class="w-5 h-5 flex-shrink-0"
           :class="modelValue === cat.id ? 'text-white' : 'text-primary/60'"
+          aria-hidden="true"
         />
         <span class="font-display">{{ cat.id }}</span>
       </button>
@@ -50,7 +52,5 @@ const selectCategory = (id: string) => {
 </template>
 
 <style scoped>
-.font-display {
-  font-family: "Bricolage Grotesque", sans-serif;
-}
+/* .font-display is inherited from global brand.css */
 </style>

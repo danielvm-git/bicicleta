@@ -131,7 +131,7 @@ const mobileNavLinks = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 font-body">
+  <div class="min-h-screen bg-brand-bg dark:bg-gray-900 font-body">
     <header
       class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 no-print"
     >
@@ -255,13 +255,5 @@ const mobileNavLinks = [
   @media print {
     display: none !important;
   }
-}
-
-.font-display {
-  font-family: "Bricolage Grotesque", sans-serif;
-}
-
-.font-body {
-  font-family: "Source Serif 4", serif;
 }
 </style>

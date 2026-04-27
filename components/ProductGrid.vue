@@ -54,9 +54,3 @@ const emit = defineEmits<{
     </div>
   </div>
 </template>
-
-<style scoped>
-.font-display {
-  font-family: "Bricolage Grotesque", sans-serif;
-}
-</style>

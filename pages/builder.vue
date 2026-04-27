@@ -181,6 +181,7 @@ const hasCompatibilityWarning = computed(() =>
         <UButton
           variant="ghost"
           icon="i-heroicons-printer"
+          aria-label="Imprimir página"
           class="no-print"
           @click="printPage"
         >
@@ -189,6 +190,7 @@ const hasCompatibilityWarning = computed(() =>
         <UButton
           variant="ghost"
           icon="i-heroicons-folder-open"
+          aria-label="Abrir minhas montagens"
           class="no-print"
           @click="isOpen = true"
         >

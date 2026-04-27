@@ -1,10 +1,10 @@
 export default defineAppConfig({
   ui: {
-    primary: "teal",
-    gray: "stone",
+    primary: "primary",
+    gray: "gray",
     card: {
       rounded: "rounded-xl",
-      border: "border-db-border dark:border-gray-800",
+      border: "border-brand-border dark:border-gray-800",
       shadow: "shadow-sm",
     },
     button: {

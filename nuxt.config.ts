@@ -12,7 +12,7 @@ export default defineNuxtConfig({
       name: "Monta Bike - Simulador",
       short_name: "Monta Bike",
       description: "Simulador completo de montagem de bicicletas MTB.",
-      theme_color: "#2563eb",
+      theme_color: "#0d6b6b",
       background_color: "#ffffff",
       icons: [
         {
@@ -102,7 +102,52 @@ export default defineNuxtConfig({
       type: "classic",
     },
   },
-  css: ["~/assets/css/brand.css"],
+  css: ["~/assets/css/brand.css", "~/assets/css/themes.css"],
+  tailwindcss: {
+    config: {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: "#f0f8f7",
+              100: "#ddf1f0",
+              200: "#b9e4e1",
+              300: "#8ed4cf",
+              400: "#5ebdb6",
+              500: "#0d6b6b",
+              600: "#0a5555",
+              700: "#084545",
+              800: "#063939",
+              900: "#052e2e",
+              950: "#021a1a",
+            },
+            gray: {
+              50: "#fafaf9",
+              100: "#f5f5f4",
+              200: "#e7e5e4",
+              300: "#d6d3d1",
+              400: "#a8a29e",
+              500: "#78716b",
+              600: "#57534e",
+              700: "#44403c",
+              800: "#292524",
+              900: "#1c1917",
+              950: "#0c0a09",
+            },
+          },
+          fontFamily: {
+            display: [
+              '"Bricolage Grotesque"',
+              "ui-sans-serif",
+              "system-ui",
+              "sans-serif",
+            ],
+            body: ['"Source Serif 4"', "Georgia", '"Times New Roman"', "serif"],
+          },
+        },
+      },
+    },
+  },
   runtimeConfig: {
     /** Neon Console → Auth; proxy target for /api/auth/* (see server/api/auth/[...].ts) */
     neonAuthBaseUrl:

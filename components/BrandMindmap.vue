@@ -204,7 +204,13 @@ onMounted(() => {
 }
 
 .brand-flow .vue-flow__node:hover {
-  @apply shadow-xl scale-105;
+  @apply shadow-xl;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand-flow .vue-flow__node:hover {
+    @apply scale-105;
+  }
 }
 
 .brand-flow .vue-flow__node.root-node {
@@ -254,9 +260,5 @@ onMounted(() => {
   to {
     stroke-dashoffset: 0;
   }
-}
-
-.font-display {
-  font-family: "Bricolage Grotesque", sans-serif;
 }
 </style>

@@ -102,6 +102,7 @@ const saveEdit = async () => {
 
 <template>
   <UContainer class="py-8">
+    <!-- Header -->
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-display">Gestão de Componentes</h1>
       <UInput
@@ -115,6 +116,14 @@ const saveEdit = async () => {
       />
     </div>
 
+    <!-- Theme Selector Section -->
+    <div
+      class="mb-12 p-6 bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/20 rounded-2xl border border-primary/20"
+    >
+      <ThemeSelector />
+    </div>
+
+    <!-- Admin Actions -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
       <div
         class="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"

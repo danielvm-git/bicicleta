@@ -209,7 +209,5 @@ useSeoMeta({
 </template>
 
 <style scoped>
-.font-display {
-  font-family: "Bricolage Grotesque", sans-serif;
-}
+/* .font-display is inherited from global brand.css */
 </style>

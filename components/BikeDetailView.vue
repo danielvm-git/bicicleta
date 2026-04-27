@@ -327,15 +327,20 @@ const handlePrint = () => {
     display: none !important;
   }
 
+  @page {
+    margin: 2cm;
+  }
+
   .bike-detail-view {
     background: white !important;
     color: black !important;
+    min-height: auto !important;
   }
 
   .bike-detail-view :deep(*) {
     background: transparent !important;
     color: black !important;
-    border-color: #eee !important;
+    border-color: #ddd !important;
     box-shadow: none !important;
     text-shadow: none !important;
   }
@@ -344,27 +349,112 @@ const handlePrint = () => {
     background: none !important;
     -webkit-text-fill-color: black !important;
     color: black !important;
+    font-size: 3rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .bg-slate-950,
   .bg-slate-900\/80,
-  .bg-slate-900\/50 {
+  .bg-slate-900\/50,
+  .bg-white {
     background: white !important;
+    border: none !important;
+  }
+
+  /* Spec Sheet Professional Look */
+  .py-24 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .grid {
+    display: block !important;
+  }
+
+  .grid-cols-1,
+  .grid-cols-2,
+  .md\:grid-cols-2,
+  .md\:grid-cols-3,
+  .lg\:grid-cols-\[7fr_5fr\] {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .space-y-8 > * + * {
+    margin-top: 1rem !important;
+  }
+
+  .mb-20,
+  .mb-16,
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Investment Card Adjustment */
+  .backdrop-blur-xl {
+    backdrop-filter: none !important;
+    border: 1px solid #eee !important;
+    padding: 1.5rem !important;
+  }
+
+  /* Performance Snapshots as simple rows/cols */
+  .max-w-2xl {
+    max-width: none !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+  }
+
+  .p-6 {
+    padding: 1rem !important;
+    flex: 1 1 30% !important;
     border: 1px solid #eee !important;
   }
 
-  .text-white,
-  .text-slate-100,
-  .text-slate-300,
-  .text-slate-400,
-  .text-slate-500 {
-    color: black !important;
+  /* Component list adjustments */
+  .gap-20 {
+    gap: 2rem !important;
   }
 
-  .border-slate-800,
-  .border-slate-700,
-  .border-slate-100 {
-    border-color: #eee !important;
+  .gap-x-12 {
+    column-gap: 2rem !important;
+  }
+
+  .gap-y-8 {
+    row-gap: 0.5rem !important;
+  }
+
+  .border-b-4 {
+    border-bottom-width: 2px !important;
+  }
+
+  .text-6xl {
+    font-size: 2.5rem !important;
+  }
+
+  .text-3xl {
+    font-size: 1.5rem !important;
+  }
+
+  .text-xl {
+    font-size: 1rem !important;
+  }
+
+  /* Ensure image fits page */
+  img {
+    max-height: 400px !important;
+    width: auto !important;
+    margin: 0 auto !important;
+    border-radius: 0.5rem !important;
+  }
+
+  /* Force category headers to stay with their items */
+  h3 {
+    page-break-after: avoid;
+  }
+
+  .flex-col {
+    page-break-inside: avoid;
   }
 }
 </style>

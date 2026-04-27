@@ -32,6 +32,9 @@ const handleImageError = () => {
         v-if="component.imageUrl && !imageError"
         :src="component.imageUrl"
         :alt="component.model"
+        width="300"
+        height="192"
+        loading="lazy"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         @error="handleImageError"
       />
@@ -68,6 +71,7 @@ const handleImageError = () => {
           :color="isSelected ? 'green' : 'primary'"
           :variant="isSelected ? 'soft' : 'solid'"
           :icon="isSelected ? 'i-heroicons-check' : 'i-heroicons-plus'"
+          :aria-label="`${isSelected ? 'Remover' : 'Adicionar'} ${component.brand} ${component.model} ao projeto`"
           size="sm"
           class="rounded-lg shadow-sm group-hover:shadow"
           @click="onAdd"
@@ -78,9 +82,3 @@ const handleImageError = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.font-display {
-  font-family: "Bricolage Grotesque", sans-serif;
-}
-</style>

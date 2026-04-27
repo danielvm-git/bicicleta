@@ -108,7 +108,7 @@ const printPage = () => {
 <template>
   <UContainer class="py-8">
     <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-bold">Comparação Side-by-Side</h1>
+      <h1 class="text-3xl font-display font-bold">Comparação Side-by-Side</h1>
       <div class="flex gap-2 no-print">
         <UButton variant="ghost" icon="i-heroicons-printer" @click="printPage">
           Imprimir
@@ -177,19 +177,25 @@ const printPage = () => {
       <table
         class="w-full border-collapse border border-gray-200 dark:border-gray-700"
       >
+        <caption class="sr-only">
+          Comparação entre sua bicicleta customizada e um template comercial
+        </caption>
         <thead>
           <tr class="bg-gray-50 dark:bg-gray-800">
             <th
+              scope="col"
               class="border border-gray-200 dark:border-gray-700 p-3 text-left"
             >
               Categoria
             </th>
             <th
+              scope="col"
               class="border border-gray-200 dark:border-gray-700 p-3 text-left"
             >
               Sua Bike
             </th>
             <th
+              scope="col"
               class="border border-gray-200 dark:border-gray-700 p-3 text-left"
             >
               Template
@@ -199,6 +205,7 @@ const printPage = () => {
         <tbody>
           <tr v-for="category in allCategories" :key="category">
             <td
+              scope="row"
               class="border border-gray-200 dark:border-gray-700 p-3 font-semibold bg-gray-50/50 dark:bg-gray-800/50"
             >
               {{ category }}
