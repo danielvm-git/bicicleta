@@ -1,5 +1,15 @@
 <script setup lang="ts">
-const { data: brands, pending, error } = await useFetch("/api/brands");
+interface Brand {
+  id: string;
+  name: string;
+}
+
+const {
+  data: brands,
+  pending,
+  error,
+  refresh,
+} = await useFetch<Brand[]>("/api/brands");
 
 useSeoMeta({
   title: "Ecosistema de Marcas | Monta Bike",
@@ -44,8 +54,8 @@ useSeoMeta({
     <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <NuxtLink
         v-for="brand in brands"
-        :key="brand"
-        :to="`/brands/${brand}`"
+        :key="brand.id"
+        :to="`/brands/${brand.name}`"
         class="group relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-8 rounded-3xl shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300"
       >
         <div class="flex items-center justify-between mb-4">
@@ -66,7 +76,7 @@ useSeoMeta({
         <h2
           class="text-3xl font-display text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300"
         >
-          {{ brand }}
+          {{ brand.name }}
         </h2>
         <p class="text-sm text-gray-500 mt-2">
           Ver matriz de equivalência e mindmap técnico.

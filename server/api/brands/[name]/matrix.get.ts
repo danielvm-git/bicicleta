@@ -76,7 +76,7 @@ export default defineCachedEventHandler(
       .from(components)
       .where(
         and(
-          eq(sql`LOWER(${components.brand})`, brandName.toLowerCase()),
+          eq(components.brand, brandName.toLowerCase()),
           sql`functional_group != 'Sistema'`
         )
       );
