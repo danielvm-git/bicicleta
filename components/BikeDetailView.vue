@@ -52,7 +52,7 @@ const handlePrint = () => {
                 >
               </div>
               <h1
-                class="text-6xl md:text-7xl font-black leading-[0.9] mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400"
+                class="text-6xl md:text-7xl font-black leading-[0.9] tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-400"
               >
                 {{ bike.name }}
               </h1>
@@ -61,6 +61,20 @@ const handlePrint = () => {
               >
                 {{ bike.description }}
               </p>
+            </div>
+
+            <div
+              v-if="bike.imageUrl"
+              class="relative group mt-12 mb-16 overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/50"
+            >
+              <img
+                :src="bike.imageUrl"
+                :alt="bike.name"
+                class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-1000"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none"
+              />
             </div>
 
             <!-- Performance Snapshots -->

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-await navigateTo("/components");
+// Redirect handled by middleware/redirect.global.ts
 </script>
 
 <template>
-  <div>Redirecting...</div>
+  <div />
 </template>
