@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Monta Bike Logo Generator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #1a1a2e;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: sans-serif;
+        color: white;
+        gap: 16px;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+      button {
+        padding: 12px 28px;
+        background: #1565c0;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1976d2;
+      }
+      #status {
+        font-size: 14px;
+        color: #90caf9;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="logo" width="800" height="400"></canvas>
+    <button onclick="saveImg()">💾 Salvar logo-monta-bike.png</button>
+    <div id="status">Canvas pronto — clique para salvar</div>
+
+    <script>
+      const canvas = document.getElementById("logo");
+      const ctx = canvas.getContext("2d");
+      const W = 800,
+        H = 400;
+
+      function drawLogo() {
+        // Background
+        const bg = ctx.createLinearGradient(0, 0, W, H);
+        bg.addColorStop(0, "#080d1a");
+        bg.addColorStop(1, "#0d1530");
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+
+        // Subtle radial glow center
+        const glow = ctx.createRadialGradient(
+          W / 2,
+          H / 2 - 40,
+          10,
+          W / 2,
+          H / 2 - 40,
+          300
+        );
+        glow.addColorStop(0, "rgba(21,101,192,0.12)");
+        glow.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, 0, W, H);
+
+        const cx = W / 2,
+          cy = 155;
+
+        // --- Mountain silhouette ---
+        const mGrad = ctx.createLinearGradient(cx - 180, 0, cx + 180, 0);
+        mGrad.addColorStop(0, "#1565C0");
+        mGrad.addColorStop(0.5, "#1976D2");
+        mGrad.addColorStop(1, "#42A5F5");
+
+        ctx.fillStyle = mGrad;
+        ctx.shadowColor = "rgba(66,165,245,0.3)";
+        ctx.shadowBlur = 18;
+
+        ctx.beginPath();
+        ctx.moveTo(cx - 175, cy + 65); // bottom-left
+        ctx.lineTo(cx - 100, cy - 45); // left peak
+        ctx.lineTo(cx - 55, cy + 5); // left valley
+        ctx.lineTo(cx, cy - 75); // center peak (tallest)
+        ctx.lineTo(cx + 55, cy - 10); // right valley
+        ctx.lineTo(cx + 110, cy - 55); // right peak
+        ctx.lineTo(cx + 175, cy + 65); // bottom-right
+        ctx.closePath();
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // --- Mountain biker (orange silhouette) ---
+        const bx = cx + 20,
+          by = cy - 85;
+
+        ctx.shadowColor = "rgba(255,111,0,0.4)";
+        ctx.shadowBlur = 12;
+
+        // Gradient orange
+        const oGrad = ctx.createLinearGradient(
+          bx - 40,
+          by - 30,
+          bx + 50,
+          by + 30
+        );
+        oGrad.addColorStop(0, "#FF6F00");
+        oGrad.addColorStop(1, "#FFA726");
+
+        ctx.strokeStyle = oGrad;
+        ctx.fillStyle = oGrad;
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        // Rear wheel
+        ctx.beginPath();
+        ctx.arc(bx - 38, by + 20, 22, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Front wheel
+        ctx.beginPath();
+        ctx.arc(bx + 44, by + 20, 22, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Frame: chain stay
+        ctx.beginPath();
+        ctx.moveTo(bx - 38, by + 20);
+        ctx.lineTo(bx + 5, by - 28);
+        ctx.stroke();
+
+        // Frame: seat tube
+        ctx.beginPath();
+        ctx.moveTo(bx + 5, by - 28);
+        ctx.lineTo(bx + 44, by + 20);
+        ctx.stroke();
+
+        // Frame: top tube
+        ctx.beginPath();
+        ctx.moveTo(bx - 10, by - 38);
+        ctx.lineTo(bx + 30, by - 35);
+        ctx.stroke();
+
+        // Frame: down tube
+        ctx.beginPath();
+        ctx.moveTo(bx - 38, by + 20);
+        ctx.lineTo(bx + 30, by - 35);
+        ctx.stroke();
+
+        // Fork
+        ctx.beginPath();
+        ctx.moveTo(bx + 30, by - 35);
+        ctx.lineTo(bx + 44, by + 20);
+        ctx.stroke();
+
+        // Handlebar
+        ctx.beginPath();
+        ctx.moveTo(bx + 25, by - 38);
+        ctx.lineTo(bx + 38, by - 50);
+        ctx.stroke();
+
+        // Seat post
+        ctx.beginPath();
+        ctx.moveTo(bx + 5, by - 28);
+        ctx.lineTo(bx - 5, by - 44);
+        ctx.stroke();
+
+        // Seat
+        ctx.beginPath();
+        ctx.moveTo(bx - 16, by - 42);
+        ctx.lineTo(bx + 8, by - 42);
+        ctx.stroke();
+
+        // Rider body
+        ctx.beginPath();
+        ctx.moveTo(bx - 2, by - 44); // hip
+        ctx.lineTo(bx + 25, by - 55); // shoulder
+        ctx.lineTo(bx + 36, by - 48); // elbow/handlebar grip
+        ctx.lineWidth = 6;
+        ctx.stroke();
+
+        // Arms
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(bx + 25, by - 55);
+        ctx.lineTo(bx + 38, by - 50);
+        ctx.stroke();
+
+        // Head
+        ctx.beginPath();
+        ctx.arc(bx + 20, by - 64, 11, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+
+        // --- Text: MONTA ---
+        ctx.save();
+        const textGrad = ctx.createLinearGradient(W * 0.2, 0, W * 0.8, 0);
+        textGrad.addColorStop(0, "#1565C0");
+        textGrad.addColorStop(0.5, "#1E88E5");
+        textGrad.addColorStop(1, "#42A5F5");
+
+        ctx.font = 'bold 96px "Arial Black", Arial, sans-serif';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = textGrad;
+        ctx.shadowColor = "rgba(21,101,192,0.5)";
+        ctx.shadowBlur = 20;
+        ctx.fillText("MONTA", W / 2, 295);
+        ctx.restore();
+
+        // --- Text: BIKE ---
+        ctx.save();
+        ctx.font = "400 36px Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#64B5F6";
+        ctx.letterSpacing = "12px";
+        ctx.fillText("B  I  K  E", W / 2, 352);
+        ctx.restore();
+
+        // Divider line
+        ctx.save();
+        ctx.strokeStyle = "rgba(66,165,245,0.25)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(W * 0.28, 330);
+        ctx.lineTo(W * 0.72, 330);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      drawLogo();
+
+      function saveImg() {
+        canvas.toBlob(function (blob) {
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "logo-monta-bike.png";
+          a.click();
+          document.getElementById("status").textContent =
+            `✅ Download iniciado! Mova o arquivo para /Users/me/Sites/bicicleta/assets/`;
+        }, "image/png");
+      }
+
+      // Check size info
+      canvas.toBlob((b) => {
+        const kb = (b.size / 1024).toFixed(1);
+        document.getElementById("status").textContent =
+          `📦 Tamanho estimado: ${kb} KB — pronto para salvar`;
+      }, "image/png");
+    </script>
+  </body>
+</html>

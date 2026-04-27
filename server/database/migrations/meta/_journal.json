@@ -57,6 +57,13 @@
       "when": 1777239799017,
       "tag": "0007_thankful_blacklash",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1777245450736,
+      "tag": "0008_thankful_yellow_claw",
+      "breakpoints": true
     }
   ]
 }

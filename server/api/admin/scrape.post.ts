@@ -4,6 +4,7 @@ import { scrapePrice } from "~/server/utils/scraper";
 import { eq, isNotNull, and, ne, or, ilike } from "drizzle-orm";
 import { requireAdminSession } from "~/server/utils/auth";
 import { checkRateLimit } from "~/server/utils/rateLimit";
+import { resolveMeliItemId, getMeliItemImages } from "~/server/utils/meli";
 
 export default defineEventHandler(async (event) => {
   await requireAdminSession(event);
@@ -38,10 +39,27 @@ export default defineEventHandler(async (event) => {
 
     const result = await scrapePrice(item.link);
     if (result.status === "success" && result.price) {
+      // Sincroniza imagem se necessário (apenas para Mercado Livre)
+      let imageUrl = item.imageUrl;
+      if (!imageUrl) {
+        try {
+          const itemId = await resolveMeliItemId(item.link);
+          if (itemId) {
+            const images = await getMeliItemImages(itemId);
+            if (images.length > 0) {
+              imageUrl = images[0];
+            }
+          }
+        } catch (error) {
+          console.error(`[Meli] Error syncing image for ${item.id}:`, error);
+        }
+      }
+
       await db
         .update(components)
         .set({
           price: result.price.toString(),
+          imageUrl,
           updatedAt: new Date(),
         })
         .where(eq(components.id, item.id));

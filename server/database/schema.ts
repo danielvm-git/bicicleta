@@ -17,12 +17,14 @@ export const components = pgTable("components", {
   line: text("line"),
   functionalGroup: text("functional_group"),
   link: text("link"),
+  imageUrl: text("image_url"),
   price: numeric("price", { precision: 10, scale: 2 }).notNull().default("0"),
   weight: numeric("weight", { precision: 10, scale: 3 }), // in kg, 3 decimals for grams
   speeds: text("speeds"),
   steeringType: text("steering_type"),
   axleType: text("axle_type"),
   suspensionTravel: text("suspension_travel"),
+  performanceLevel: text("performance_level"),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 

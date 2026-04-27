@@ -184,6 +184,8 @@ defineShortcuts({
       </UContainer>
     </header>
 
+    <OfflineBanner />
+
     <main>
       <NuxtPage />
     </main>

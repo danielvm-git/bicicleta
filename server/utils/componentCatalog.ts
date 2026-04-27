@@ -22,10 +22,18 @@ export function componentCatalogFilters(args: {
   brand?: string;
   line?: string;
   search?: string;
+  functionalGroup?: string;
+  performanceLevel?: string;
 }): SQL[] {
   const filters: SQL[] = [];
   if (args.category) {
     filters.push(eq(components.category, args.category));
+  }
+  if (args.functionalGroup) {
+    filters.push(eq(components.functionalGroup, args.functionalGroup));
+  }
+  if (args.performanceLevel) {
+    filters.push(eq(components.performanceLevel, args.performanceLevel));
   }
   if (args.brand) {
     filters.push(eq(components.brand, args.brand));

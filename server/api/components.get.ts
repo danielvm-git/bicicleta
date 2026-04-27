@@ -13,8 +13,17 @@ export default defineCachedEventHandler(
     const brand = query.brand as string;
     const line = query.line as string;
     const search = query.search as string;
+    const functionalGroup = query.functionalGroup as string;
+    const performanceLevel = query.performanceLevel as string;
 
-    const filters = componentCatalogFilters({ category, brand, line, search });
+    const filters = componentCatalogFilters({
+      category,
+      brand,
+      line,
+      search,
+      functionalGroup,
+      performanceLevel,
+    });
     const result = await db
       .select()
       .from(components)

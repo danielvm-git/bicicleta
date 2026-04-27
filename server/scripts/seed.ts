@@ -96,7 +96,40 @@ async function seed() {
   }
 
   // 2. Seed Groups
-  // ... (no changes needed in groups for now)
+  console.log("Seeding groups from CSV...");
+  const groupsFile = "data/grupo_completo.csv";
+  if (fs.existsSync(groupsFile)) {
+    const groupRows = parseCSV(groupsFile);
+    for (const row of groupRows) {
+      const data = {
+        brand: row.Marca,
+        line: row.Linha,
+        configuration: row.Configuracao,
+        frontShifter:
+          row.Trocador_Dianteiro === "N/A" ? null : row.Trocador_Dianteiro,
+        rearShifter:
+          row.Trocador_Traseiro === "N/A" ? null : row.Trocador_Traseiro,
+        frontDerailleur:
+          row.Cambio_Dianteiro === "N/A" ? null : row.Cambio_Dianteiro,
+        rearDerailleur:
+          row.Cambio_Traseiro === "N/A" ? null : row.Cambio_Traseiro,
+        cassette: row.Cassete === "N/A" ? null : row.Cassete,
+        bottomBracket:
+          row.Movimento_Central === "N/A" ? null : row.Movimento_Central,
+        chain: row.Corrente === "N/A" ? null : row.Corrente,
+        crankset: row.Pedivela === "N/A" ? null : row.Pedivela,
+        axleType: row.Tipo_Eixo === "N/A" ? null : row.Tipo_Eixo,
+      };
+
+      if (!dryRun) {
+        await db.insert(groups).values(data);
+      } else {
+        console.log(
+          `[DRY RUN] Would insert group: ${data.brand} ${data.line} (${data.configuration})`
+        );
+      }
+    }
+  }
 
   // 3. Seed Bikes from KV CSVs
   console.log("Seeding bikes from CSV KV...");

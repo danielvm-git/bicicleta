@@ -3,8 +3,7 @@
     "ctxo": {
       "command": "npx",
       "args": [
-        "@ctxo/cli",
-        "mcp"
+        "@ctxo/cli"
       ]
     },
     "context-mode": {
