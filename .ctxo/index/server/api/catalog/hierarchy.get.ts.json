@@ -1,0 +1,28 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "055c8143a6e3f68b374b38e5a1854e52001ff85693263dbf2c1ec3f47099fabc",
+  "edges": [
+    {
+      "from": "server/api/catalog/hierarchy.get.ts::hierarchy.get::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/api/catalog/hierarchy.get.ts::hierarchy.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    }
+  ],
+  "file": "server/api/catalog/hierarchy.get.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T19:35:08-03:00",
+      "hash": "e65c7691a75136d0a29fcb535557a0dab7411b56",
+      "kind": "commit",
+      "message": "feat: Implement cached hierarchy API endpoint to return grouped categor…"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": []
+}

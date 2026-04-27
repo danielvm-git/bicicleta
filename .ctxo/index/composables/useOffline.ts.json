@@ -1,0 +1,27 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "29efdd274c4af695a8ed6ad4e200be7eba1ea7a9cce80af0987748f00c3d5029",
+  "edges": [],
+  "file": "composables/useOffline.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 18,
+      "endOffset": 526,
+      "kind": "variable",
+      "name": "useOffline",
+      "startLine": 0,
+      "startOffset": 13,
+      "symbolId": "composables/useOffline.ts::useOffline::variable"
+    }
+  ]
+}

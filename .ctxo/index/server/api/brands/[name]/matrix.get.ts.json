@@ -1,0 +1,28 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "8b1a07e48e1972b9b4cebb8e0e35a43a20b32714e92cbf6d64fa3f40fb902d29",
+  "edges": [
+    {
+      "from": "server/api/brands/[name]/matrix.get.ts::matrix.get::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/api/brands/[name]/matrix.get.ts::matrix.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    }
+  ],
+  "file": "server/api/brands/[name]/matrix.get.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": []
+}

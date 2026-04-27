@@ -1,10 +1,5 @@
 {
   "mcpServers": {
-    "ctxo": {
-      "command": "npx",
-      "args": ["@ctxo/cli", "mcp"],
-      "env": { "DEBUG": "ctxo:*" }
-    },
     "context-mode": {
       "command": "context-mode"
     },

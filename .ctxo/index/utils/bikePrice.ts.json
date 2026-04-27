@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 4,
+      "symbolId": "utils/bikePrice.ts::sumComponentPrices::function"
+    }
+  ],
+  "contentHash": "38c69dc72d837313f732a557cfd53d7614afcd7be2e9337a80f3cc01daf4eb1a",
+  "edges": [],
+  "file": "utils/bikePrice.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 12,
+      "endOffset": 412,
+      "kind": "function",
+      "name": "sumComponentPrices",
+      "startLine": 4,
+      "startOffset": 138,
+      "symbolId": "utils/bikePrice.ts::sumComponentPrices::function"
+    }
+  ]
+}

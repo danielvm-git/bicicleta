@@ -1,0 +1,28 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "29819ad8a1424485cbb451d6c04219679bca8f2fa4455418ebf3ad3e16090dc5",
+  "edges": [
+    {
+      "from": "scripts/verify-performance-levels.ts::verify-performance-levels::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "scripts/verify-performance-levels.ts::verify-performance-levels::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    }
+  ],
+  "file": "scripts/verify-performance-levels.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": []
+}

@@ -1,0 +1,34 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "baafda0571ebc7aa11f5a5a56f6bf1d2421e883ff582771861941fe0813ef11a",
+  "edges": [
+    {
+      "from": "scripts/verify-m010.ts::verify-m010::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "scripts/verify-m010.ts::verify-m010::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    }
+  ],
+  "file": "scripts/verify-m010.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T18:53:59-03:00",
+      "hash": "dfa0949c2a4d4a1c4e171e57e68027349afa9f70",
+      "kind": "commit",
+      "message": "feat: Executada migração de dados e validada integridade da taxonomia f…"
+    },
+    {
+      "date": "2026-04-26T18:50:03-03:00",
+      "hash": "14987a8e92469a886761c0043f7fa124c50d7b69",
+      "kind": "commit",
+      "message": "feat: Criado script de verificação de integridade e refinado mapeamento…"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": []
+}

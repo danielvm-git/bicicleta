@@ -1,0 +1,56 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 8,
+      "symbolId": "utils/compatibility.ts::issueRelevantForBuilderPreview::function"
+    }
+  ],
+  "contentHash": "0dbe268777be1db07a9b3d5702be57e0b86e1426e349d5e1ae09a25d084c9104",
+  "edges": [],
+  "file": "utils/compatibility.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 171,
+      "endOffset": 4927,
+      "kind": "function",
+      "name": "issueRelevantForBuilderPreview",
+      "startLine": 151,
+      "startOffset": 4406,
+      "symbolId": "utils/compatibility.ts::issueRelevantForBuilderPreview::function"
+    },
+    {
+      "endLine": 145,
+      "endOffset": 4206,
+      "kind": "variable",
+      "name": "validateBike",
+      "startLine": 134,
+      "startOffset": 3931,
+      "symbolId": "utils/compatibility.ts::validateBike::variable"
+    },
+    {
+      "endLine": 218,
+      "endOffset": 6284,
+      "kind": "variable",
+      "name": "checkComponentCompatibility",
+      "startLine": 173,
+      "startOffset": 4942,
+      "symbolId": "utils/compatibility.ts::checkComponentCompatibility::variable"
+    }
+  ]
+}

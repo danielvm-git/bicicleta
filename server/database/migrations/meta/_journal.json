@@ -64,6 +64,13 @@
       "when": 1777245450736,
       "tag": "0008_thankful_yellow_claw",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1777265222989,
+      "tag": "0009_wise_paladin",
+      "breakpoints": true
     }
   ]
 }

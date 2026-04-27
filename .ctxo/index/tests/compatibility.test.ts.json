@@ -1,13 +1,8 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "cc7db74cf654e4af2f507e632f4dc29f9d817f058d2feec22dce059393809c33",
+  "contentHash": "833ae0535921e78b14ea8af541d79ea90596a26db3323aabe45dda9bbd09ea8e",
   "edges": [
-    {
-      "from": "tests/compatibility.test.ts::compatibility.test::variable",
-      "kind": "imports",
-      "to": "server/utils/compatibility.ts::validateBike::variable"
-    },
     {
       "from": "tests/compatibility.test.ts::compatibility.test::variable",
       "kind": "imports",
@@ -17,6 +12,18 @@
   ],
   "file": "tests/compatibility.test.ts",
   "intent": [
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    },
     {
       "date": "2026-04-26T17:25:18-03:00",
       "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
@@ -36,6 +43,6 @@
       "message": "feat(core): implement isomorphic compatibility engine and server-side validation"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }

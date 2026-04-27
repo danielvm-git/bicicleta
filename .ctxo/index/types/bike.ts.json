@@ -1,10 +1,22 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "d1bad502eda65b108ea0eb6850d63244e06446e9b26bfedbe809675ed9d283cb",
+  "contentHash": "8409433273523f5bf7a89d3106dc3bc86973ab460b046f9acba92d30bb73fb82",
   "edges": [],
   "file": "types/bike.ts",
   "intent": [
+    {
+      "date": "2026-04-26T19:46:56-03:00",
+      "hash": "8cea2a7d5e3fbd9a11f9f6835b02520b81f12576",
+      "kind": "commit",
+      "message": "fix: Fix builder 500 error and polish hierarchical UI with selection fe…"
+    },
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
     {
       "date": "2026-04-26T17:25:18-03:00",
       "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
@@ -24,11 +36,11 @@
       "message": "feat(core): implement isomorphic compatibility engine and server-side validation"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": [
     {
-      "endLine": 14,
-      "endOffset": 359,
+      "endLine": 15,
+      "endOffset": 394,
       "kind": "interface",
       "name": "BikeComponent",
       "startLine": 0,
@@ -36,13 +48,31 @@
       "symbolId": "types/bike.ts::BikeComponent::interface"
     },
     {
-      "endLine": 21,
-      "endOffset": 492,
+      "endLine": 40,
+      "endOffset": 1300,
       "kind": "interface",
       "name": "CompatibilityIssue",
-      "startLine": 16,
-      "startOffset": 361,
+      "startLine": 28,
+      "startOffset": 762,
       "symbolId": "types/bike.ts::CompatibilityIssue::interface"
+    },
+    {
+      "endLine": 26,
+      "endOffset": 760,
+      "kind": "type",
+      "name": "CompatibilityRuleId",
+      "startLine": 26,
+      "startOffset": 686,
+      "symbolId": "types/bike.ts::CompatibilityRuleId::type"
+    },
+    {
+      "endLine": 24,
+      "endOffset": 683,
+      "kind": "variable",
+      "name": "COMPATIBILITY_RULE_IDS",
+      "startLine": 18,
+      "startOffset": 482,
+      "symbolId": "types/bike.ts::COMPATIBILITY_RULE_IDS::variable"
     }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "4616e34f508b0dbd339fa01221fa8716e2da61f03db4a5849c425e0dcf75e717",
+  "edges": [
+    {
+      "from": "tests/builder.test.ts::builder.test::variable",
+      "kind": "imports",
+      "to": "stores/builder.ts::useBuilderStore::variable"
+    }
+  ],
+  "file": "tests/builder.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": []
+}

@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "fd018e02c5bc58266513c1ae0ec05bd9b097369b5f697f1c9a42dec8e73d6767",
+  "edges": [],
+  "file": "tests/bikePrice.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": []
+}

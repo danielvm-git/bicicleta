@@ -2,11 +2,11 @@
   "antiPatterns": [],
   "complexity": [
     {
-      "cyclomatic": 7,
+      "cyclomatic": 4,
       "symbolId": "composables/useNeonAuth.ts::useNeonAuth::function"
     }
   ],
-  "contentHash": "15cf7022d615ff3ceedb04e280200359123e69e32d251af2b5e7923b396cb203",
+  "contentHash": "92d5291a4da63cafae330188f5d4d64a7a8f7f0ff4ea33bd92a86dbeea630b4c",
   "edges": [
     {
       "from": "composables/useNeonAuth.ts::useNeonAuth::function",
@@ -20,16 +20,29 @@
     }
   ],
   "file": "composables/useNeonAuth.ts",
-  "intent": [],
-  "lastModified": 1777235957,
+  "intent": [
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    },
+    {
+      "date": "2026-04-26T17:53:32-03:00",
+      "hash": "9b0bfb87517d2aef41c45a534d4d8839b6d8dbc0",
+      "kind": "commit",
+      "message": "- Remove nuxt-auth-utils; proxy /api/auth/* to Neon (Better Auth) and use @neondatabase/auth on the client - Add useNeonAuth and require Neon session for user-scoped fetches; send credentials where needed - requireAdminSession: use Neon session user with role \"admin\" instead of ADMIN_GITHUB_IDS allowlist - Move bike claim to POST /api/claim; GitHub sign-in is client-driven (no /api/auth/github link) - Nuxt: experimental.appManifest false; runtimeConfig.neonAuthBaseUrl; .env.example documents NUXT_NEON_AUTH_BASE_URL - Playwright: drop NUXT_SESSION_PASSWORD helper for dev server; Vitest: add tests/vitest-setup.ts"
+    }
+  ],
+  "lastModified": 1777265180,
   "symbols": [
     {
-      "endLine": 63,
-      "endOffset": 1432,
+      "endLine": 58,
+      "endOffset": 1420,
       "kind": "function",
       "name": "useNeonAuth",
-      "startLine": 13,
-      "startOffset": 431,
+      "startLine": 14,
+      "startOffset": 494,
       "symbolId": "composables/useNeonAuth.ts::useNeonAuth::function"
     }
   ]

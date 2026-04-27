@@ -6,10 +6,22 @@
       "symbolId": "server/utils/auth.ts::requireAdminSession::function"
     }
   ],
-  "contentHash": "bdfe0e62462b2abd5964e873cbca74ad1ce723f4dcf0fb5c08904ec818251da0",
+  "contentHash": "67a4b56bae4ebe2581124cf053e21099dfea8c01c80465496cb02c64ecf59572",
   "edges": [],
   "file": "server/utils/auth.ts",
   "intent": [
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    },
+    {
+      "date": "2026-04-26T17:53:32-03:00",
+      "hash": "9b0bfb87517d2aef41c45a534d4d8839b6d8dbc0",
+      "kind": "commit",
+      "message": "- Remove nuxt-auth-utils; proxy /api/auth/* to Neon (Better Auth) and use @neondatabase/auth on the client - Add useNeonAuth and require Neon session for user-scoped fetches; send credentials where needed - requireAdminSession: use Neon session user with role \"admin\" instead of ADMIN_GITHUB_IDS allowlist - Move bike claim to POST /api/claim; GitHub sign-in is client-driven (no /api/auth/github link) - Nuxt: experimental.appManifest false; runtimeConfig.neonAuthBaseUrl; .env.example documents NUXT_NEON_AUTH_BASE_URL - Playwright: drop NUXT_SESSION_PASSWORD helper for dev server; Vitest: add tests/vitest-setup.ts"
+    },
     {
       "date": "2026-04-26T17:25:18-03:00",
       "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
@@ -17,15 +29,15 @@
       "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": [
     {
-      "endLine": 22,
-      "endOffset": 691,
+      "endLine": 23,
+      "endOffset": 726,
       "kind": "function",
       "name": "requireAdminSession",
-      "startLine": 7,
-      "startOffset": 285,
+      "startLine": 8,
+      "startOffset": 320,
       "symbolId": "server/utils/auth.ts::requireAdminSession::function"
     }
   ]

@@ -1,7 +1,7 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "91b8cd2ac80a107d38bd68ea9c729c6122b5a86a4dfd83dde02bc2148d414840",
+  "contentHash": "d9d772622d73207854ee1c1deaae076ec471e4859a24f0eb475fddda8456b5c2",
   "edges": [
     {
       "from": "server/scripts/seed.ts::seed::variable",
@@ -77,6 +77,12 @@
   "file": "server/scripts/seed.ts",
   "intent": [
     {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    },
+    {
       "date": "2026-04-26T16:55:33-03:00",
       "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
       "kind": "commit",
@@ -101,6 +107,6 @@
       "message": "feat: Implementar Engine de Dados (Parser & Seed) para ingestão de CSV/…"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }

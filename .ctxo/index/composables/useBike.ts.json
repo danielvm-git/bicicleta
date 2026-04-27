@@ -1,28 +1,41 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "7ebc3db036c85441d45af80861773dc552bd70e4a6c9bc1fa23cf64da43c0c74",
+  "contentHash": "7230e0db71eaf065a1f92d3f874ceeaaac442989eb2cd5392189ff1cc9a5c9dc",
   "edges": [
     {
-      "from": "composables/useBike.ts::BikeState::interface",
+      "from": "composables/useBike.ts::useBikeBuilder::variable",
       "kind": "imports",
       "to": "types/bike.ts::BikeComponent::interface",
       "typeOnly": true
-    },
-    {
-      "from": "composables/useBike.ts::BikeState::interface",
-      "kind": "imports",
-      "to": "types/bike.ts::CompatibilityIssue::interface",
-      "typeOnly": true
-    },
-    {
-      "from": "composables/useBike.ts::BikeState::interface",
-      "kind": "imports",
-      "to": "server/utils/compatibility.ts::validateBike::variable"
     }
   ],
   "file": "composables/useBike.ts",
   "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    },
+    {
+      "date": "2026-04-26T19:46:56-03:00",
+      "hash": "8cea2a7d5e3fbd9a11f9f6835b02520b81f12576",
+      "kind": "commit",
+      "message": "fix: Fix builder 500 error and polish hierarchical UI with selection fe…"
+    },
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    },
     {
       "date": "2026-04-26T17:25:18-03:00",
       "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
@@ -36,33 +49,15 @@
       "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": [
     {
-      "endLine": 8,
-      "endOffset": 303,
-      "kind": "interface",
-      "name": "BikeState",
-      "startLine": 4,
-      "startOffset": 189,
-      "symbolId": "composables/useBike.ts::BikeState::interface"
-    },
-    {
-      "endLine": 108,
-      "endOffset": 3273,
-      "kind": "variable",
-      "name": "createBike",
-      "startLine": 10,
-      "startOffset": 318,
-      "symbolId": "composables/useBike.ts::createBike::variable"
-    },
-    {
-      "endLine": 114,
-      "endOffset": 3433,
+      "endLine": 27,
+      "endOffset": 858,
       "kind": "variable",
       "name": "useBikeBuilder",
-      "startLine": 111,
-      "startOffset": 3325,
+      "startLine": 6,
+      "startOffset": 245,
       "symbolId": "composables/useBike.ts::useBikeBuilder::variable"
     }
   ]

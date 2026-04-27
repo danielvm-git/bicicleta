@@ -1,0 +1,82 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 7,
+      "symbolId": "server/utils/meli.ts::getMeliAccessToken::function"
+    },
+    {
+      "cyclomatic": 5,
+      "symbolId": "server/utils/meli.ts::resolveMeliItemId::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "server/utils/meli.ts::getMeliItem::function"
+    },
+    {
+      "cyclomatic": 5,
+      "symbolId": "server/utils/meli.ts::getMeliItemImages::function"
+    }
+  ],
+  "contentHash": "3bd7a70fd9c1135a4252405f1733ff0b6ba626c4c3dba0c8f151214e902f012f",
+  "edges": [
+    {
+      "from": "server/utils/meli.ts::getMeliItem::function",
+      "kind": "calls",
+      "to": "server/utils/meli.ts::getMeliAccessToken::function"
+    },
+    {
+      "from": "server/utils/meli.ts::getMeliItemImages::function",
+      "kind": "calls",
+      "to": "server/utils/meli.ts::getMeliItem::function"
+    }
+  ],
+  "file": "server/utils/meli.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 59,
+      "endOffset": 1630,
+      "kind": "function",
+      "name": "getMeliAccessToken",
+      "startLine": 14,
+      "startOffset": 315,
+      "symbolId": "server/utils/meli.ts::getMeliAccessToken::function"
+    },
+    {
+      "endLine": 88,
+      "endOffset": 2442,
+      "kind": "function",
+      "name": "resolveMeliItemId",
+      "startLine": 65,
+      "startOffset": 1791,
+      "symbolId": "server/utils/meli.ts::resolveMeliItemId::function"
+    },
+    {
+      "endLine": 112,
+      "endOffset": 3025,
+      "kind": "function",
+      "name": "getMeliItem",
+      "startLine": 93,
+      "startOffset": 2491,
+      "symbolId": "server/utils/meli.ts::getMeliItem::function"
+    },
+    {
+      "endLine": 127,
+      "endOffset": 3435,
+      "kind": "function",
+      "name": "getMeliItemImages",
+      "startLine": 117,
+      "startOffset": 3083,
+      "symbolId": "server/utils/meli.ts::getMeliItemImages::function"
+    }
+  ]
+}

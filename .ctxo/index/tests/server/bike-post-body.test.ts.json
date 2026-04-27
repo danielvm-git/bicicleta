@@ -1,10 +1,16 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "60a53d3bc113ba6d76c4c37bc7440ce5421d278525a333587d0525b1ec635aa7",
+  "contentHash": "98580bf63101eda37e9ecadaab2ee4e795f61528b1d77163d60ae9b89876a35b",
   "edges": [],
   "file": "tests/server/bike-post-body.test.ts",
   "intent": [
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    },
     {
       "date": "2026-04-26T17:25:18-03:00",
       "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
@@ -12,6 +18,6 @@
       "message": "feat(api)!: harden bikes and admin APIs; cascade FK migration"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }

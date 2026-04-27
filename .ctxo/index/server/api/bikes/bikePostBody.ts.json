@@ -1,0 +1,36 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "009c90fff7f18890aa115cff5f186312ed027d55cac3f991e74dd3bd4a10a501",
+  "edges": [],
+  "file": "server/api/bikes/bikePostBody.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 13,
+      "endOffset": 496,
+      "kind": "type",
+      "name": "BikePostBody",
+      "startLine": 13,
+      "startOffset": 434,
+      "symbolId": "server/api/bikes/bikePostBody.ts::BikePostBody::type"
+    },
+    {
+      "endLine": 11,
+      "endOffset": 431,
+      "kind": "variable",
+      "name": "bikePostBodySchema",
+      "startLine": 3,
+      "startOffset": 118,
+      "symbolId": "server/api/bikes/bikePostBody.ts::bikePostBodySchema::variable"
+    }
+  ]
+}

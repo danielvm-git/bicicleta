@@ -1,0 +1,28 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "7d843bf000a0439d1d38c1d23e22286499c25ecbd33c0d67005eaae811ba5b16",
+  "edges": [
+    {
+      "from": "server/api/groups.get.ts::groups.get::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/api/groups.get.ts::groups.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::groups::variable"
+    }
+  ],
+  "file": "server/api/groups.get.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": []
+}

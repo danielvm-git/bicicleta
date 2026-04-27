@@ -6,12 +6,18 @@
   "file": "playwright.config.ts",
   "intent": [
     {
+      "date": "2026-04-26T17:53:32-03:00",
+      "hash": "9b0bfb87517d2aef41c45a534d4d8839b6d8dbc0",
+      "kind": "commit",
+      "message": "- Remove nuxt-auth-utils; proxy /api/auth/* to Neon (Better Auth) and use @neondatabase/auth on the client - Add useNeonAuth and require Neon session for user-scoped fetches; send credentials where needed - requireAdminSession: use Neon session user with role \"admin\" instead of ADMIN_GITHUB_IDS allowlist - Move bike claim to POST /api/claim; GitHub sign-in is client-driven (no /api/auth/github link) - Nuxt: experimental.appManifest false; runtimeConfig.neonAuthBaseUrl; .env.example documents NUXT_NEON_AUTH_BASE_URL - Playwright: drop NUXT_SESSION_PASSWORD helper for dev server; Vitest: add tests/vitest-setup.ts"
+    },
+    {
       "date": "2026-04-26T17:26:16-03:00",
       "hash": "9f9acd5c53abbf575ab37a3c3c29f561a88e2204",
       "kind": "commit",
       "message": "chore(test): add Playwright E2E and Husky preflight pipeline"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }

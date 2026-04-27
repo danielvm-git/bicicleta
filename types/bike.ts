@@ -12,7 +12,21 @@ export interface BikeComponent {
   steeringType?: string | null;
   axleType?: string | null;
   suspensionTravel?: string | null;
+  imageUrl?: string | null;
   updatedAt?: string | Date | null;
+}
+
+export interface UnifiedBike {
+  id?: number | string;
+  slug?: string;
+  name: string;
+  description?: string | null;
+  totalPrice: number | string;
+  imageUrl?: string | null;
+  bikeComponents: {
+    id?: number;
+    component: BikeComponent;
+  }[];
 }
 
 /** Stable ids for each Rule in the CompatibilityEngine (CONTEXT.md). */

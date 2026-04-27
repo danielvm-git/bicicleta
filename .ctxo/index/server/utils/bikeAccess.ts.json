@@ -1,0 +1,51 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 5,
+      "symbolId": "server/utils/bikeAccess.ts::resolveBikesListFilter::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "server/utils/bikeAccess.ts::whereBikeBySlugForReader::function"
+    }
+  ],
+  "contentHash": "d84444afe67af88bafdabc51e20ffd6e94a292d4525e233dd59b42d672661f96",
+  "edges": [],
+  "file": "server/utils/bikeAccess.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 22,
+      "endOffset": 767,
+      "kind": "function",
+      "name": "resolveBikesListFilter",
+      "startLine": 8,
+      "startOffset": 311,
+      "symbolId": "server/utils/bikeAccess.ts::resolveBikesListFilter::function"
+    },
+    {
+      "endLine": 52,
+      "endOffset": 1601,
+      "kind": "function",
+      "name": "whereBikeBySlugForReader",
+      "startLine": 39,
+      "startOffset": 1215,
+      "symbolId": "server/utils/bikeAccess.ts::whereBikeBySlugForReader::function"
+    }
+  ]
+}

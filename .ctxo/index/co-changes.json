@@ -1,11 +1,65 @@
 {
   "version": 1,
-  "timestamp": 1777235957,
+  "timestamp": 1777265180,
   "entries": [
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 5,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/bikes/index.get.ts",
+      "sharedCommits": 4,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/bikes/index.post.ts",
+      "sharedCommits": 4,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/api/bikes/index.post.ts",
+      "sharedCommits": 4,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/api/categories.get.ts",
+      "sharedCommits": 4,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 4,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/categories.get.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 4,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 4,
+      "frequency": 1
+    },
     {
       "file1": "server/scripts/seed.ts",
       "file2": "server/utils/parser.ts",
       "sharedCommits": 4,
+      "frequency": 1
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/api/bikes/[slug].patch.ts",
+      "sharedCommits": 3,
       "frequency": 1
     },
     {
@@ -15,26 +69,44 @@
       "frequency": 1
     },
     {
-      "file1": "server/api/brands.get.ts",
-      "file2": "server/api/categories.get.ts",
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/bikes/[slug].patch.ts",
       "sharedCommits": 3,
       "frequency": 1
     },
     {
-      "file1": "server/api/brands.get.ts",
-      "file2": "server/api/components.get.ts",
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "server/api/bikes/index.get.ts",
       "sharedCommits": 3,
       "frequency": 1
     },
     {
-      "file1": "server/api/categories.get.ts",
-      "file2": "server/api/components.get.ts",
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "server/api/bikes/index.post.ts",
       "sharedCommits": 3,
       "frequency": 1
     },
     {
-      "file1": "tests/compatibility.test.ts",
-      "file2": "types/bike.ts",
+      "file1": "server/api/components/[id].patch.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 3,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/utils/auth.ts",
+      "sharedCommits": 3,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/utils/auth.ts",
+      "sharedCommits": 3,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/utils/auth.ts",
       "sharedCommits": 3,
       "frequency": 1
     },
@@ -106,48 +178,6 @@
     },
     {
       "file1": "composables/useBike.ts",
-      "file2": "nuxt.config.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "server/api/admin/import.post.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "server/api/admin/scrape.post.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "server/api/bikes/[slug].get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "server/api/bikes/[slug].patch.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "server/api/bikes/index.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "server/api/bikes/index.post.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
       "file2": "server/api/bikes/public.get.ts",
       "sharedCommits": 2,
       "frequency": 1
@@ -160,31 +190,7 @@
     },
     {
       "file1": "composables/useBike.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "server/scripts/verify-data.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
       "file2": "tests/composables/useBike.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "composables/useBike.ts",
-      "file2": "types/bike.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -202,30 +208,6 @@
     },
     {
       "file1": "nuxt.config.ts",
-      "file2": "server/api/bikes/[slug].get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "nuxt.config.ts",
-      "file2": "server/api/bikes/[slug].patch.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "nuxt.config.ts",
-      "file2": "server/api/bikes/index.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "nuxt.config.ts",
-      "file2": "server/api/bikes/index.post.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "nuxt.config.ts",
       "file2": "server/api/bikes/public.get.ts",
       "sharedCommits": 2,
       "frequency": 1
@@ -244,30 +226,6 @@
     },
     {
       "file1": "server/api/admin/import.post.ts",
-      "file2": "server/api/bikes/[slug].get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "server/api/bikes/[slug].patch.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "server/api/bikes/index.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "server/api/bikes/index.post.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
       "file2": "server/api/bikes/public.get.ts",
       "sharedCommits": 2,
       "frequency": 1
@@ -275,18 +233,6 @@
     {
       "file1": "server/api/admin/import.post.ts",
       "file2": "server/api/bikes/templates.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "server/api/components/[id].patch.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "server/api/search.get.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -340,30 +286,6 @@
     },
     {
       "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/api/bikes/[slug].get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/api/bikes/[slug].patch.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/api/bikes/index.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/api/bikes/index.post.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
       "file2": "server/api/bikes/public.get.ts",
       "sharedCommits": 2,
       "frequency": 1
@@ -371,18 +293,6 @@
     {
       "file1": "server/api/admin/scrape.post.ts",
       "file2": "server/api/bikes/templates.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/api/components/[id].patch.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/api/search.get.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -436,24 +346,6 @@
     },
     {
       "file1": "server/api/bikes/[slug].get.ts",
-      "file2": "server/api/bikes/[slug].patch.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].get.ts",
-      "file2": "server/api/bikes/index.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].get.ts",
-      "file2": "server/api/bikes/index.post.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].get.ts",
       "file2": "server/api/bikes/public.get.ts",
       "sharedCommits": 2,
       "frequency": 1
@@ -466,43 +358,7 @@
     },
     {
       "file1": "server/api/bikes/[slug].get.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].get.ts",
-      "file2": "server/scripts/verify-data.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].get.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].get.ts",
       "file2": "tests/composables/useBike.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].get.ts",
-      "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].patch.ts",
-      "file2": "server/api/bikes/index.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].patch.ts",
-      "file2": "server/api/bikes/index.post.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -520,37 +376,7 @@
     },
     {
       "file1": "server/api/bikes/[slug].patch.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].patch.ts",
-      "file2": "server/scripts/verify-data.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].patch.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].patch.ts",
       "file2": "tests/composables/useBike.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/[slug].patch.ts",
-      "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.get.ts",
-      "file2": "server/api/bikes/index.post.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -568,31 +394,7 @@
     },
     {
       "file1": "server/api/bikes/index.get.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.get.ts",
-      "file2": "server/scripts/verify-data.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.get.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.get.ts",
       "file2": "tests/composables/useBike.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.get.ts",
-      "file2": "types/bike.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -610,31 +412,7 @@
     },
     {
       "file1": "server/api/bikes/index.post.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.post.ts",
-      "file2": "server/scripts/verify-data.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.post.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.post.ts",
       "file2": "tests/composables/useBike.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/bikes/index.post.ts",
-      "file2": "types/bike.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -701,30 +479,6 @@
     {
       "file1": "server/api/bikes/templates.get.ts",
       "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/brands.get.ts",
-      "file2": "server/api/lines.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/categories.get.ts",
-      "file2": "server/api/lines.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/components.get.ts",
-      "file2": "server/api/lines.get.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/api/components/[id].patch.ts",
-      "file2": "server/api/search.get.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -929,18 +683,6 @@
     {
       "file1": "server/scripts/verify-m03-s01.ts",
       "file2": "tests/utils/parser.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/utils/compatibility.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 1
-    },
-    {
-      "file1": "server/utils/compatibility.ts",
-      "file2": "types/bike.ts",
       "sharedCommits": 2,
       "frequency": 1
     },
@@ -975,200 +717,686 @@
       "frequency": 1
     },
     {
+      "file1": "composables/useBike.ts",
+      "file2": "server/utils/bikeAccess.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/utils/bikeAccess.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/utils/bikeAccess.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/utils/bikeAccess.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/lines.get.ts",
+      "file2": "server/utils/bikeAccess.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/lines.get.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/utils/bikeAccess.ts",
+      "file2": "server/utils/componentCatalog.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/utils/bikeAccess.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/utils/bikeAccess.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/utils/componentCatalog.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "tests/compatibility.test.ts",
+      "file2": "utils/compatibility.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "tests/server/bike-post-body.test.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useNeonAuth.ts",
+      "file2": "server/api/bikes/[slug].get.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useNeonAuth.ts",
+      "file2": "server/api/bikes/index.get.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useNeonAuth.ts",
+      "file2": "server/api/bikes/index.post.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useNeonAuth.ts",
+      "file2": "server/utils/auth.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useNeonAuth.ts",
+      "file2": "server/utils/neonSession.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/utils/neonSession.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "tests/server/bike-post-body.test.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/utils/neonSession.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "tests/server/bike-post-body.test.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/utils/neonSession.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "tests/server/bike-post-body.test.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/utils/auth.ts",
+      "file2": "server/utils/neonSession.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "server/utils/auth.ts",
+      "file2": "tests/server/bike-post-body.test.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "tests/compatibility.test.ts",
+      "file2": "tests/server/bike-post-body.test.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "playwright.config.ts",
+      "file2": "vitest.config.ts",
+      "sharedCommits": 2,
+      "frequency": 1
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/bikes/index.post.ts",
+      "sharedCommits": 4,
+      "frequency": 0.8
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 4,
+      "frequency": 0.8
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 4,
+      "frequency": 0.8
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 4,
+      "frequency": 0.8
+    },
+    {
+      "file1": "tests/compatibility.test.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 4,
+      "frequency": 0.8
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/admin/scrape.post.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/bikes/[slug].get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/bikes/index.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/api/admin/scrape.post.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/api/bikes/[slug].get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/api/bikes/index.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "server/api/categories.get.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "server/api/lines.get.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/utils/componentCatalog.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/utils/componentCatalog.ts",
+      "sharedCommits": 3,
+      "frequency": 0.75
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 4,
+      "frequency": 0.667
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/admin/import.post.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/bikes/[slug].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
       "file1": "nuxt.config.ts",
       "file2": "server/api/admin/import.post.ts",
       "sharedCommits": 2,
       "frequency": 0.667
     },
     {
-      "file1": "nuxt.config.ts",
-      "file2": "server/api/admin/scrape.post.ts",
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/api/bikes/[slug].get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/api/bikes/[slug].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/api/bikes/index.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/api/bikes/index.post.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "server/scripts/verify-data.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/import.post.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/api/bikes/[slug].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "server/scripts/verify-data.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "vitest.config.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/api/components/[id].patch.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/components/[id].patch.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/components/[id].patch.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/lines.get.ts",
+      "file2": "server/api/search.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/search.get.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/database/db.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/database/db.ts",
+      "file2": "server/scripts/seed.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/database/db.ts",
+      "file2": "server/utils/parser.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/utils/auth.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/utils/auth.ts",
+      "file2": "tests/compatibility.test.ts",
       "sharedCommits": 2,
       "frequency": 0.667
     },
     {
       "file1": "nuxt.config.ts",
+      "file2": "server/utils/auth.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "server/api/bikes/[slug].patch.ts",
+      "file2": "server/utils/auth.ts",
+      "sharedCommits": 2,
+      "frequency": 0.667
+    },
+    {
+      "file1": "composables/useBike.ts",
       "file2": "server/api/brands.get.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
+      "sharedCommits": 3,
+      "frequency": 0.6
     },
     {
       "file1": "nuxt.config.ts",
-      "file2": "server/api/categories.get.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "nuxt.config.ts",
-      "file2": "server/api/components.get.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "nuxt.config.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "nuxt.config.ts",
-      "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "server/scripts/verify-data.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/import.post.ts",
-      "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "server/scripts/verify-data.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/admin/scrape.post.ts",
-      "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/brands.get.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/brands.get.ts",
-      "file2": "server/scripts/seed.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/brands.get.ts",
-      "file2": "server/utils/parser.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/categories.get.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/categories.get.ts",
-      "file2": "server/scripts/seed.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/categories.get.ts",
-      "file2": "server/utils/parser.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/components.get.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/components.get.ts",
-      "file2": "server/scripts/seed.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/api/components.get.ts",
-      "file2": "server/utils/parser.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/database/db.ts",
-      "file2": "server/database/schema.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/database/db.ts",
-      "file2": "server/scripts/seed.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/database/db.ts",
-      "file2": "server/utils/parser.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/database/schema.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/database/schema.ts",
-      "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/scripts/verify-data.ts",
-      "file2": "tests/compatibility.test.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "server/scripts/verify-data.ts",
-      "file2": "types/bike.ts",
-      "sharedCommits": 2,
-      "frequency": 0.667
-    },
-    {
-      "file1": "nuxt.config.ts",
-      "file2": "server/database/schema.ts",
+      "file2": "server/api/bikes/index.post.ts",
       "sharedCommits": 3,
       "frequency": 0.6
     },
     {
       "file1": "nuxt.config.ts",
       "file2": "server/scripts/seed.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/api/brands.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/scripts/seed.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "server/database/schema.ts",
+      "file2": "server/scripts/seed.ts",
+      "sharedCommits": 3,
+      "frequency": 0.6
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 4,
+      "frequency": 0.571
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "nuxt.config.ts",
+      "sharedCommits": 3,
+      "frequency": 0.5
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 3,
+      "frequency": 0.5
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 3,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 3,
+      "frequency": 0.5
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/api/categories.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/scripts/verify-data.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/api/categories.get.ts",
       "sharedCommits": 2,
       "frequency": 0.5
     },
@@ -1185,8 +1413,206 @@
       "frequency": 0.5
     },
     {
-      "file1": "server/database/schema.ts",
+      "file1": "nuxt.config.ts",
+      "file2": "vitest.config.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/api/bikes/[slug].get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/api/bikes/index.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/api/bikes/index.post.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
       "file2": "server/scripts/seed.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "server/scripts/verify-data.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/admin/scrape.post.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/brands.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "server/scripts/verify-data.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/[slug].get.ts",
+      "file2": "vitest.config.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/api/brands.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/api/components.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/api/lines.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "server/scripts/verify-data.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.get.ts",
+      "file2": "vitest.config.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/api/categories.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/scripts/verify-data.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "vitest.config.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/utils/parser.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/categories.get.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/categories.get.ts",
+      "file2": "server/scripts/seed.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/categories.get.ts",
+      "file2": "server/utils/parser.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/categories.get.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/categories.get.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "server/utils/parser.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/lines.get.ts",
+      "file2": "types/bike.ts",
       "sharedCommits": 2,
       "frequency": 0.5
     },
@@ -1213,6 +1639,108 @@
       "file2": "server/utils/parser.ts",
       "sharedCommits": 2,
       "frequency": 0.5
+    },
+    {
+      "file1": "server/scripts/verify-data.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/scripts/verify-data.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/utils/componentCatalog.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/utils/componentCatalog.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/api/lines.get.ts",
+      "file2": "server/utils/componentCatalog.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "server/utils/componentCatalog.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.5
+    },
+    {
+      "file1": "composables/useBike.ts",
+      "file2": "server/scripts/seed.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "server/api/brands.get.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "nuxt.config.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "server/api/bikes/index.post.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/database/schema.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "server/scripts/seed.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "server/api/brands.get.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "server/api/components.get.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "server/database/schema.ts",
+      "file2": "tests/compatibility.test.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
+    },
+    {
+      "file1": "server/database/schema.ts",
+      "file2": "types/bike.ts",
+      "sharedCommits": 2,
+      "frequency": 0.4
     }
   ]
 }

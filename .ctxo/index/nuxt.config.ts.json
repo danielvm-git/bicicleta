@@ -1,10 +1,22 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "f85a9016402a4c1165b758d686c7114688c1790b06e996e45ce6e499428e03f9",
+  "contentHash": "75b10980ef7dadc76f1aa81a1dc014d8dbf37bf25b036416be6d9d9eb22128cc",
   "edges": [],
   "file": "nuxt.config.ts",
   "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    },
+    {
+      "date": "2026-04-26T17:53:32-03:00",
+      "hash": "9b0bfb87517d2aef41c45a534d4d8839b6d8dbc0",
+      "kind": "commit",
+      "message": "- Remove nuxt-auth-utils; proxy /api/auth/* to Neon (Better Auth) and use @neondatabase/auth on the client - Add useNeonAuth and require Neon session for user-scoped fetches; send credentials where needed - requireAdminSession: use Neon session user with role \"admin\" instead of ADMIN_GITHUB_IDS allowlist - Move bike claim to POST /api/claim; GitHub sign-in is client-driven (no /api/auth/github link) - Nuxt: experimental.appManifest false; runtimeConfig.neonAuthBaseUrl; .env.example documents NUXT_NEON_AUTH_BASE_URL - Playwright: drop NUXT_SESSION_PASSWORD helper for dev server; Vitest: add tests/vitest-setup.ts"
+    },
     {
       "date": "2026-04-26T17:25:18-03:00",
       "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
@@ -36,6 +48,6 @@
       "message": "feat: Inicializar Nuxt 3, Drizzle ORM e dependências de dados."
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }

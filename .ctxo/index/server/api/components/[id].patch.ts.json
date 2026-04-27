@@ -1,10 +1,16 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "3585951de71be29e0d4a66c16154b4002b4a383f9f81de4fb2de40c9e2afd1ab",
+  "contentHash": "bfa28cde44d7045e363b606ca44a808c3d4d5a90f87cd67e08f94dcabdfe274e",
   "edges": [],
   "file": "server/api/components/[id].patch.ts",
   "intent": [
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    },
     {
       "date": "2026-04-26T16:55:33-03:00",
       "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
@@ -18,6 +24,6 @@
       "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }

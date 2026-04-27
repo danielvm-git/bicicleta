@@ -1,0 +1,69 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 3,
+      "symbolId": "utils/neonAuth.ts::getNeonAuthUserFromSession::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "utils/neonAuth.ts::getNeonUserId::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "utils/neonAuth.ts::getSessionUser::function"
+    }
+  ],
+  "contentHash": "4b5bdba11502bbcc0fad5d9e10cdb5a08c8c2b2c47506b9142d2beeb70974186",
+  "edges": [
+    {
+      "from": "utils/neonAuth.ts::getNeonUserId::function",
+      "kind": "calls",
+      "to": "utils/neonAuth.ts::getNeonAuthUserFromSession::function"
+    },
+    {
+      "from": "utils/neonAuth.ts::getSessionUser::function",
+      "kind": "calls",
+      "to": "utils/neonAuth.ts::getNeonAuthUserFromSession::function"
+    }
+  ],
+  "file": "utils/neonAuth.ts",
+  "intent": [
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 14,
+      "endOffset": 442,
+      "kind": "function",
+      "name": "getNeonAuthUserFromSession",
+      "startLine": 6,
+      "startOffset": 241,
+      "symbolId": "utils/neonAuth.ts::getNeonAuthUserFromSession::function"
+    },
+    {
+      "endLine": 24,
+      "endOffset": 698,
+      "kind": "function",
+      "name": "getNeonUserId",
+      "startLine": 19,
+      "startOffset": 522,
+      "symbolId": "utils/neonAuth.ts::getNeonUserId::function"
+    },
+    {
+      "endLine": 31,
+      "endOffset": 897,
+      "kind": "function",
+      "name": "getSessionUser",
+      "startLine": 29,
+      "startOffset": 786,
+      "symbolId": "utils/neonAuth.ts::getSessionUser::function"
+    }
+  ]
+}

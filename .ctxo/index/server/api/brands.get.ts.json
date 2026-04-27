@@ -1,7 +1,7 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "58792c4ddbb8468c5d738e8f43a8feec0c0c1c995f7ad56c995f38a63f403d29",
+  "contentHash": "6ea5788edee88193c63f5103a0cd12ee2d1efa3b5ae9b7e6d0d624e84abadb02",
   "edges": [
     {
       "from": "server/api/brands.get.ts::brands.get::variable",
@@ -16,6 +16,18 @@
   ],
   "file": "server/api/brands.get.ts",
   "intent": [
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    },
     {
       "date": "2026-04-26T16:55:33-03:00",
       "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
@@ -35,6 +47,6 @@
       "message": "feat: Implement Nitro API endpoints for component filtering and listing."
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }

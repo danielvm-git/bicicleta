@@ -4,7 +4,14 @@
   "contentHash": "c2337205521947a932c3db92c2f25a1a5f6cc0166c8e020ba887224365d7a355",
   "edges": [],
   "file": "server/api/claim.post.ts",
-  "intent": [],
-  "lastModified": 1777235957,
+  "intent": [
+    {
+      "date": "2026-04-26T17:53:32-03:00",
+      "hash": "9b0bfb87517d2aef41c45a534d4d8839b6d8dbc0",
+      "kind": "commit",
+      "message": "- Remove nuxt-auth-utils; proxy /api/auth/* to Neon (Better Auth) and use @neondatabase/auth on the client - Add useNeonAuth and require Neon session for user-scoped fetches; send credentials where needed - requireAdminSession: use Neon session user with role \"admin\" instead of ADMIN_GITHUB_IDS allowlist - Move bike claim to POST /api/claim; GitHub sign-in is client-driven (no /api/auth/github link) - Nuxt: experimental.appManifest false; runtimeConfig.neonAuthBaseUrl; .env.example documents NUXT_NEON_AUTH_BASE_URL - Playwright: drop NUXT_SESSION_PASSWORD helper for dev server; Vitest: add tests/vitest-setup.ts"
+    }
+  ],
+  "lastModified": 1777265180,
   "symbols": []
 }

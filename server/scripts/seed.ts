@@ -39,12 +39,12 @@ async function seed() {
   // 1. Seed Components from Tabular CSV
   console.log("Seeding components from CSV...");
   const componentsFiles = [
-    "componentes_absolute_candidatos.csv",
-    "absolute_wild.csv",
-    "montagem_absolute_nero.csv",
-    "montagem_absolute_prime.csv",
-    "montagem_absolute_wild.csv",
-    "montagem_show_nextep.csv",
+    "data/componentes_absolute_candidatos.csv",
+    "data/absolute_wild.csv",
+    "data/montagem_absolute_nero.csv",
+    "data/montagem_absolute_prime.csv",
+    "data/montagem_absolute_wild.csv",
+    "data/montagem_show_nextep.csv",
   ];
 
   for (const file of componentsFiles) {
@@ -133,7 +133,7 @@ async function seed() {
 
   // 3. Seed Bikes from KV CSVs
   console.log("Seeding bikes from CSV KV...");
-  const bikesDir = "bicicletas_analise";
+  const bikesDir = "data/analise";
   if (fs.existsSync(bikesDir)) {
     const bikeFiles = fs
       .readdirSync(bikesDir)
@@ -149,6 +149,7 @@ async function seed() {
             name: bikeData.name,
             description: `Importado de ${file}`,
             totalPrice: bikeData.price,
+            isPublic: true,
           })
           .returning();
 
@@ -185,10 +186,10 @@ async function seed() {
   // 4. Seed Bikes from XLSX
   console.log("Seeding bikes from XLSX...");
   const xlsxFiles = [
-    "MTB Montada R$3.000.xlsx",
-    "MTB Montada R$5.000.xlsx",
-    "MTB Montada R$7.500.xlsx",
-    "MTB Montada R$10.000.xlsx",
+    "docs/MTB Montada R$3.000.xlsx",
+    "docs/MTB Montada R$5.000.xlsx",
+    "docs/MTB Montada R$7.500.xlsx",
+    "docs/MTB Montada R$10.000.xlsx",
   ];
 
   for (const file of xlsxFiles) {
@@ -198,9 +199,10 @@ async function seed() {
         const [insertedBike] = await db
           .insert(bikes)
           .values({
-            name: `${file.replace(".xlsx", "")} (${bikeData.name})`,
+            name: `${file.replace(".xlsx", "").replace("docs/", "")} (${bikeData.name})`,
             description: `Importado de ${file}`,
             totalPrice: bikeData.price,
+            isPublic: true,
           })
           .returning();
 

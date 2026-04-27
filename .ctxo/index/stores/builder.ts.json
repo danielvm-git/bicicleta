@@ -1,0 +1,43 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "aa515b717ca920a3af2eef48d5740a3f31733b060f67147d464c6595b4ab9e0c",
+  "edges": [
+    {
+      "from": "stores/builder.ts::BuilderState::interface",
+      "kind": "imports",
+      "to": "types/bike.ts::BikeComponent::interface",
+      "typeOnly": true
+    }
+  ],
+  "file": "stores/builder.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 13,
+      "endOffset": 398,
+      "kind": "interface",
+      "name": "BuilderState",
+      "startLine": 9,
+      "startOffset": 281,
+      "symbolId": "stores/builder.ts::BuilderState::interface"
+    },
+    {
+      "endLine": 183,
+      "endOffset": 5253,
+      "kind": "variable",
+      "name": "useBuilderStore",
+      "startLine": 15,
+      "startOffset": 413,
+      "symbolId": "stores/builder.ts::useBuilderStore::variable"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 7,
+      "symbolId": "server/utils/componentCatalog.ts::componentCatalogFilters::function"
+    },
+    {
+      "cyclomatic": 2,
+      "symbolId": "server/utils/componentCatalog.ts::andComponentFilters::function"
+    },
+    {
+      "cyclomatic": 1,
+      "symbolId": "server/utils/componentCatalog.ts::globalSearchComponentsWhere::function"
+    },
+    {
+      "cyclomatic": 3,
+      "symbolId": "server/utils/componentCatalog.ts::invalidateComponentCatalogCaches::function"
+    }
+  ],
+  "contentHash": "440dcf66d67386672266b1c7fbb36c9242a3b966f0c84db8db99d1a762fbcd2d",
+  "edges": [],
+  "file": "server/utils/componentCatalog.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    },
+    {
+      "date": "2026-04-26T19:30:41-03:00",
+      "hash": "ef0cbefcfefc874f69a8f514bc007bdc3b2ffe50",
+      "kind": "commit",
+      "message": "perf: Update cache constants to include hierarchy key"
+    },
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
+    {
+      "date": "2026-04-26T17:59:37-03:00",
+      "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
+      "kind": "commit",
+      "message": "refactor(api)!: centralize bike access, session DTO, and component catalog"
+    }
+  ],
+  "lastModified": 1777265180,
+  "symbols": [
+    {
+      "endLine": 53,
+      "endOffset": 1494,
+      "kind": "function",
+      "name": "componentCatalogFilters",
+      "startLine": 19,
+      "startOffset": 579,
+      "symbolId": "server/utils/componentCatalog.ts::componentCatalogFilters::function"
+    },
+    {
+      "endLine": 60,
+      "endOffset": 1659,
+      "kind": "function",
+      "name": "andComponentFilters",
+      "startLine": 55,
+      "startOffset": 1496,
+      "symbolId": "server/utils/componentCatalog.ts::andComponentFilters::function"
+    },
+    {
+      "endLine": 68,
+      "endOffset": 1915,
+      "kind": "function",
+      "name": "globalSearchComponentsWhere",
+      "startLine": 63,
+      "startOffset": 1749,
+      "symbolId": "server/utils/componentCatalog.ts::globalSearchComponentsWhere::function"
+    },
+    {
+      "endLine": 80,
+      "endOffset": 2225,
+      "kind": "function",
+      "name": "invalidateComponentCatalogCaches",
+      "startLine": 70,
+      "startOffset": 1917,
+      "symbolId": "server/utils/componentCatalog.ts::invalidateComponentCatalogCaches::function"
+    },
+    {
+      "endLine": 13,
+      "endOffset": 457,
+      "kind": "variable",
+      "name": "CATALOG_CACHE_HANDLER_NAME",
+      "startLine": 7,
+      "startOffset": 276,
+      "symbolId": "server/utils/componentCatalog.ts::CATALOG_CACHE_HANDLER_NAME::variable"
+    }
+  ]
+}

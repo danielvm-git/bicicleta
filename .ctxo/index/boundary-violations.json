@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "computedAt": "2026-04-26T20:39:17.952Z",
-  "commitSha": "a04fa09",
+  "computedAt": "2026-04-27T04:46:20.568Z",
+  "commitSha": "e8f521f",
   "confidence": "low",
-  "snapshotsAvailable": 0,
+  "snapshotsAvailable": 1,
   "hint": "Insufficient snapshot history — enable `ctxo init` hook or add `ctxo index --check` to CI for boundary-violation signal.",
   "violations": []
 }

@@ -1,10 +1,22 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "c8a19c02c6e7dad82bd2059ff0d8da4f89e221324ffddb0cb79d96702b4ab3b7",
+  "contentHash": "28272a668d4fc1e35e3e7224ae104959d1edb06dc362bcca69ad23684e10e654",
   "edges": [],
   "file": "server/database/schema.ts",
   "intent": [
+    {
+      "date": "2026-04-27T01:34:35-03:00",
+      "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
+      "kind": "commit",
+      "message": "feat: Performance Guide & Builder Tool"
+    },
+    {
+      "date": "2026-04-26T18:35:41-03:00",
+      "hash": "9af9e9b30cbce861fa7e3bf7b482b087dcf6e02a",
+      "kind": "commit",
+      "message": "feat: Adicionada coluna functionalGroup ao schema Drizzle da tabela com…"
+    },
     {
       "date": "2026-04-26T17:25:18-03:00",
       "hash": "aa4a74aad41ed0764da7996bf489713c52cafb6d",
@@ -42,11 +54,11 @@
       "message": "feat: Definir schema Drizzle e conexão com Neon DB."
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": [
     {
-      "endLine": 25,
-      "endOffset": 745,
+      "endLine": 28,
+      "endOffset": 868,
       "kind": "variable",
       "name": "components",
       "startLine": 11,
@@ -54,75 +66,75 @@
       "symbolId": "server/database/schema.ts::components::variable"
     },
     {
-      "endLine": 34,
-      "endOffset": 1065,
+      "endLine": 37,
+      "endOffset": 1188,
       "kind": "variable",
       "name": "componentPrices",
-      "startLine": 27,
-      "startOffset": 761,
+      "startLine": 30,
+      "startOffset": 884,
       "symbolId": "server/database/schema.ts::componentPrices::variable"
     },
     {
-      "endLine": 44,
-      "endOffset": 1283,
+      "endLine": 47,
+      "endOffset": 1406,
       "kind": "variable",
       "name": "componentPricesRelations",
-      "startLine": 36,
-      "startOffset": 1081,
+      "startLine": 39,
+      "startOffset": 1204,
       "symbolId": "server/database/schema.ts::componentPricesRelations::variable"
     },
     {
-      "endLine": 60,
-      "endOffset": 1799,
+      "endLine": 63,
+      "endOffset": 1922,
       "kind": "variable",
       "name": "groups",
-      "startLine": 46,
-      "startOffset": 1299,
+      "startLine": 49,
+      "startOffset": 1422,
       "symbolId": "server/database/schema.ts::groups::variable"
     },
     {
-      "endLine": 73,
-      "endOffset": 2203,
+      "endLine": 76,
+      "endOffset": 2326,
       "kind": "variable",
       "name": "bikes",
-      "startLine": 62,
-      "startOffset": 1815,
+      "startLine": 65,
+      "startOffset": 1938,
       "symbolId": "server/database/schema.ts::bikes::variable"
     },
     {
-      "endLine": 77,
-      "endOffset": 2313,
+      "endLine": 80,
+      "endOffset": 2436,
       "kind": "variable",
       "name": "bikesRelations",
-      "startLine": 75,
-      "startOffset": 2219,
+      "startLine": 78,
+      "startOffset": 2342,
       "symbolId": "server/database/schema.ts::bikesRelations::variable"
     },
     {
-      "endLine": 87,
-      "endOffset": 2603,
+      "endLine": 90,
+      "endOffset": 2726,
       "kind": "variable",
       "name": "bikeComponents",
-      "startLine": 79,
-      "startOffset": 2329,
+      "startLine": 82,
+      "startOffset": 2452,
       "symbolId": "server/database/schema.ts::bikeComponents::variable"
     },
     {
-      "endLine": 92,
-      "endOffset": 2756,
+      "endLine": 95,
+      "endOffset": 2879,
       "kind": "variable",
       "name": "componentsRelations",
-      "startLine": 89,
-      "startOffset": 2619,
+      "startLine": 92,
+      "startOffset": 2742,
       "symbolId": "server/database/schema.ts::componentsRelations::variable"
     },
     {
-      "endLine": 103,
-      "endOffset": 3047,
+      "endLine": 106,
+      "endOffset": 3170,
       "kind": "variable",
       "name": "bikeComponentsRelations",
-      "startLine": 94,
-      "startOffset": 2772,
+      "startLine": 97,
+      "startOffset": 2895,
       "symbolId": "server/database/schema.ts::bikeComponentsRelations::variable"
     }
   ]

@@ -1,7 +1,7 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "b9c9e8e800d9b7ab2e5d876358da8a3948ddb41330fe9b345c8427c0de073ca2",
+  "contentHash": "54a84479f62848d20a51142645cb49e5c1a4f4c950c44d838f894b8e23b0fac0",
   "edges": [
     {
       "from": "server/api/categories.get.ts::categories.get::variable",
@@ -16,6 +16,12 @@
   ],
   "file": "server/api/categories.get.ts",
   "intent": [
+    {
+      "date": "2026-04-26T18:31:31-03:00",
+      "hash": "c04fa26030ecd96a380b49b99be7a65c0fc1bc12",
+      "kind": "commit",
+      "message": "docs(dev): add setup:db and first-run database instructions"
+    },
     {
       "date": "2026-04-26T16:55:33-03:00",
       "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
@@ -35,6 +41,6 @@
       "message": "feat: Implement Nitro API endpoints for component filtering and listing."
     }
   ],
-  "lastModified": 1777235957,
+  "lastModified": 1777265180,
   "symbols": []
 }
