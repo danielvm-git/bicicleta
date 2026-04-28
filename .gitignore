@@ -71,5 +71,8 @@ _bmad/**
 # Ctxo local cache (never committed)
 .ctxo/.cache/
 
+# Git worktrees (isolated workspaces)
+.worktrees/
+
 # ── GSD baseline (auto-generated) ──
 .mcp.json
