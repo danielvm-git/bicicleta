@@ -123,3 +123,14 @@ export const brandsRelations = relations(brands, ({ many }) => ({
   components: many(components),
   groups: many(groups),
 }));
+
+export const categories = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  englishName: text("english_name").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const categoriesRelations = relations(categories, ({ many }) => ({
+  translations: many(categoryTranslations),
+  components: many(components),
+}));
