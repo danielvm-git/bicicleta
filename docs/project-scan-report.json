@@ -1,0 +1,89 @@
+{
+  "workflow_version": "1.2.0",
+  "timestamps": {
+    "started": "2026-04-28T01:35:23Z",
+    "last_updated": "2026-04-28T03:08:20Z"
+  },
+  "mode": "initial_scan",
+  "scan_level": "exhaustive",
+  "project_root": "/Users/me/Sites/bicicleta",
+  "project_knowledge": "/Users/me/Sites/bicicleta/docs",
+  "completed_steps": [
+    {
+      "step": "step_1",
+      "status": "completed",
+      "timestamp": "2026-04-28T01:36:00Z",
+      "summary": "Classified as monolith with 1 parts"
+    },
+    {
+      "step": "step_2",
+      "status": "completed",
+      "timestamp": "2026-04-28T01:38:50Z",
+      "summary": "Found 3 existing docs"
+    },
+    {
+      "step": "step_3",
+      "status": "completed",
+      "timestamp": "2026-04-28T03:06:15Z",
+      "summary": "Tech stack: Nuxt.js on TypeScript"
+    },
+    {
+      "step": "step_4",
+      "status": "completed",
+      "timestamp": "2026-04-28T03:07:30Z",
+      "summary": "Conditional analysis complete, 2 files written (api-contracts, data-models)"
+    },
+    {
+      "step": "step_5",
+      "status": "completed",
+      "timestamp": "2026-04-28T03:07:50Z",
+      "summary": "Source tree documented"
+    },
+    {
+      "step": "step_6",
+      "status": "completed",
+      "timestamp": "2026-04-28T03:07:55Z",
+      "summary": "Dev/deployment guides written"
+    },
+    {
+      "step": "step_8",
+      "status": "completed",
+      "timestamp": "2026-04-28T03:08:10Z",
+      "summary": "Architecture/overview docs written for 1 parts"
+    },
+    {
+      "step": "step_9",
+      "status": "completed",
+      "timestamp": "2026-04-28T03:08:10Z",
+      "summary": "All supporting docs written"
+    },
+    {
+      "step": "step_10",
+      "status": "completed",
+      "timestamp": "2026-04-28T03:08:12Z",
+      "summary": "Master index generated"
+    }
+  ],
+  "current_step": "completed",
+  "findings": {
+    "project_classification": "Monolith Web Application (Nuxt.js / Vue)"
+  },
+  "project_types": [
+    {
+      "part_id": "main",
+      "project_type_id": "web",
+      "display_name": "Main Web Application"
+    }
+  ],
+  "outputs_generated": [
+    "project-scan-report.json",
+    "api-contracts.md",
+    "data-models.md",
+    "source-tree-analysis.md",
+    "component-inventory.md",
+    "development-guide.md",
+    "project-overview.md",
+    "index.md"
+  ],
+  "resume_instructions": "Workflow complete."
+}
