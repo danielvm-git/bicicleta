@@ -1,0 +1,27 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "fabef874fad4b748f1bcadaabfd9f602833d307481465f0122c222984c237b30",
+  "edges": [],
+  "file": "composables/useI18n.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T20:44:44-03:00",
+      "hash": "43c33fd0c0bdb1642e55636f88b3f661db26739e",
+      "kind": "commit",
+      "message": "feat: add brands table with migration and schema"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": [
+    {
+      "endLine": 4,
+      "endOffset": 90,
+      "kind": "variable",
+      "name": "useI18n",
+      "startLine": 2,
+      "startOffset": 55,
+      "symbolId": "composables/useI18n.ts::useI18n::variable"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" initial="start">
+  <datamodel>
+    <data id="hasDiscovery" expr="false" />
+    <data id="hasUX" expr="true" />
+    <data id="reviewPass" expr="true" />
+    <data id="moreStoriesInEpic" expr="false" />
+    <data id="moreEpics" expr="false" />
+  </datamodel>
+
+  <state id="start">
+    <transition event="begin" target="includeDiscoveryDecision" />
+  </state>
+
+  <state id="includeDiscoveryDecision">
+    <transition cond="hasDiscovery" target="brainstormRequirements" />
+    <transition cond="!hasDiscovery" target="prd" />
+  </state>
+
+  <state id="brainstormRequirements">
+    <transition event="done" target="analyzeMarketSegments" />
+  </state>
+  <state id="analyzeMarketSegments">
+    <transition event="done" target="productBriefRequirements" />
+  </state>
+  <state id="productBriefRequirements">
+    <transition event="done" target="prd" />
+  </state>
+
+  <state id="prd">
+    <transition event="done" target="validatePrdCompleteness" />
+  </state>
+  <state id="validatePrdCompleteness">
+    <transition event="done" target="haveUxDecision" />
+  </state>
+  <state id="haveUxDecision">
+    <transition cond="hasUX" target="createUx" />
+    <transition cond="!hasUX" target="architecture" />
+  </state>
+  <state id="createUx">
+    <transition event="done" target="architecture" />
+  </state>
+
+  <state id="architecture">
+    <transition event="done" target="validateArchitectureRequirements" />
+  </state>
+  <state id="validateArchitectureRequirements">
+    <transition event="done" target="epicsStories" />
+  </state>
+  <state id="epicsStories">
+    <transition event="done" target="testDesignRequirements" />
+  </state>
+  <state id="testDesignRequirements">
+    <transition event="done" target="implementationReadiness" />
+  </state>
+  <state id="implementationReadiness">
+    <transition event="done" target="sprintPlan" />
+  </state>
+
+  <state id="sprintPlan">
+    <transition event="done" target="createStory" />
+  </state>
+  <state id="createStory">
+    <transition event="done" target="validateStoryAcceptance" />
+  </state>
+  <state id="validateStoryAcceptance">
+    <transition event="done" target="developStory" />
+  </state>
+  <state id="developStory">
+    <transition event="done" target="codeReviewWithDifferentLlms" />
+  </state>
+  <state id="codeReviewWithDifferentLlms">
+    <transition event="done" target="codeReviewPassDecision" />
+  </state>
+  <state id="codeReviewPassDecision">
+    <transition cond="reviewPass" target="moreStoriesInEpicDecision" />
+    <transition cond="!reviewPass" target="createStory" />
+  </state>
+
+  <state id="moreStoriesInEpicDecision">
+    <transition cond="moreStoriesInEpic" target="createStory" />
+    <transition cond="!moreStoriesInEpic" target="retrospective" />
+  </state>
+  <state id="retrospective">
+    <transition event="done" target="moreEpicsDecision" />
+  </state>
+  <state id="moreEpicsDecision">
+    <transition cond="moreEpics" target="sprintPlan" />
+    <transition cond="!moreEpics" target="end" />
+  </state>
+
+  <final id="end" />
+</scxml>

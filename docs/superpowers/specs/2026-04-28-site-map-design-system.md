@@ -38,16 +38,16 @@ graph TD
 
 ### Detalhamento das Rotas
 
-| Rota | Descrição | Componentes Chave |
-| :--- | :--- | :--- |
-| `/` | Landing page com proposta de valor e destaques. | `ProductGrid`, `Hero` |
-| `/builder` | Interface principal de montagem de bikes. | `MiniBuilder`, `TierSelector` |
-| `/components` | Catálogo filtrável de peças (transmissão, suspensão, etc). | `ProductCard`, `CategorySidebar` |
-| `/brands` | Índice de marcas parceiras e fabricantes. | `BrandMindmap` |
-| `/b/:slug` | Visualização 360º/Detalhada de uma montagem específica. | `BikeDetailView`, `ShareBikeModal` |
-| `/compare` | Comparador lado-a-lado de specs técnicas. | `ComparisonTable` |
-| `/profile` | Dashboard do usuário com suas montagens salvas. | `GroupGrid`, `SaveBikeModal` |
-| `/pricing` | Planos de assinatura e serviços premium. | `PricingTable` |
+| Rota          | Descrição                                                  | Componentes Chave                  |
+| :------------ | :--------------------------------------------------------- | :--------------------------------- |
+| `/`           | Landing page com proposta de valor e destaques.            | `ProductGrid`, `Hero`              |
+| `/builder`    | Interface principal de montagem de bikes.                  | `MiniBuilder`, `TierSelector`      |
+| `/components` | Catálogo filtrável de peças (transmissão, suspensão, etc). | `ProductCard`, `CategorySidebar`   |
+| `/brands`     | Índice de marcas parceiras e fabricantes.                  | `BrandMindmap`                     |
+| `/b/:slug`    | Visualização 360º/Detalhada de uma montagem específica.    | `BikeDetailView`, `ShareBikeModal` |
+| `/compare`    | Comparador lado-a-lado de specs técnicas.                  | `ComparisonTable`                  |
+| `/profile`    | Dashboard do usuário com suas montagens salvas.            | `GroupGrid`, `SaveBikeModal`       |
+| `/pricing`    | Planos de assinatura e serviços premium.                   | `PricingTable`                     |
 
 ---
 
@@ -125,15 +125,15 @@ Tokens extraídos da configuração atual (`themes.config.ts`). Estes valores de
 
 Componentes reutilizáveis que formam o ecossistema visual da Bicicleta.
 
-| Componente | Função | Contexto de Uso |
-| :--- | :--- | :--- |
-| `BikeDetailView` | Exibe specs completas e render da bike. | Página `/b/:slug` |
-| `ProductCard` | Card de peça individual com preço e marca. | Catálogo e Builder |
-| `BrandMindmap` | Visualização relacional de marcas. | Página `/brands` |
-| `MiniBuilder` | Widget de seleção rápida de peças. | Home e Builder |
-| `ThemeSelector` | Toggle global de temas do sistema. | Header / Design System |
-| `TierSelector` | Filtro de nível de performance (Entry/Mid/Pro). | Builder |
-| `OfflineBanner` | Aviso de estado de conexão. | Global (`app.vue`) |
+| Componente       | Função                                          | Contexto de Uso        |
+| :--------------- | :---------------------------------------------- | :--------------------- |
+| `BikeDetailView` | Exibe specs completas e render da bike.         | Página `/b/:slug`      |
+| `ProductCard`    | Card de peça individual com preço e marca.      | Catálogo e Builder     |
+| `BrandMindmap`   | Visualização relacional de marcas.              | Página `/brands`       |
+| `MiniBuilder`    | Widget de seleção rápida de peças.              | Home e Builder         |
+| `ThemeSelector`  | Toggle global de temas do sistema.              | Header / Design System |
+| `TierSelector`   | Filtro de nível de performance (Entry/Mid/Pro). | Builder                |
+| `OfflineBanner`  | Aviso de estado de conexão.                     | Global (`app.vue`)     |
 
 ---
 

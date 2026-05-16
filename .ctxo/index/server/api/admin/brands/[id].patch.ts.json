@@ -1,0 +1,40 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "0246e4fd87b7092c55016fb39134d57cd86697b819ab019cf36521fb57dfe51d",
+  "edges": [
+    {
+      "from": "server/api/admin/brands/[id].patch.ts::[id].patch::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/api/admin/brands/[id].patch.ts::[id].patch::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::brands::variable"
+    }
+  ],
+  "file": "server/api/admin/brands/[id].patch.ts",
+  "intent": [
+    {
+      "date": "2026-04-28T00:25:26-03:00",
+      "hash": "528143ec1c8065179581c3bc8ff099119d5984f2",
+      "kind": "commit",
+      "message": "feat: add scripts and dependencies to automate brand logo synchronization from external APIs"
+    },
+    {
+      "date": "2026-04-27T20:53:46-03:00",
+      "hash": "0f405cd699f9d7246d5457f08e1b119de9533d4d",
+      "kind": "commit",
+      "message": "refactor: complete brands table implementation and testing strategy"
+    },
+    {
+      "date": "2026-04-27T20:48:08-03:00",
+      "hash": "6a9dbed5c839157b8d708924bb2d02aa69ce954a",
+      "kind": "commit",
+      "message": "feat: implement brands API endpoints (admin CRUD + logo upload)"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": []
+}

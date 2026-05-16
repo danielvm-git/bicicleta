@@ -61,6 +61,9 @@ const validate = (): boolean => {
 
   if (!formData.id?.trim()) {
     errors.id = "Brand ID is required";
+  } else if (!/^[a-z0-9-]+$/.test(formData.id)) {
+    errors.id =
+      "Brand ID must contain only lowercase letters, numbers, and hyphens";
   }
 
   return Object.values(errors).every((e) => !e);

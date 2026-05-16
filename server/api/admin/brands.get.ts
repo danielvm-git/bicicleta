@@ -1,8 +1,10 @@
 import { db } from "../../database/db";
 import { brands, components, groups } from "../../database/schema";
 import { count, eq } from "drizzle-orm";
+import { requireAdminSession } from "~/server/utils/auth";
 
 export default defineEventHandler(async (event) => {
+  await requireAdminSession(event);
   const brandsList = await db.select().from(brands).orderBy(brands.name);
 
   // Get component count for each brand

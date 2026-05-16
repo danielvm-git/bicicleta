@@ -16,20 +16,21 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="flex flex-col items-center justify-center py-16 px-4 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl bg-gray-50 dark:bg-gray-800/50"
+    class="flex flex-col items-center justify-center py-16 px-4 brutalist-card bg-gray-50"
   >
-    <UIcon
-      :name="props.icon"
-      class="w-16 h-16 text-gray-400 dark:text-gray-500 mb-4"
-    />
+    <div class="h-24 w-24 bg-black flex items-center justify-center mb-8">
+      <UIcon :name="props.icon" class="w-12 h-12 text-white" />
+    </div>
 
-    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+    <h3
+      class="text-3xl font-display font-black text-black mb-4 uppercase text-center"
+    >
       {{ props.title }}
     </h3>
 
     <p
       v-if="props.description"
-      class="text-gray-600 dark:text-gray-400 text-center max-w-md mb-6"
+      class="font-body text-lg text-black/70 text-center max-w-md mb-8"
     >
       {{ props.description }}
     </p>
@@ -38,8 +39,7 @@ const props = withDefaults(defineProps<Props>(), {
       v-if="props.actionLabel && props.actionHref"
       :to="props.actionHref"
       :icon="props.actionIcon"
-      color="primary"
-      variant="soft"
+      class="brutalist-button text-lg px-8 py-4"
     >
       {{ props.actionLabel }}
     </UButton>

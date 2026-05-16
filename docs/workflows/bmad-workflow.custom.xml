@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow id="bmad-standard-greenfield" version="1.0">
+  <meta>
+    <name>BMad Method Workflow - Standard Greenfield</name>
+    <source>Diagram recreation from provided image</source>
+    <purpose>Human + AI readable workflow specification</purpose>
+  </meta>
+
+  <phases>
+    <phase id="phase-1" name="Discovery">
+      <decision id="include-discovery" question="Include Discovery?">
+        <branch when="yes" goto="brainstorm-requirements" />
+        <branch when="no" goto="prd" />
+      </decision>
+      <step id="brainstorm-requirements" kind="task" next="analyze-market-segments">Brainstorm requirements</step>
+      <step id="analyze-market-segments" kind="task" next="product-brief-requirements">Analyze market segments</step>
+      <step id="product-brief-requirements" kind="task" next="prd">Product brief requirements</step>
+    </phase>
+
+    <phase id="phase-2" name="Planning">
+      <step id="prd" kind="artifact" next="validate-prd-completeness">PRD</step>
+      <step id="validate-prd-completeness" kind="validation" next="have-ux">Validate PRD completeness</step>
+      <decision id="have-ux" question="Have UX?">
+        <branch when="yes" goto="create-ux" />
+        <branch when="no" goto="architecture" />
+      </decision>
+      <step id="create-ux" kind="task" next="architecture">Create UX</step>
+    </phase>
+
+    <phase id="phase-3" name="Solutioning">
+      <step id="architecture" kind="artifact" next="validate-architecture-requirements">Architecture</step>
+      <step id="validate-architecture-requirements" kind="validation" next="epics-stories">Validate architecture requirements</step>
+      <step id="epics-stories" kind="artifact" next="test-design-requirements">Epics/Stories</step>
+      <step id="test-design-requirements" kind="validation" next="implementation-readiness">Test design requirements</step>
+      <step id="implementation-readiness" kind="gate" next="sprint-plan">Implementation readiness</step>
+    </phase>
+
+    <phase id="phase-4" name="Implementation">
+      <step id="sprint-plan" kind="artifact" next="create-story">Sprint Plan</step>
+      <loop id="story-loop" label="Story Loop">
+        <step id="create-story" kind="task" next="validate-story-acceptance">Create Story</step>
+        <step id="validate-story-acceptance" kind="validation" next="develop-story">Validate story acceptance</step>
+        <step id="develop-story" kind="task" next="code-review-different-llms">Develop Story</step>
+        <step id="code-review-different-llms" kind="review" next="code-review-pass">Code review with different LLMs</step>
+        <decision id="code-review-pass" question="Code Review Pass?">
+          <branch when="pass" goto="more-stories-in-epic" />
+          <branch when="fail" goto="create-story" />
+        </decision>
+        <decision id="more-stories-in-epic" question="More Stories in Epic?">
+          <branch when="yes" goto="create-story" />
+          <branch when="no" goto="retrospective" />
+        </decision>
+      </loop>
+      <step id="retrospective" kind="review" next="more-epics">Retrospective</step>
+      <decision id="more-epics" question="More Epics?">
+        <branch when="yes" goto="sprint-plan" />
+        <branch when="no" goto="end" />
+      </decision>
+    </phase>
+  </phases>
+
+  <end id="end">End</end>
+</workflow>

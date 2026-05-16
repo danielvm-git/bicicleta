@@ -37,3 +37,14 @@
 - NEVER skip `get_why_context` — reverted code and anti-patterns are invisible without it
 - NEVER grep source files to find symbols when `search_symbols` exists
 - NEVER manually trace imports when `find_importers` gives the full reverse dependency graph
+
+## Superpowers Skills (MANDATORY)
+
+This project uses the **Superpowers** skills library for agentic workflows. You MUST follow these processes:
+
+1.  **Brainstorming**: BEFORE starting any implementation, call `superpowers:brainstorming`. Explore context deeply and get approval on a "Visual Companion" (implementation plan).
+2.  **Plan Execution**: Use `superpowers:subagent-driven-development` to execute plans. Dispatch isolated sub-agents and enforce reviews for each task.
+3.  **TDD**: Follow the Red-Green-Refactor cycle as defined in `superpowers:test-driven-development`. No production code without a failing test.
+4.  **Debugging**: Use `superpowers:systematic-debugging`. Prohibit fixing symptoms; find the root cause first.
+
+Refer to the individual skill files in `.agents/skills/` for detailed instructions.

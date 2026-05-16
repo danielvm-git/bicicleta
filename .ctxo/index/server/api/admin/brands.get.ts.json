@@ -1,0 +1,38 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "e01ab95e68bb3769e054d05f16cf854bfe73accab4be43d52b776c351e4da753",
+  "edges": [
+    {
+      "from": "server/api/admin/brands.get.ts::brands.get::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/api/admin/brands.get.ts::brands.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::brands::variable"
+    },
+    {
+      "from": "server/api/admin/brands.get.ts::brands.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    },
+    {
+      "from": "server/api/admin/brands.get.ts::brands.get::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::groups::variable"
+    }
+  ],
+  "file": "server/api/admin/brands.get.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T20:48:08-03:00",
+      "hash": "6a9dbed5c839157b8d708924bb2d02aa69ce954a",
+      "kind": "commit",
+      "message": "feat: implement brands API endpoints (admin CRUD + logo upload)"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": []
+}

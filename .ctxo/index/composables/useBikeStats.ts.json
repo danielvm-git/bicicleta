@@ -1,0 +1,32 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 13,
+      "symbolId": "composables/useBikeStats.ts::useBikeStats::function"
+    }
+  ],
+  "contentHash": "aa235a8ab22f661f104d06233892ac751fd9d499204c29561134e16009619fc2",
+  "edges": [],
+  "file": "composables/useBikeStats.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": [
+    {
+      "endLine": 46,
+      "endOffset": 1445,
+      "kind": "function",
+      "name": "useBikeStats",
+      "startLine": 4,
+      "startOffset": 114,
+      "symbolId": "composables/useBikeStats.ts::useBikeStats::function"
+    }
+  ]
+}

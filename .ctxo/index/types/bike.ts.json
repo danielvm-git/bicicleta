@@ -1,10 +1,16 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "8409433273523f5bf7a89d3106dc3bc86973ab460b046f9acba92d30bb73fb82",
+  "contentHash": "02f8452f7c122facc9c519375eae2be31fb3e0af82294bc6660e325e824e552e",
   "edges": [],
   "file": "types/bike.ts",
   "intent": [
+    {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    },
     {
       "date": "2026-04-26T19:46:56-03:00",
       "hash": "8cea2a7d5e3fbd9a11f9f6835b02520b81f12576",
@@ -36,11 +42,11 @@
       "message": "feat(core): implement isomorphic compatibility engine and server-side validation"
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": [
     {
-      "endLine": 15,
-      "endOffset": 394,
+      "endLine": 16,
+      "endOffset": 422,
       "kind": "interface",
       "name": "BikeComponent",
       "startLine": 0,
@@ -48,30 +54,39 @@
       "symbolId": "types/bike.ts::BikeComponent::interface"
     },
     {
-      "endLine": 40,
-      "endOffset": 1300,
+      "endLine": 29,
+      "endOffset": 677,
+      "kind": "interface",
+      "name": "UnifiedBike",
+      "startLine": 18,
+      "startOffset": 424,
+      "symbolId": "types/bike.ts::UnifiedBike::interface"
+    },
+    {
+      "endLine": 54,
+      "endOffset": 1583,
       "kind": "interface",
       "name": "CompatibilityIssue",
-      "startLine": 28,
-      "startOffset": 762,
+      "startLine": 42,
+      "startOffset": 1045,
       "symbolId": "types/bike.ts::CompatibilityIssue::interface"
     },
     {
-      "endLine": 26,
-      "endOffset": 760,
+      "endLine": 40,
+      "endOffset": 1043,
       "kind": "type",
       "name": "CompatibilityRuleId",
-      "startLine": 26,
-      "startOffset": 686,
+      "startLine": 40,
+      "startOffset": 969,
       "symbolId": "types/bike.ts::CompatibilityRuleId::type"
     },
     {
-      "endLine": 24,
-      "endOffset": 683,
+      "endLine": 38,
+      "endOffset": 966,
       "kind": "variable",
       "name": "COMPATIBILITY_RULE_IDS",
-      "startLine": 18,
-      "startOffset": 482,
+      "startLine": 32,
+      "startOffset": 765,
       "symbolId": "types/bike.ts::COMPATIBILITY_RULE_IDS::variable"
     }
   ]

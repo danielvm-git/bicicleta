@@ -3,24 +3,27 @@ export default defineAppConfig({
     primary: "primary",
     gray: "gray",
     card: {
-      rounded: "rounded-xl",
-      border: "border-brand-border dark:border-gray-800",
-      shadow: "shadow-sm",
+      rounded: "rounded-none",
+      border: "border-2 border-black dark:border-white",
+      shadow: "shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
     },
     button: {
-      rounded: "rounded-lg",
+      rounded: "rounded-none",
       default: {
-        size: "sm",
+        size: "md",
+        variant: "solid",
+        color: "black",
       },
     },
     input: {
-      rounded: "rounded-lg",
+      rounded: "rounded-none",
+      border: "border-2 border-black",
     },
     select: {
-      rounded: "rounded-lg",
+      rounded: "rounded-none",
     },
     selectMenu: {
-      rounded: "rounded-lg",
+      rounded: "rounded-none",
     },
   },
 });

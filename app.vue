@@ -85,34 +85,24 @@ defineShortcuts({
 
 const navLinks = [
   {
-    label: "Simulador",
+    label: "Simulator",
     icon: "i-heroicons-wrench-screwdriver",
     to: "/builder",
-    class: "hidden sm:flex",
   },
   {
-    label: "Peças",
+    label: "Catalog",
     icon: "i-heroicons-cpu-chip",
     to: "/components",
-    class: "hidden md:flex",
   },
   {
-    label: "Marcas",
+    label: "Pricing",
+    icon: "i-heroicons-currency-dollar",
+    to: "/pricing",
+  },
+  {
+    label: "Brands",
     icon: "i-heroicons-tag",
     to: "/brands",
-    class: "hidden lg:flex",
-  },
-  {
-    label: "Guia",
-    icon: "i-heroicons-book-open",
-    to: "/guide",
-    class: "hidden lg:flex",
-  },
-  {
-    label: "Galeria",
-    icon: "i-heroicons-photo",
-    to: "/gallery",
-    class: "hidden xl:flex",
   },
 ];
 
@@ -120,89 +110,66 @@ const mobileNavLinks = [
   {
     icon: "i-heroicons-wrench-screwdriver",
     to: "/builder",
-    class: "sm:hidden",
   },
   {
     icon: "i-heroicons-cpu-chip",
     to: "/components",
-    class: "md:hidden hidden sm:flex",
+  },
+  {
+    icon: "i-heroicons-currency-dollar",
+    to: "/pricing",
   },
 ];
 </script>
 
 <template>
-  <div class="min-h-screen bg-brand-bg dark:bg-gray-900 font-body">
-    <header
-      class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 no-print"
-    >
-      <UContainer class="flex items-center justify-between h-16">
-        <div class="flex items-center gap-4 sm:gap-8">
+  <div class="min-h-screen bg-white dark:bg-gray-900 font-body text-black">
+    <header class="brutalist-header sticky top-0 z-50 no-print">
+      <UContainer class="flex items-center justify-between h-20">
+        <div class="flex items-center gap-8">
           <NuxtLink
             to="/"
-            class="text-xl font-display flex items-center gap-2 group"
+            class="text-3xl font-display font-black tracking-tighter flex items-center gap-2 group"
           >
-            <UIcon
-              name="i-heroicons-bolt"
-              class="text-primary group-hover:scale-110 transition-transform"
-            />
-            <span class="hidden sm:inline">Monta Bike</span>
+            <UIcon name="i-heroicons-bolt" class="text-primary scale-125" />
+            <span class="inline">BICICLETA</span>
           </NuxtLink>
 
-          <nav class="flex items-center gap-1">
+          <nav class="hidden lg:flex items-center gap-2">
             <template v-for="link in navLinks" :key="link.to">
-              <UButton
-                :to="link.to"
-                variant="ghost"
-                color="gray"
-                :icon="link.icon"
-                :class="[link.class, 'font-display']"
-              >
+              <NuxtLink :to="link.to" class="nav-link">
                 {{ link.label }}
-              </UButton>
+              </NuxtLink>
             </template>
-
-            <template v-for="link in mobileNavLinks" :key="'mobile-' + link.to">
-              <UButton
-                :to="link.to"
-                variant="ghost"
-                color="gray"
-                :icon="link.icon"
-                :class="link.class"
-              />
-            </template>
-
-            <UButton
-              to="/admin/components"
-              variant="ghost"
-              color="gray"
-              icon="i-heroicons-cog-6-tooth"
-              class="hidden 2xl:flex font-display"
-            >
-              Admin
-            </UButton>
           </nav>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-4">
           <UButton
             icon="i-heroicons-magnifying-glass"
-            color="gray"
+            color="white"
             variant="ghost"
-            class="hidden sm:flex"
+            class="hidden sm:flex border-2 border-black rounded-none hover:bg-black hover:text-white transition-colors"
             @click="isSearchOpen = true"
           />
-          <UKbd value="meta" class="hidden sm:inline-flex" />
-          <UKbd value="K" class="hidden sm:inline-flex" />
 
-          <div class="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-2" />
+          <div
+            class="hidden sm:flex items-center gap-1 bg-gray-100 p-1 border-2 border-black"
+          >
+            <UKbd value="meta" />
+            <UKbd value="K" />
+          </div>
+
+          <div class="h-8 w-1 bg-black mx-2" />
 
           <UButton
             v-if="!loggedIn"
             icon="i-simple-icons-github"
             color="black"
             variant="solid"
-            size="sm"
-            label="Entrar"
+            size="md"
+            label="JOIN"
+            class="font-display font-bold rounded-none border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px]"
             @click="signInWithGitHub"
           />
           <UDropdown v-else :items="userMenuItems" :ui="{ width: 'w-48' }">
@@ -227,11 +194,29 @@ const mobileNavLinks = [
 
     <OfflineBanner />
 
-    <main>
+    <main class="pb-20 lg:pb-0">
       <NuxtPage />
     </main>
 
     <UNotifications />
+
+    <!-- Mobile Bottom Navigation -->
+    <nav
+      class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t-4 border-black z-50 flex justify-around items-center h-20 no-print"
+    >
+      <NuxtLink
+        v-for="link in navLinks"
+        :key="link.to"
+        :to="link.to"
+        class="flex flex-col items-center justify-center w-full h-full border-r-2 last:border-r-0 border-black transition-colors"
+        active-class="bg-black text-white"
+      >
+        <UIcon :name="link.icon" class="text-2xl" />
+        <span class="text-[10px] font-display font-black uppercase mt-1">{{
+          link.label
+        }}</span>
+      </NuxtLink>
+    </nav>
 
     <UModal v-model="isSearchOpen">
       <UCommandPalette

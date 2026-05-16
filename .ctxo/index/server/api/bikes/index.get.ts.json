@@ -1,10 +1,16 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "3c930942d51b0df396330cfe8fe4e5bbcce9cc9c41ba36fc049115773f74daf5",
+  "contentHash": "052374170f9eb4d2614a046a0de10d2464dfc2398adc3433157f98bdf3cba93f",
   "edges": [],
   "file": "server/api/bikes/index.get.ts",
   "intent": [
+    {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    },
     {
       "date": "2026-04-26T17:59:37-03:00",
       "hash": "7a704a9a6137db4d55b008fb4c0b70fe15b255e2",
@@ -30,6 +36,6 @@
       "message": "feat(bikes)!: migrate builds to bikes and align agent stack"
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": []
 }

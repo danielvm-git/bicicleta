@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_BMadWorkflow" targetNamespace="https://bicicleta.dev/workflows/bmad" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:process id="Process_BMadMethodWorkflow" name="BMad Method Workflow - Standard Greenfield" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_Start" name="Start">
+      <bpmn:outgoing>Flow_Start_DiscoveryDecision</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_IncludeDiscovery" name="Include Discovery?">
+      <bpmn:incoming>Flow_Start_DiscoveryDecision</bpmn:incoming>
+      <bpmn:outgoing>Flow_Discovery_No_PRD</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Discovery_Yes_Brainstorm</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_BrainstormRequirements" name="Brainstorm requirements">
+      <bpmn:incoming>Flow_Discovery_Yes_Brainstorm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gx1mkg</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_AnalyzeMarketSegments" name="Analyze market segments">
+      <bpmn:incoming>Flow_0gx1mkg</bpmn:incoming>
+      <bpmn:outgoing>Flow_Market_ProductBrief</bpmn:outgoing>
+      <bpmn:outgoing>Flow_17iowgz</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_ProductBriefRequirements" name="Product brief requirements">
+      <bpmn:incoming>Flow_Market_ProductBrief</bpmn:incoming>
+      <bpmn:outgoing>Flow_ProductBrief_PRD</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_PRD" name="PRD">
+      <bpmn:incoming>Flow_Discovery_No_PRD</bpmn:incoming>
+      <bpmn:incoming>Flow_ProductBrief_PRD</bpmn:incoming>
+      <bpmn:incoming>Flow_17iowgz</bpmn:incoming>
+      <bpmn:outgoing>Flow_PRD_ValidatePRD</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_ValidatePRD" name="Validate PRD completeness">
+      <bpmn:incoming>Flow_PRD_ValidatePRD</bpmn:incoming>
+      <bpmn:outgoing>Flow_ValidatePRD_HaveUX</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_HaveUX" name="Have UX?">
+      <bpmn:incoming>Flow_ValidatePRD_HaveUX</bpmn:incoming>
+      <bpmn:outgoing>Flow_HaveUX_Yes_CreateUX</bpmn:outgoing>
+      <bpmn:outgoing>Flow_HaveUX_No_Architecture</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_CreateUX" name="Create UX">
+      <bpmn:incoming>Flow_HaveUX_Yes_CreateUX</bpmn:incoming>
+      <bpmn:outgoing>Flow_CreateUX_Architecture</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Architecture" name="Architecture">
+      <bpmn:incoming>Flow_HaveUX_No_Architecture</bpmn:incoming>
+      <bpmn:incoming>Flow_CreateUX_Architecture</bpmn:incoming>
+      <bpmn:outgoing>Flow_Architecture_ValidateArch</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_ValidateArchitecture" name="Validate architecture requirements">
+      <bpmn:incoming>Flow_Architecture_ValidateArch</bpmn:incoming>
+      <bpmn:outgoing>Flow_ValidateArch_EpicsStories</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_EpicsStories" name="Epics/Stories">
+      <bpmn:incoming>Flow_ValidateArch_EpicsStories</bpmn:incoming>
+      <bpmn:outgoing>Flow_EpicsStories_TestDesign</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_TestDesignRequirements" name="Test design requirements">
+      <bpmn:incoming>Flow_EpicsStories_TestDesign</bpmn:incoming>
+      <bpmn:outgoing>Flow_TestDesign_ImplReadiness</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_ImplementationReadiness" name="Implementation readiness">
+      <bpmn:incoming>Flow_TestDesign_ImplReadiness</bpmn:incoming>
+      <bpmn:outgoing>Flow_ImplReadiness_SprintPlan</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_SprintPlan" name="Sprint Plan">
+      <bpmn:incoming>Flow_ImplReadiness_SprintPlan</bpmn:incoming>
+      <bpmn:incoming>Flow_MoreEpics_Yes_SprintPlan</bpmn:incoming>
+      <bpmn:outgoing>Flow_SprintPlan_CreateStory</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_CreateStory" name="Create Story">
+      <bpmn:incoming>Flow_SprintPlan_CreateStory</bpmn:incoming>
+      <bpmn:incoming>Flow_MoreStories_Yes_CreateStory</bpmn:incoming>
+      <bpmn:outgoing>Flow_CreateStory_ValidateStory</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_ValidateStoryAcceptance" name="Validate story acceptance">
+      <bpmn:incoming>Flow_CreateStory_ValidateStory</bpmn:incoming>
+      <bpmn:outgoing>Flow_ValidateStory_DevelopStory</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_DevelopStory" name="Develop Story">
+      <bpmn:incoming>Flow_ValidateStory_DevelopStory</bpmn:incoming>
+      <bpmn:incoming>Flow_CodeReview_Fail_CreateStory</bpmn:incoming>
+      <bpmn:outgoing>Flow_DevelopStory_CodeReviewWithLLMs</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_CodeReviewDifferentLLMs" name="Code review with different LLMs">
+      <bpmn:incoming>Flow_DevelopStory_CodeReviewWithLLMs</bpmn:incoming>
+      <bpmn:outgoing>Flow_CodeReviewWithLLMs_PassDecision</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_CodeReviewPass" name="Code Review Pass?">
+      <bpmn:incoming>Flow_CodeReviewWithLLMs_PassDecision</bpmn:incoming>
+      <bpmn:outgoing>Flow_CodeReview_Fail_CreateStory</bpmn:outgoing>
+      <bpmn:outgoing>Flow_CodeReview_Pass_MoreStories</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_MoreStoriesInEpic" name="More Stories in Epic?">
+      <bpmn:incoming>Flow_CodeReview_Pass_MoreStories</bpmn:incoming>
+      <bpmn:outgoing>Flow_MoreStories_Yes_CreateStory</bpmn:outgoing>
+      <bpmn:outgoing>Flow_MoreStories_No_Retrospective</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_Retrospective" name="Retrospective">
+      <bpmn:incoming>Flow_MoreStories_No_Retrospective</bpmn:incoming>
+      <bpmn:outgoing>Flow_Retrospective_MoreEpics</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_MoreEpics" name="More Epics?">
+      <bpmn:incoming>Flow_Retrospective_MoreEpics</bpmn:incoming>
+      <bpmn:outgoing>Flow_MoreEpics_Yes_SprintPlan</bpmn:outgoing>
+      <bpmn:outgoing>Flow_MoreEpics_No_End</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_End" name="End">
+      <bpmn:incoming>Flow_MoreEpics_No_End</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Start_DiscoveryDecision" sourceRef="StartEvent_Start" targetRef="Gateway_IncludeDiscovery" />
+    <bpmn:sequenceFlow id="Flow_Discovery_No_PRD" name="No" sourceRef="Gateway_IncludeDiscovery" targetRef="Task_PRD" />
+    <bpmn:sequenceFlow id="Flow_Discovery_Yes_Brainstorm" name="Yes" sourceRef="Gateway_IncludeDiscovery" targetRef="Task_BrainstormRequirements" />
+    <bpmn:sequenceFlow id="Flow_Market_ProductBrief" sourceRef="Task_AnalyzeMarketSegments" targetRef="Task_ProductBriefRequirements" />
+    <bpmn:sequenceFlow id="Flow_ProductBrief_PRD" sourceRef="Task_ProductBriefRequirements" targetRef="Task_PRD" />
+    <bpmn:sequenceFlow id="Flow_PRD_ValidatePRD" sourceRef="Task_PRD" targetRef="Task_ValidatePRD" />
+    <bpmn:sequenceFlow id="Flow_ValidatePRD_HaveUX" sourceRef="Task_ValidatePRD" targetRef="Gateway_HaveUX" />
+    <bpmn:sequenceFlow id="Flow_HaveUX_Yes_CreateUX" name="Yes" sourceRef="Gateway_HaveUX" targetRef="Task_CreateUX" />
+    <bpmn:sequenceFlow id="Flow_HaveUX_No_Architecture" name="No" sourceRef="Gateway_HaveUX" targetRef="Task_Architecture" />
+    <bpmn:sequenceFlow id="Flow_CreateUX_Architecture" sourceRef="Task_CreateUX" targetRef="Task_Architecture" />
+    <bpmn:sequenceFlow id="Flow_Architecture_ValidateArch" sourceRef="Task_Architecture" targetRef="Task_ValidateArchitecture" />
+    <bpmn:sequenceFlow id="Flow_ValidateArch_EpicsStories" sourceRef="Task_ValidateArchitecture" targetRef="Task_EpicsStories" />
+    <bpmn:sequenceFlow id="Flow_EpicsStories_TestDesign" sourceRef="Task_EpicsStories" targetRef="Task_TestDesignRequirements" />
+    <bpmn:sequenceFlow id="Flow_TestDesign_ImplReadiness" sourceRef="Task_TestDesignRequirements" targetRef="Task_ImplementationReadiness" />
+    <bpmn:sequenceFlow id="Flow_ImplReadiness_SprintPlan" sourceRef="Task_ImplementationReadiness" targetRef="Task_SprintPlan" />
+    <bpmn:sequenceFlow id="Flow_SprintPlan_CreateStory" sourceRef="Task_SprintPlan" targetRef="Task_CreateStory" />
+    <bpmn:sequenceFlow id="Flow_CreateStory_ValidateStory" sourceRef="Task_CreateStory" targetRef="Task_ValidateStoryAcceptance" />
+    <bpmn:sequenceFlow id="Flow_ValidateStory_DevelopStory" sourceRef="Task_ValidateStoryAcceptance" targetRef="Task_DevelopStory" />
+    <bpmn:sequenceFlow id="Flow_DevelopStory_CodeReviewWithLLMs" sourceRef="Task_DevelopStory" targetRef="Task_CodeReviewDifferentLLMs" />
+    <bpmn:sequenceFlow id="Flow_CodeReviewWithLLMs_PassDecision" sourceRef="Task_CodeReviewDifferentLLMs" targetRef="Gateway_CodeReviewPass" />
+    <bpmn:sequenceFlow id="Flow_CodeReview_Fail_CreateStory" name="Fail" sourceRef="Gateway_CodeReviewPass" targetRef="Task_DevelopStory" />
+    <bpmn:sequenceFlow id="Flow_CodeReview_Pass_MoreStories" name="Pass" sourceRef="Gateway_CodeReviewPass" targetRef="Gateway_MoreStoriesInEpic" />
+    <bpmn:sequenceFlow id="Flow_MoreStories_Yes_CreateStory" name="Yes" sourceRef="Gateway_MoreStoriesInEpic" targetRef="Task_CreateStory" />
+    <bpmn:sequenceFlow id="Flow_MoreStories_No_Retrospective" name="No" sourceRef="Gateway_MoreStoriesInEpic" targetRef="Task_Retrospective" />
+    <bpmn:sequenceFlow id="Flow_Retrospective_MoreEpics" sourceRef="Task_Retrospective" targetRef="Gateway_MoreEpics" />
+    <bpmn:sequenceFlow id="Flow_MoreEpics_Yes_SprintPlan" name="Yes" sourceRef="Gateway_MoreEpics" targetRef="Task_SprintPlan" />
+    <bpmn:sequenceFlow id="Flow_MoreEpics_No_End" name="No" sourceRef="Gateway_MoreEpics" targetRef="EndEvent_End" />
+    <bpmn:sequenceFlow id="Flow_0gx1mkg" sourceRef="Task_BrainstormRequirements" targetRef="Task_AnalyzeMarketSegments" />
+    <bpmn:sequenceFlow id="Flow_17iowgz" sourceRef="Task_AnalyzeMarketSegments" targetRef="Task_PRD" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_BMadWorkflow">
+    <bpmndi:BPMNPlane id="BPMNPlane_BMadWorkflow" bpmnElement="Process_BMadMethodWorkflow">
+      <bpmndi:BPMNShape id="Shape_Task_PRD" bpmnElement="Task_PRD">
+        <dc:Bounds x="660" y="380" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_ValidatePRD" bpmnElement="Task_ValidatePRD">
+        <dc:Bounds x="860" y="380" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_HaveUX" bpmnElement="Gateway_HaveUX" isMarkerVisible="true">
+        <dc:Bounds x="1060" y="395" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1060" y="445" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_ValidateArchitecture" bpmnElement="Task_ValidateArchitecture">
+        <dc:Bounds x="1360" y="380" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_EpicsStories" bpmnElement="Task_EpicsStories">
+        <dc:Bounds x="1600" y="380" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_TestDesignRequirements" bpmnElement="Task_TestDesignRequirements">
+        <dc:Bounds x="1800" y="380" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_ImplementationReadiness" bpmnElement="Task_ImplementationReadiness">
+        <dc:Bounds x="2040" y="380" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_SprintPlan" bpmnElement="Task_SprintPlan">
+        <dc:Bounds x="2280" y="380" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_CreateStory" bpmnElement="Task_CreateStory">
+        <dc:Bounds x="2480" y="380" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_ValidateStoryAcceptance" bpmnElement="Task_ValidateStoryAcceptance">
+        <dc:Bounds x="2680" y="380" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_DevelopStory" bpmnElement="Task_DevelopStory">
+        <dc:Bounds x="2910" y="380" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_CodeReviewDifferentLLMs" bpmnElement="Task_CodeReviewDifferentLLMs">
+        <dc:Bounds x="3110" y="380" width="190" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_CodeReviewPass" bpmnElement="Gateway_CodeReviewPass" isMarkerVisible="true">
+        <dc:Bounds x="3350" y="395" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3342" y="445" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_MoreStoriesInEpic" bpmnElement="Gateway_MoreStoriesInEpic" isMarkerVisible="true">
+        <dc:Bounds x="3550" y="395" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3538" y="445" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_StartEvent_Start" bpmnElement="StartEvent_Start">
+        <dc:Bounds x="152" y="370" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="406" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_IncludeDiscovery" bpmnElement="Gateway_IncludeDiscovery" isMarkerVisible="true">
+        <dc:Bounds x="275" y="363" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="273" y="413" width="55" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_BrainstormRequirements" bpmnElement="Task_BrainstormRequirements">
+        <dc:Bounds x="230" y="80" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_ProductBriefRequirements" bpmnElement="Task_ProductBriefRequirements">
+        <dc:Bounds x="660" y="80" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_AnalyzeMarketSegments" bpmnElement="Task_AnalyzeMarketSegments">
+        <dc:Bounds x="430" y="80" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_Architecture" bpmnElement="Task_Architecture">
+        <dc:Bounds x="1170" y="380" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_CreateUX" bpmnElement="Task_CreateUX">
+        <dc:Bounds x="1170" y="270" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Task_Retrospective" bpmnElement="Task_Retrospective">
+        <dc:Bounds x="3710" y="405" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_Gateway_MoreEpics" bpmnElement="Gateway_MoreEpics" isMarkerVisible="true">
+        <dc:Bounds x="3915" y="420" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3909" y="480" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Shape_EndEvent_End" bpmnElement="EndEvent_End">
+        <dc:Bounds x="4092" y="427" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="4100" y="463" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Edge_Flow_Start_DiscoveryDecision" bpmnElement="Flow_Start_DiscoveryDecision">
+        <di:waypoint x="188" y="388" />
+        <di:waypoint x="275" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_Discovery_No_PRD" bpmnElement="Flow_Discovery_No_PRD">
+        <di:waypoint x="322" y="385" />
+        <di:waypoint x="493" y="385" />
+        <di:waypoint x="493" y="429" />
+        <di:waypoint x="660" y="429" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="399" y="360" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_Discovery_Yes_Brainstorm" bpmnElement="Flow_Discovery_Yes_Brainstorm">
+        <di:waypoint x="300" y="363" />
+        <di:waypoint x="300" y="160" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="275" y="322" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_Market_ProductBrief" bpmnElement="Flow_Market_ProductBrief">
+        <di:waypoint x="570" y="120" />
+        <di:waypoint x="660" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_ProductBrief_PRD" bpmnElement="Flow_ProductBrief_PRD">
+        <di:waypoint x="800" y="150" />
+        <di:waypoint x="800" y="275" />
+        <di:waypoint x="730" y="275" />
+        <di:waypoint x="730" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_PRD_ValidatePRD" bpmnElement="Flow_PRD_ValidatePRD">
+        <di:waypoint x="800" y="420" />
+        <di:waypoint x="860" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_ValidatePRD_HaveUX" bpmnElement="Flow_ValidatePRD_HaveUX">
+        <di:waypoint x="1010" y="420" />
+        <di:waypoint x="1060" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_HaveUX_Yes_CreateUX" bpmnElement="Flow_HaveUX_Yes_CreateUX">
+        <di:waypoint x="1085" y="395" />
+        <di:waypoint x="1085" y="350" />
+        <di:waypoint x="1180" y="350" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1126" y="326" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_HaveUX_No_Architecture" bpmnElement="Flow_HaveUX_No_Architecture">
+        <di:waypoint x="1110" y="420" />
+        <di:waypoint x="1170" y="420" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1133" y="395" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_CreateUX_Architecture" bpmnElement="Flow_CreateUX_Architecture">
+        <di:waypoint x="1240" y="350" />
+        <di:waypoint x="1240" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_Architecture_ValidateArch" bpmnElement="Flow_Architecture_ValidateArch">
+        <di:waypoint x="1310" y="420" />
+        <di:waypoint x="1360" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_ValidateArch_EpicsStories" bpmnElement="Flow_ValidateArch_EpicsStories">
+        <di:waypoint x="1540" y="420" />
+        <di:waypoint x="1600" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_EpicsStories_TestDesign" bpmnElement="Flow_EpicsStories_TestDesign">
+        <di:waypoint x="1740" y="420" />
+        <di:waypoint x="1800" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_TestDesign_ImplReadiness" bpmnElement="Flow_TestDesign_ImplReadiness">
+        <di:waypoint x="1980" y="420" />
+        <di:waypoint x="2040" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_ImplReadiness_SprintPlan" bpmnElement="Flow_ImplReadiness_SprintPlan">
+        <di:waypoint x="2220" y="420" />
+        <di:waypoint x="2280" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_SprintPlan_CreateStory" bpmnElement="Flow_SprintPlan_CreateStory">
+        <di:waypoint x="2420" y="420" />
+        <di:waypoint x="2480" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_CreateStory_ValidateStory" bpmnElement="Flow_CreateStory_ValidateStory">
+        <di:waypoint x="2620" y="420" />
+        <di:waypoint x="2680" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_ValidateStory_DevelopStory" bpmnElement="Flow_ValidateStory_DevelopStory">
+        <di:waypoint x="2850" y="420" />
+        <di:waypoint x="2910" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_DevelopStory_CodeReviewWithLLMs" bpmnElement="Flow_DevelopStory_CodeReviewWithLLMs">
+        <di:waypoint x="3050" y="420" />
+        <di:waypoint x="3110" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_CodeReviewWithLLMs_PassDecision" bpmnElement="Flow_CodeReviewWithLLMs_PassDecision">
+        <di:waypoint x="3300" y="420" />
+        <di:waypoint x="3350" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_CodeReview_Fail_CreateStory" bpmnElement="Flow_CodeReview_Fail_CreateStory">
+        <di:waypoint x="3350" y="420" />
+        <di:waypoint x="3350" y="560" />
+        <di:waypoint x="2980" y="560" />
+        <di:waypoint x="2980" y="460" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3156" y="535" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_CodeReview_Pass_MoreStories" bpmnElement="Flow_CodeReview_Pass_MoreStories">
+        <di:waypoint x="3400" y="420" />
+        <di:waypoint x="3550" y="420" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3463" y="395" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_MoreStories_Yes_CreateStory" bpmnElement="Flow_MoreStories_Yes_CreateStory">
+        <di:waypoint x="3550" y="445" />
+        <di:waypoint x="3550" y="670" />
+        <di:waypoint x="2550" y="670" />
+        <di:waypoint x="2550" y="460" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3041" y="645" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_MoreStories_No_Retrospective" bpmnElement="Flow_MoreStories_No_Retrospective">
+        <di:waypoint x="3575" y="445" />
+        <di:waypoint x="3710" y="445" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3629" y="422" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_Retrospective_MoreEpics" bpmnElement="Flow_Retrospective_MoreEpics">
+        <di:waypoint x="3850" y="445" />
+        <di:waypoint x="3915" y="445" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_MoreEpics_Yes_SprintPlan" bpmnElement="Flow_MoreEpics_Yes_SprintPlan">
+        <di:waypoint x="3940" y="420" />
+        <di:waypoint x="3940" y="310" />
+        <di:waypoint x="2350" y="310" />
+        <di:waypoint x="2350" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3136" y="285" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Edge_Flow_MoreEpics_No_End" bpmnElement="Flow_MoreEpics_No_End">
+        <di:waypoint x="3965" y="445" />
+        <di:waypoint x="4092" y="445" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="4021" y="420" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gx1mkg_di" bpmnElement="Flow_0gx1mkg">
+        <di:waypoint x="370" y="120" />
+        <di:waypoint x="430" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17iowgz_di" bpmnElement="Flow_17iowgz">
+        <di:waypoint x="525" y="160" />
+        <di:waypoint x="525" y="270" />
+        <di:waypoint x="660" y="270" />
+        <di:waypoint x="660" y="390" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

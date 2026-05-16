@@ -1,8 +1,10 @@
 import { db } from "../../../database/db";
 import { brands } from "../../../database/schema";
 import { eq } from "drizzle-orm";
+import { requireAdminSession } from "~/server/utils/auth";
 
 export default defineEventHandler(async (event) => {
+  await requireAdminSession(event);
   const id = getRouterParam(event, "id");
 
   if (!id) {

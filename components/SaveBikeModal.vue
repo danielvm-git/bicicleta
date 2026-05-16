@@ -49,46 +49,60 @@ const handleClose = () => {
 </script>
 
 <template>
-  <UModal :model-value="modelValue" @update:model-value="handleClose">
-    <UCard>
-      <template #header>
-        <div class="flex items-center justify-between">
-          <h3 class="text-base font-semibold text-gray-900 dark:text-white">
-            {{ displayTitle }}
-          </h3>
-          <UButton
-            color="gray"
-            variant="ghost"
-            icon="i-heroicons-x-mark-20-solid"
-            class="-my-1"
-            @click="handleClose"
-          />
-        </div>
-      </template>
-
-      <div class="space-y-4">
-        <UInput
-          v-model="inputValue"
-          :placeholder="displayPlaceholder"
-          @keydown.enter="handleConfirm"
-          autofocus
-        />
+  <UModal
+    :model-value="modelValue"
+    @update:model-value="handleClose"
+    :ui="{
+      wrapper: 'z-[100]',
+      container: 'flex items-center justify-center p-4',
+      width: 'w-full max-w-lg',
+      base: 'relative overflow-visible',
+    }"
+  >
+    <div class="brutalist-card bg-white p-8 relative">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="text-3xl font-display font-black uppercase tracking-tighter">
+          {{ displayTitle }}
+        </h3>
+        <button
+          class="h-10 w-10 border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+          @click="handleClose"
+        >
+          <UIcon name="i-heroicons-x-mark-20-solid" class="text-xl" />
+        </button>
       </div>
 
-      <template #footer>
-        <div class="flex justify-end gap-2">
-          <UButton color="gray" variant="ghost" @click="handleClose">
+      <div class="space-y-6">
+        <div class="relative">
+          <UInput
+            v-model="inputValue"
+            :placeholder="displayPlaceholder"
+            @keydown.enter="handleConfirm"
+            autofocus
+            size="xl"
+            :ui="{
+              base: 'rounded-none border-4 border-black focus:ring-0 focus:border-black font-body text-lg py-4',
+              placeholder: 'text-black/30',
+            }"
+          />
+        </div>
+
+        <div class="flex justify-end gap-4 pt-4">
+          <button
+            class="px-6 py-3 font-display font-bold uppercase border-2 border-black hover:bg-gray-100 transition-colors"
+            @click="handleClose"
+          >
             {{ i18n.modals.saveBike.cancel }}
-          </UButton>
-          <UButton
-            color="primary"
+          </button>
+          <button
+            class="brutalist-button px-8 py-3 disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed"
             @click="handleConfirm"
             :disabled="!inputValue.trim()"
           >
             {{ i18n.modals.saveBike.confirm }}
-          </UButton>
+          </button>
         </div>
-      </template>
-    </UCard>
+      </div>
+    </div>
   </UModal>
 </template>

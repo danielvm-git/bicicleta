@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "83cffdd9c61ab38042baa57ede2f3db1c4ef27d06bbbe90ac51ac444b61e57f3",
+  "edges": [],
+  "file": "middleware/redirect.global.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T18:31:57-03:00",
+      "hash": "857a36a92bb929f211d265147a1f48aae6db7ed5",
+      "kind": "commit",
+      "message": "fix: Applied asymmetric hero layout, premium typography, and image supp…"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": []
+}

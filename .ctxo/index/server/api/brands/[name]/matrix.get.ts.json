@@ -1,7 +1,7 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "8b1a07e48e1972b9b4cebb8e0e35a43a20b32714e92cbf6d64fa3f40fb902d29",
+  "contentHash": "5d22f445e888725934029a7d5f9a96fd59fad0fa4dbf900cba7e62ae5e96688b",
   "edges": [
     {
       "from": "server/api/brands/[name]/matrix.get.ts::matrix.get::variable",
@@ -17,12 +17,18 @@
   "file": "server/api/brands/[name]/matrix.get.ts",
   "intent": [
     {
+      "date": "2026-04-27T20:49:46-03:00",
+      "hash": "c8f56a279e826c4f61e3c57f06dec2b3dc119969",
+      "kind": "commit",
+      "message": "feat: update brands pages to use new brands table"
+    },
+    {
       "date": "2026-04-27T01:34:35-03:00",
       "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
       "kind": "commit",
       "message": "feat: Performance Guide & Builder Tool"
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": []
 }

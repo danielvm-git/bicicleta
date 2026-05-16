@@ -1,10 +1,22 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "aa6dcf3d3c6219c768d7ae84920a8584942ac7d8671d1a5218177de8254ecbaa",
+  "contentHash": "dc2697f7c71864d3e23f7c6c05cf69c6b55258fc8d041643b77c88862a1a6216",
   "edges": [],
   "file": "tailwind.config.ts",
   "intent": [
+    {
+      "date": "2026-04-27T19:23:30-03:00",
+      "hash": "baafa32b5041d1c3b4f3c787cc748cf324db866f",
+      "kind": "commit",
+      "message": "fix: critical readability fix for default Daniel Builds theme"
+    },
+    {
+      "date": "2026-04-27T18:43:15-03:00",
+      "hash": "bb3a004fae72c6eadb9c2486be6d8a57e1249450",
+      "kind": "commit",
+      "message": "fix: Implemented professional print styles for BikeDetailView and fixed…"
+    },
     {
       "date": "2026-04-26T16:55:33-03:00",
       "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
@@ -18,6 +30,6 @@
       "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": []
 }

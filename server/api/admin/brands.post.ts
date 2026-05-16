@@ -1,5 +1,6 @@
 import { db } from "../../database/db";
 import { brands } from "../../database/schema";
+import { requireAdminSession } from "~/server/utils/auth";
 
 function generateBrandId(name: string): string {
   // Normalize: lowercase, trim, replace spaces with nothing
@@ -7,6 +8,7 @@ function generateBrandId(name: string): string {
 }
 
 export default defineEventHandler(async (event) => {
+  await requireAdminSession(event);
   const body = await readBody(event);
 
   // Validate input
@@ -26,6 +28,15 @@ export default defineEventHandler(async (event) => {
 
   // Generate or use provided ID
   let id = body.id || generateBrandId(body.name);
+
+  // Validate ID format
+  if (!/^[a-z0-9-]+$/.test(id)) {
+    throw createError({
+      statusCode: 400,
+      statusMessage:
+        "Brand ID must contain only lowercase letters, numbers, and hyphens",
+    });
+  }
 
   // Validate URL format
   try {

@@ -1,23 +1,8 @@
 {
   "version": 1,
-  "computedAt": "2026-04-27T04:46:20.568Z",
-  "commitSha": "e8f521f",
-  "confidence": "low",
-  "snapshotsAvailable": 1,
-  "hint": "Install post-commit hook or run `ctxo index` more often to build a richer drift history.",
-  "events": [
-    {
-      "symbolId": "composables/useBike.ts::useBikeBuilder::variable",
-      "movedFrom": {
-        "id": 2,
-        "label": "useBikeBuilder area"
-      },
-      "movedTo": {
-        "id": 0,
-        "label": "BikeComponent area"
-      },
-      "firstSeenInNewCluster": "2026-04-27T04:46:20.517Z",
-      "stability": "unverified"
-    }
-  ]
+  "computedAt": "2026-04-28T04:43:31.134Z",
+  "commitSha": "528143e",
+  "confidence": "medium",
+  "snapshotsAvailable": 4,
+  "events": []
 }

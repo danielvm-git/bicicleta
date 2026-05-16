@@ -1,10 +1,16 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "ff1aa5bdcd019514d159c351208d20a63a3f0414493024332bfd8ff2a0f3db80",
+  "contentHash": "6c5e902d613356f966d3ddd2d535004ff472f320f4ce774aa151187a67a006a2",
   "edges": [],
   "file": "tests/e2e/catalog.spec.ts",
   "intent": [
+    {
+      "date": "2026-04-27T18:31:57-03:00",
+      "hash": "857a36a92bb929f211d265147a1f48aae6db7ed5",
+      "kind": "commit",
+      "message": "fix: Applied asymmetric hero layout, premium typography, and image supp…"
+    },
     {
       "date": "2026-04-26T17:26:16-03:00",
       "hash": "9f9acd5c53abbf575ab37a3c3c29f561a88e2204",
@@ -12,6 +18,6 @@
       "message": "chore(test): add Playwright E2E and Husky preflight pipeline"
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": []
 }

@@ -1,10 +1,16 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "28272a668d4fc1e35e3e7224ae104959d1edb06dc362bcca69ad23684e10e654",
+  "contentHash": "7fc65f00a8942fb6c508fd19e574a076fbd579c7e4a60e61f75110cf5a225fe6",
   "edges": [],
   "file": "server/database/schema.ts",
   "intent": [
+    {
+      "date": "2026-04-27T20:44:44-03:00",
+      "hash": "43c33fd0c0bdb1642e55636f88b3f661db26739e",
+      "kind": "commit",
+      "message": "feat: add brands table with migration and schema"
+    },
     {
       "date": "2026-04-27T01:34:35-03:00",
       "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
@@ -54,88 +60,106 @@
       "message": "feat: Definir schema Drizzle e conexão com Neon DB."
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": [
     {
-      "endLine": 28,
-      "endOffset": 868,
+      "endLine": 18,
+      "endOffset": 536,
       "kind": "variable",
-      "name": "components",
+      "name": "brands",
       "startLine": 11,
       "startOffset": 169,
-      "symbolId": "server/database/schema.ts::components::variable"
+      "symbolId": "server/database/schema.ts::brands::variable"
     },
     {
       "endLine": 37,
-      "endOffset": 1188,
+      "endOffset": 1251,
+      "kind": "variable",
+      "name": "components",
+      "startLine": 20,
+      "startOffset": 552,
+      "symbolId": "server/database/schema.ts::components::variable"
+    },
+    {
+      "endLine": 46,
+      "endOffset": 1571,
       "kind": "variable",
       "name": "componentPrices",
-      "startLine": 30,
-      "startOffset": 884,
+      "startLine": 39,
+      "startOffset": 1267,
       "symbolId": "server/database/schema.ts::componentPrices::variable"
     },
     {
-      "endLine": 47,
-      "endOffset": 1406,
+      "endLine": 56,
+      "endOffset": 1789,
       "kind": "variable",
       "name": "componentPricesRelations",
-      "startLine": 39,
-      "startOffset": 1204,
+      "startLine": 48,
+      "startOffset": 1587,
       "symbolId": "server/database/schema.ts::componentPricesRelations::variable"
     },
     {
-      "endLine": 63,
-      "endOffset": 1922,
+      "endLine": 72,
+      "endOffset": 2305,
       "kind": "variable",
       "name": "groups",
-      "startLine": 49,
-      "startOffset": 1422,
+      "startLine": 58,
+      "startOffset": 1805,
       "symbolId": "server/database/schema.ts::groups::variable"
     },
     {
-      "endLine": 76,
-      "endOffset": 2326,
+      "endLine": 85,
+      "endOffset": 2709,
       "kind": "variable",
       "name": "bikes",
-      "startLine": 65,
-      "startOffset": 1938,
+      "startLine": 74,
+      "startOffset": 2321,
       "symbolId": "server/database/schema.ts::bikes::variable"
     },
     {
-      "endLine": 80,
-      "endOffset": 2436,
+      "endLine": 89,
+      "endOffset": 2819,
       "kind": "variable",
       "name": "bikesRelations",
-      "startLine": 78,
-      "startOffset": 2342,
+      "startLine": 87,
+      "startOffset": 2725,
       "symbolId": "server/database/schema.ts::bikesRelations::variable"
     },
     {
-      "endLine": 90,
-      "endOffset": 2726,
+      "endLine": 99,
+      "endOffset": 3109,
       "kind": "variable",
       "name": "bikeComponents",
-      "startLine": 82,
-      "startOffset": 2452,
+      "startLine": 91,
+      "startOffset": 2835,
       "symbolId": "server/database/schema.ts::bikeComponents::variable"
     },
     {
-      "endLine": 95,
-      "endOffset": 2879,
+      "endLine": 108,
+      "endOffset": 3365,
       "kind": "variable",
       "name": "componentsRelations",
-      "startLine": 92,
-      "startOffset": 2742,
+      "startLine": 101,
+      "startOffset": 3125,
       "symbolId": "server/database/schema.ts::componentsRelations::variable"
     },
     {
-      "endLine": 106,
-      "endOffset": 3170,
+      "endLine": 119,
+      "endOffset": 3656,
       "kind": "variable",
       "name": "bikeComponentsRelations",
-      "startLine": 97,
-      "startOffset": 2895,
+      "startLine": 110,
+      "startOffset": 3381,
       "symbolId": "server/database/schema.ts::bikeComponentsRelations::variable"
+    },
+    {
+      "endLine": 124,
+      "endOffset": 3784,
+      "kind": "variable",
+      "name": "brandsRelations",
+      "startLine": 121,
+      "startOffset": 3672,
+      "symbolId": "server/database/schema.ts::brandsRelations::variable"
     }
   ]
 }

@@ -181,281 +181,301 @@ const hasCompatibilityWarning = computed(() =>
 
 <template>
   <UContainer class="py-8">
-    <div class="flex justify-between items-center mb-8">
-      <h1 class="text-3xl font-display">{{ i18n.pages.builder.title }}</h1>
-      <div class="flex items-center gap-4">
-        <UButton
-          variant="ghost"
-          icon="i-heroicons-printer"
-          aria-label="Imprimir página"
-          class="no-print"
-          @click="printPage"
+    <div
+      class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-12 border-b-8 border-black pb-8"
+    >
+      <div>
+        <h1 class="text-7xl mb-2">{{ i18n.pages.builder.title }}</h1>
+        <p class="font-body text-xl opacity-60">
+          Architect your performance machine with pinpoint accuracy.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-6 no-print">
+        <div class="flex items-center gap-4">
+          <button
+            class="h-14 w-14 border-4 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+            @click="printPage"
+            title="Print Specification"
+          >
+            <UIcon name="i-heroicons-printer" class="text-2xl" />
+          </button>
+          <button
+            class="h-14 px-6 border-4 border-black font-display font-black uppercase hover:bg-black hover:text-white transition-colors"
+            @click="isOpen = true"
+          >
+            Saved Builds
+          </button>
+        </div>
+
+        <div
+          class="bg-black text-white p-6 border-4 border-black shadow-[4px_4px_0px_0px_rgba(239,68,68,1)]"
         >
-          Imprimir
-        </UButton>
-        <UButton
-          variant="ghost"
-          icon="i-heroicons-folder-open"
-          aria-label="Abrir minhas montagens"
-          class="no-print"
-          @click="isOpen = true"
-        >
-          Minhas Montagens
-        </UButton>
-        <div class="text-right">
-          <p class="text-sm text-gray-600">Total Estimado</p>
-          <div class="flex items-baseline justify-end gap-2">
-            <p
+          <p
+            class="text-xs font-display font-black uppercase tracking-widest opacity-60 mb-1"
+          >
+            Estimated Total
+          </p>
+          <div class="flex items-baseline gap-3">
+            <span
               v-if="bike.totalWeight > 0"
-              class="text-sm text-gray-700 font-medium"
+              class="text-lg font-display font-black text-primary"
             >
-              {{ bike.totalWeight }} kg
-            </p>
-            <p class="text-2xl font-bold text-primary">
+              {{ bike.totalWeight }}KG
+            </span>
+            <span class="text-4xl font-display font-black">
               {{ formatCurrency(totalPriceValue) }}
-            </p>
+            </span>
           </div>
         </div>
       </div>
     </div>
 
-    <UAlert
+    <!-- Compatibility Alerts -->
+    <div
       v-if="issuesList.length > 0"
-      :color="hasCompatibilityError ? 'red' : 'orange'"
-      variant="soft"
-      icon="i-heroicons-exclamation-triangle"
-      title="Alertas de Compatibilidade"
-      class="mb-8"
+      class="mb-12 p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+      :class="
+        hasCompatibilityError
+          ? 'bg-primary text-white'
+          : 'bg-yellow-400 text-black'
+      "
     >
-      <template #description>
-        <ul class="list-disc list-inside">
-          <li v-for="issue in issuesList" :key="issue.ruleId + issue.message">
-            <span :class="{ 'font-bold': issue.severity === 'error' }">{{
-              issue.message
-            }}</span>
-          </li>
-        </ul>
-      </template>
-    </UAlert>
+      <div class="flex items-center gap-4 mb-6">
+        <UIcon
+          :name="
+            hasCompatibilityError
+              ? 'i-heroicons-exclamation-circle'
+              : 'i-heroicons-exclamation-triangle'
+          "
+          class="text-5xl"
+        />
+        <h2 class="text-4xl m-0 leading-none">System Alerts</h2>
+      </div>
+      <ul class="space-y-3">
+        <li
+          v-for="issue in issuesList"
+          :key="issue.ruleId + issue.message"
+          class="flex items-start gap-3"
+        >
+          <span class="font-black text-xl">/</span>
+          <span
+            class="font-display font-bold text-xl uppercase tracking-tight"
+            >{{ issue.message }}</span
+          >
+        </li>
+      </ul>
+    </div>
 
     <div
       v-if="!hierarchy"
-      class="flex flex-col items-center justify-center py-20"
+      class="flex flex-col items-center justify-center py-32 border-4 border-black border-dashed"
     >
       <UIcon
         name="i-heroicons-arrow-path"
-        class="animate-spin text-4xl text-primary mb-4"
+        class="animate-spin text-6xl text-black mb-6"
       />
-      <p class="text-gray-600">Carregando catálogo...</p>
+      <p class="text-2xl font-display font-black uppercase">
+        Initializing Ecosystem...
+      </p>
     </div>
 
-    <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2 no-print">
-        <UAccordion
-          :items="groupItems"
-          :ui="{ wrapper: 'flex flex-col gap-4' }"
+    <div v-else class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <!-- Component Selection -->
+      <div class="lg:col-span-2 space-y-8 no-print">
+        <div
+          v-for="group in groupItems"
+          :key="group.slot"
+          class="brutalist-card"
         >
-          <template
-            v-for="item in groupItems"
-            :key="item.slot"
-            #[`${item.slot}-title`]
+          <div
+            class="bg-black text-white p-4 flex items-center justify-between"
           >
-            <div class="flex items-center justify-between w-full pr-2">
-              <span>{{ item.label }}</span>
-              <UIcon
-                v-if="item.completed"
-                name="i-heroicons-check-circle"
-                class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0"
-              />
-            </div>
-          </template>
-          <template v-for="item in groupItems" :key="item.slot" #[item.slot]>
-            <div class="pl-4 border-l-2 border-primary/20 flex flex-col gap-2">
-              <UAccordion :items="getCategoryItems(item.categories)">
-                <template
-                  v-for="category in item.categories"
-                  :key="category"
-                  #[category]
-                >
-                  <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
-                    <USelectMenu
-                      v-model="bike.state.components[category]"
-                      :options="componentsMap[category] || []"
-                      placeholder="Selecione uma peça..."
-                      searchable
-                      option-attribute="model"
-                      by="id"
-                      @update:model-value="(val) => bike.selectComponent(val)"
-                    >
-                      <template #label>
+            <h2 class="text-2xl m-0 leading-none">{{ group.label }}</h2>
+            <UIcon
+              v-if="group.completed"
+              name="i-heroicons-check-circle"
+              class="w-8 h-8 text-primary"
+            />
+          </div>
+
+          <div class="p-6 space-y-6 bg-white">
+            <div
+              v-for="category in group.categories"
+              :key="category"
+              class="space-y-2"
+            >
+              <label
+                class="block text-xs font-display font-black uppercase tracking-widest text-black/40"
+              >
+                {{ category }}
+              </label>
+
+              <USelectMenu
+                v-model="bike.state.components[category]"
+                :options="componentsMap[category] || []"
+                placeholder="Select Component..."
+                searchable
+                option-attribute="model"
+                by="id"
+                :ui="{
+                  base: 'rounded-none border-4 border-black focus:ring-0 focus:border-black font-body text-lg py-3',
+                  placeholder: 'text-black/30',
+                }"
+                @update:model-value="(val) => bike.selectComponent(val)"
+              >
+                <template #label>
+                  <span
+                    v-if="bike.state.components[category]"
+                    class="font-display font-bold uppercase truncate"
+                  >
+                    {{ bike.state.components[category].brand }}
+                    {{ bike.state.components[category].model }}
+                  </span>
+                  <span v-else class="opacity-30">NOT SELECTED</span>
+                </template>
+
+                <template #option="{ option }">
+                  <div
+                    class="flex justify-between w-full gap-4 py-2"
+                    :class="{
+                      'opacity-40': !bike.checkCompatibility(option).compatible,
+                    }"
+                  >
+                    <div class="flex flex-col">
+                      <span class="font-display font-bold uppercase"
+                        >{{ option.brand }} {{ option.model }}</span
+                      >
+                      <div class="flex gap-2 mt-1">
                         <span
-                          v-if="bike.state.components[category]"
-                          class="truncate"
+                          v-if="option.speeds"
+                          class="text-[10px] bg-black text-white px-1"
+                          >{{ option.speeds }} SPD</span
                         >
-                          {{ bike.state.components[category].brand }}
-                          {{ bike.state.components[category].model }}
-                        </span>
-                        <span v-else>Selecione uma peça...</span>
-                      </template>
-                      <template #option="{ option }">
-                        <div
-                          class="flex justify-between w-full"
-                          :class="{
-                            'opacity-50':
-                              !bike.checkCompatibility(option).compatible,
-                          }"
+                        <span
+                          v-if="option.axleType"
+                          class="text-[10px] bg-black text-white px-1"
+                          >{{ option.axleType }}</span
                         >
-                          <div class="flex flex-col overflow-hidden">
-                            <div class="flex items-center gap-2">
-                              <span class="truncate"
-                                >{{ option.brand }} {{ option.model }}</span
-                              >
-                              <UBadge
-                                v-if="option.speeds"
-                                size="xs"
-                                color="gray"
-                                variant="soft"
-                                >{{ option.speeds }}</UBadge
-                              >
-                              <UBadge
-                                v-if="option.axleType"
-                                size="xs"
-                                color="gray"
-                                variant="soft"
-                                >{{ option.axleType }}</UBadge
-                              >
-                              <UBadge
-                                v-if="
-                                  !bike.checkCompatibility(option).compatible
-                                "
-                                size="xs"
-                                color="red"
-                                variant="soft"
-                              >
-                                {{ bike.checkCompatibility(option).reason }}
-                              </UBadge>
-                            </div>
-                            <div class="flex items-center gap-2 mt-0.5">
-                              <span class="text-[10px] text-gray-700">
-                                Preço: {{ timeAgo(option.updatedAt) }}
-                              </span>
-                              <UBadge
-                                v-if="isOutdated(option.updatedAt)"
-                                size="xs"
-                                color="orange"
-                                variant="soft"
-                                class="text-[8px] px-1 py-0"
-                                >Desatualizado</UBadge
-                              >
-                            </div>
-                          </div>
-                          <span class="text-gray-600 font-mono">{{
-                            formatCurrency(option.price)
-                          }}</span>
-                        </div>
-                      </template>
-                    </USelectMenu>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <span class="font-display font-black text-primary">{{
+                        formatCurrency(option.price)
+                      }}</span>
+                      <p
+                        v-if="!bike.checkCompatibility(option).compatible"
+                        class="text-[10px] text-primary font-black uppercase mt-1"
+                      >
+                        {{ bike.checkCompatibility(option).reason }}
+                      </p>
+                    </div>
                   </div>
                 </template>
-              </UAccordion>
+              </USelectMenu>
             </div>
-          </template>
-        </UAccordion>
+          </div>
+        </div>
       </div>
 
+      <!-- Summary Sidebar -->
       <div class="lg:col-span-1">
-        <UCard class="card-elevated">
-          <template #header>
-            <h2 class="font-display">Resumo da Bike</h2>
-          </template>
+        <div class="brutalist-card sticky top-32">
+          <div class="bg-black text-white p-4">
+            <h2 class="text-2xl m-0 leading-none">BUILD SPEC</h2>
+          </div>
 
-          <EmptyState
-            v-if="Object.keys(bike.state.components).length === 0"
-            icon="i-heroicons-wrench"
-            title="Sua bicicleta está vazia"
-            description="Comece a selecionar componentes no painel à esquerda para montar sua bicicleta ideal."
-          />
-
-          <ul v-else class="divide-y divide-gray-300 dark:divide-gray-700">
-            <li
-              v-for="(comp, cat) in bike.state.components"
-              :key="cat"
-              class="py-2 flex justify-between items-start"
+          <div class="p-6">
+            <div
+              v-if="Object.keys(bike.state.components).length === 0"
+              class="py-12"
             >
-              <div class="flex-1 min-w-0">
-                <p class="text-xs font-semibold text-gray-600 uppercase">
-                  {{ cat }}
-                </p>
-                <p class="truncate text-sm">
-                  {{ comp.brand }} {{ comp.model }}
-                  <span v-if="comp.weight" class="text-xs text-gray-700">
-                    ({{ comp.weight }}kg)
-                  </span>
-                </p>
-              </div>
-              <div class="text-right ml-4">
-                <p class="text-sm font-medium">
-                  {{ formatCurrency(comp.price) }}
-                </p>
-                <UButton
-                  color="red"
-                  variant="ghost"
-                  icon="i-heroicons-trash"
-                  size="2xs"
-                  @click="bike.removeComponent(cat)"
-                />
-              </div>
-            </li>
-          </ul>
-
-          <template #footer>
-            <div class="flex flex-col gap-2 no-print">
-              <div
-                v-if="bike.totalWeight > 0"
-                class="flex justify-between items-center mb-2 px-1"
-              >
-                <span class="text-gray-600 font-medium">Peso Total:</span>
-                <span class="font-bold">{{ bike.totalWeight }} kg</span>
-              </div>
-              <div class="flex gap-2">
-                <UButton
-                  block
-                  class="flex-1"
-                  color="primary"
-                  :disabled="Object.keys(bike.state.components).length === 0"
-                  @click="isSaveBikeModalOpen = true"
-                >
-                  Salvar Bike
-                </UButton>
-                <UButton
-                  variant="soft"
-                  color="gray"
-                  icon="i-heroicons-trash"
-                  @click="bike.clear"
-                />
-              </div>
-              <UButton
-                block
-                variant="soft"
-                color="primary"
-                icon="i-heroicons-share"
-                :disabled="Object.keys(bike.state.components).length === 0"
-                @click="isShareBikeModalOpen = true"
-              >
-                Compartilhar Bike
-              </UButton>
-              <UButton
-                block
-                variant="outline"
-                color="primary"
-                icon="i-heroicons-arrows-right-left"
-                @click="isCompareOpen = true"
-              >
-                Comparar com Bike Comercial
-              </UButton>
+              <EmptyState
+                icon="i-heroicons-wrench"
+                title="READY TO START"
+                description="Begin by selecting components to architect your machine."
+              />
             </div>
-          </template>
-        </UCard>
+
+            <ul v-else class="space-y-4">
+              <li
+                v-for="(comp, cat) in bike.state.components"
+                :key="cat"
+                class="flex flex-col border-b-2 border-black/10 pb-4 last:border-0"
+              >
+                <div class="flex justify-between items-start mb-1">
+                  <span
+                    class="text-[10px] font-display font-black uppercase text-black/40"
+                    >{{ cat }}</span
+                  >
+                  <button
+                    class="text-primary hover:bg-primary hover:text-white transition-colors p-1"
+                    @click="bike.removeComponent(cat)"
+                  >
+                    <UIcon name="i-heroicons-trash" class="text-lg" />
+                  </button>
+                </div>
+                <div class="flex justify-between items-end">
+                  <p
+                    class="font-display font-bold uppercase text-lg leading-none truncate pr-4"
+                  >
+                    {{ comp.brand }} {{ comp.model }}
+                  </p>
+                  <p class="font-display font-black text-primary flex-shrink-0">
+                    {{ formatCurrency(comp.price) }}
+                  </p>
+                </div>
+                <p v-if="comp.weight" class="text-xs font-body opacity-50 mt-1">
+                  Weight: {{ comp.weight }}kg
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="p-6 bg-gray-50 border-t-4 border-black no-print">
+            <div class="flex justify-between items-center mb-6">
+              <span class="font-display font-black uppercase"
+                >Total Weight</span
+              >
+              <span class="text-2xl font-display font-black"
+                >{{ bike.totalWeight || "0" }}KG</span
+              >
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <button
+                class="brutalist-button py-4 disabled:grayscale disabled:opacity-50"
+                :disabled="Object.keys(bike.state.components).length === 0"
+                @click="isSaveBikeModalOpen = true"
+              >
+                SAVE
+              </button>
+              <button
+                class="border-4 border-black font-display font-black uppercase hover:bg-black hover:text-white transition-colors py-4"
+                @click="bike.clear"
+              >
+                CLEAR
+              </button>
+            </div>
+
+            <button
+              class="w-full border-4 border-black font-display font-black uppercase hover:bg-black hover:text-white transition-colors py-4 mb-4 flex items-center justify-center gap-2"
+              :disabled="Object.keys(bike.state.components).length === 0"
+              @click="isShareBikeModalOpen = true"
+            >
+              <UIcon name="i-heroicons-share" class="text-xl" />
+              SHARE BUILD
+            </button>
+
+            <button
+              class="w-full bg-primary text-white border-4 border-black font-display font-black uppercase hover:translate-x-1 hover:-translate-y-1 transition-transform py-4 flex items-center justify-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+              @click="isCompareOpen = true"
+            >
+              <UIcon name="i-heroicons-arrows-right-left" class="text-xl" />
+              COMPARE TECH
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 

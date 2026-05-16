@@ -1,0 +1,23 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "0e4edcda8e98f9ec39de921a78b527479c2a87c303420bc35487f3537e202043",
+  "edges": [
+    {
+      "from": "scripts/sync-brand-logos.ts::sync-brand-logos::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::brands::variable"
+    }
+  ],
+  "file": "scripts/sync-brand-logos.ts",
+  "intent": [
+    {
+      "date": "2026-04-28T00:25:26-03:00",
+      "hash": "528143ec1c8065179581c3bc8ff099119d5984f2",
+      "kind": "commit",
+      "message": "feat: add scripts and dependencies to automate brand logo synchronization from external APIs"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": []
+}

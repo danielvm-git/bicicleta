@@ -130,6 +130,25 @@ export const categories = pgTable("categories", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const categoryTranslations = pgTable("category_translations", {
+  id: serial("id").primaryKey(),
+  categoryId: integer("category_id").references(() => categories.id, {
+    onDelete: "cascade",
+  }),
+  locale: text("locale").notNull(),
+  name: text("name").notNull(),
+});
+
+export const categoryTranslationsRelations = relations(
+  categoryTranslations,
+  ({ one }) => ({
+    category: one(categories, {
+      fields: [categoryTranslations.categoryId],
+      references: [categories.id],
+    }),
+  })
+);
+
 export const categoriesRelations = relations(categories, ({ many }) => ({
   translations: many(categoryTranslations),
   components: many(components),

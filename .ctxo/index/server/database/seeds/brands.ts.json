@@ -1,0 +1,74 @@
+{
+  "antiPatterns": [],
+  "complexity": [
+    {
+      "cyclomatic": 5,
+      "symbolId": "server/database/seeds/brands.ts::seedBrands::function"
+    }
+  ],
+  "contentHash": "2349046055f38b0f936fd2a4f5bf71c862f68b72c782dd773a39dac60cbc3079",
+  "edges": [
+    {
+      "from": "server/database/seeds/brands.ts::seedBrands::function",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/database/seeds/brands.ts::seedBrands::function",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    },
+    {
+      "from": "server/database/seeds/brands.ts::seedBrands::function",
+      "kind": "imports",
+      "to": "server/database/schema.ts::brands::variable"
+    },
+    {
+      "from": "server/database/seeds/brands.ts::seedBrands::function",
+      "kind": "calls",
+      "to": "server/database/seeds/brands.ts::generateBrandId::function"
+    },
+    {
+      "from": "server/database/seeds/brands.ts::seedBrands::function",
+      "kind": "uses",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/database/seeds/brands.ts::seedBrands::function",
+      "kind": "uses",
+      "to": "server/database/schema.ts::components::variable"
+    },
+    {
+      "from": "server/database/seeds/brands.ts::seedBrands::function",
+      "kind": "uses",
+      "to": "server/database/schema.ts::brands::variable"
+    }
+  ],
+  "file": "server/database/seeds/brands.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T20:48:08-03:00",
+      "hash": "6a9dbed5c839157b8d708924bb2d02aa69ce954a",
+      "kind": "commit",
+      "message": "feat: implement brands API endpoints (admin CRUD + logo upload)"
+    },
+    {
+      "date": "2026-04-27T20:44:44-03:00",
+      "hash": "43c33fd0c0bdb1642e55636f88b3f661db26739e",
+      "kind": "commit",
+      "message": "feat: add brands table with migration and schema"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": [
+    {
+      "endLine": 102,
+      "endOffset": 2702,
+      "kind": "function",
+      "name": "seedBrands",
+      "startLine": 45,
+      "startOffset": 1078,
+      "symbolId": "server/database/seeds/brands.ts::seedBrands::function"
+    }
+  ]
+}

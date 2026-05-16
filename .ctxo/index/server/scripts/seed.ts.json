@@ -1,7 +1,7 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "d9d772622d73207854ee1c1deaae076ec471e4859a24f0eb475fddda8456b5c2",
+  "contentHash": "458be01f47cf16469a1a8b3b75839747a7a23c59e9d1c3b9fb6ccee82b4f093d",
   "edges": [
     {
       "from": "server/scripts/seed.ts::seed::variable",
@@ -77,6 +77,12 @@
   "file": "server/scripts/seed.ts",
   "intent": [
     {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    },
+    {
       "date": "2026-04-27T01:34:35-03:00",
       "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
       "kind": "commit",
@@ -107,6 +113,6 @@
       "message": "feat: Implementar Engine de Dados (Parser & Seed) para ingestão de CSV/…"
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": []
 }

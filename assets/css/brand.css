@@ -1,10 +1,8 @@
 /**
- * Daniel Builds — Design System with Nuxt UI
- * Primary brand identity using Tailwind CSS theme configuration
- * Fonts: Bricolage Grotesque (display) + Source Serif 4 (body)
+ * Bicicleta — Brutalist Premium Design System
+ * Focus: High contrast, thick borders, sharp corners, bold typography.
  */
 
-/* Font weight hierarchy - document intention */
 :root {
   --fw-light: 300;
   --fw-regular: 400;
@@ -12,24 +10,23 @@
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-extrabold: 800;
+
+  /* Brutalist Tokens */
+  --brutalist-border-width: 3px;
+  --brutalist-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --brutalist-shadow-hover: 6px 6px 0px 0px rgba(0, 0, 0, 1);
 }
 
-/* Usage guide:
-   - 300: Light emphasis (rare)
-   - 400: Body text (regular)
-   - 500: Form labels, secondary info
-   - 600: Small headings, important labels (h4, buttons)
-   - 700: Headings (h1-h3), primary emphasis
-   - 800: Display headings, extreme emphasis
-*/
-
-/* Global typography and resets */
+/* Global Reset for Brutalist Aesthetic */
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.5;
+  background-color: #ffffff;
+  color: #000000;
 }
 
+/* Typography Hierarchy */
 h1,
 h2,
 h3,
@@ -37,252 +34,151 @@ h4,
 h5,
 h6,
 .font-display {
-  font-family: var(
-    --font-display,
-    "Bricolage Grotesque",
-    ui-sans-serif,
-    system-ui,
-    sans-serif
-  );
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
 }
 
-/* Standardized heading sizes */
 h1 {
-  font-size: 2.5rem; /* 40px - was 32px */
-  line-height: 1.1;
-  font-weight: 800; /* was 700 */
-  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 0.9;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 1.875rem; /* 30px - was 24px */
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  line-height: 1;
+  margin-bottom: 0.75rem;
 }
 
 h3 {
-  font-size: 1.5rem; /* 24px - was 20px */
-  line-height: 1.3;
-  font-weight: 700;
-}
-
-h4 {
-  font-size: 1.125rem; /* 18px - NEW */
-  line-height: 1.4;
-  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.1;
 }
 
 .font-body {
-  font-family: var(
-    --font-body,
-    "Source Serif 4",
-    "Georgia",
-    "Times New Roman",
-    serif
-  );
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 400;
 }
 
-/* Body text optimization */
-p {
-  line-height: 1.6;
-  font-size: 1rem; /* 16px */
+/* Brutalist Utility Classes */
+.brutalist-card {
+  background: #ffffff;
+  border: var(--brutalist-border-width) solid #000000;
+  box-shadow: var(--brutalist-shadow);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
 }
 
-small,
-.text-sm {
-  font-size: 0.875rem; /* 14px - MINIMUM */
-  line-height: 1.5;
+.brutalist-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--brutalist-shadow-hover);
 }
 
-.text-xs {
-  font-size: 0.75rem; /* 12px - use sparingly */
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: var(--fw-semibold);
-}
-
-/* Utility classes for design tokens */
-.bg-brand-bg {
-  background-color: var(--color-brand-bg);
-}
-
-.text-brand-ink {
-  color: var(--color-brand-ink);
-}
-
-.border-brand-border {
-  border-color: var(--color-brand-border);
-}
-
-/* Text color utilities - WCAG AA compliant */
-.text-contrast-primary {
-  color: #1c1917; /* 16.4:1 on white - excellent */
-}
-
-.text-contrast-secondary {
-  color: #57534e; /* 4.8:1 on white - WCAG AA ✓ */
-}
-
-.text-contrast-tertiary {
-  color: #78716b; /* 3.2:1 on white - use sparingly */
-}
-
-.text-contrast-disabled {
-  color: #a8a29e; /* 2.2:1 - for disabled states */
-  opacity: 0.65;
-}
-
-/* Border contrast utilities */
-.border-contrast-default {
-  border-color: #d6d3d1; /* 3.5:1 - visible borders */
-}
-
-.border-contrast-strong {
-  border-color: #a8a29e; /* 6:1 - prominent borders */
-}
-
-/* Metric emphasis class - for prices, totals */
-.metric-large {
-  font-size: 2rem; /* 32px */
+.brutalist-button {
+  background: #ef4444; /* Brutalist Red */
+  color: #ffffff;
+  border: var(--brutalist-border-width) solid #000000;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+  font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 800;
-  line-height: 1.1;
-  color: var(--color-brand-ink);
-  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.1s ease;
 }
 
-/* Font weight utilities */
-.font-light {
-  font-weight: var(--fw-light);
-}
-.font-medium {
-  font-weight: var(--fw-medium);
-}
-.font-semibold {
-  font-weight: var(--fw-semibold);
-}
-.font-bold {
-  font-weight: var(--fw-bold);
-}
-.font-extrabold {
-  font-weight: var(--fw-extrabold);
+.brutalist-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 1);
 }
 
-/* Button disabled state */
-button:disabled,
-[role="button"]:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  background-color: #f5f5f4;
-  color: #a8a29e;
-  border-color: #d6d3d1;
+/* Header Specifics */
+.brutalist-header {
+  background: #ffffff;
+  border-bottom: var(--brutalist-border-width) solid #000000;
 }
 
-/* Visible focus state for accessibility */
+/* Navigation Links */
+.nav-link {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.router-link-active {
+  border: 2px solid #000000;
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Responsive Overrides */
+@media (max-width: 640px) {
+  .brutalist-shadow {
+    --brutalist-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+  }
+}
+
+/* Accessibility */
 :focus-visible {
-  outline: 3px solid var(--color-primary-500);
+  outline: 3px solid #ef4444;
   outline-offset: 2px;
 }
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline: 3px solid var(--color-primary-500);
-  outline-offset: -1px;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
 
-/* Smooth transitions between themes */
-* {
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease;
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-left: 2px solid #000000;
 }
 
-button,
-[role="button"] {
-  transition: all 0.2s ease;
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border: 2px solid #ffffff;
 }
 
-/* Card polish and shadow hierarchy */
-.card-elevated {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition:
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+::-webkit-scrollbar-thumb:hover {
+  background: #ef4444;
 }
 
-.card-elevated:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+/* Page Transitions */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Subtle elevation for interactive elements */
-.elevation-sm {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
-.elevation-md {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
-.elevation-lg {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+/* Logo Animation */
+.group:hover .text-primary {
+  animation: bolt-flash 0.4s infinite alternate;
 }
 
-/* Enhanced spacing utilities */
-.gap-tight {
-  gap: 0.5rem;
-}
-.gap-cozy {
-  gap: 1rem;
-}
-.gap-spacious {
-  gap: 1.5rem;
-}
-
-/* Enhanced line-height utilities for better readability */
-.leading-relaxed {
-  line-height: 1.75;
-}
-.leading-generous {
-  line-height: 1.9;
-}
-
-/* Dark mode shadow adjustments */
-@media (prefers-color-scheme: dark) {
-  .card-elevated {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+@keyframes bolt-flash {
+  from {
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 0px #ef4444);
   }
-
-  .card-elevated:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  }
-
-  .elevation-sm {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-
-  .elevation-md {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .elevation-lg {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  }
-}
-
-/* Respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  to {
+    transform: scale(1.5) rotate(10deg);
+    filter: drop-shadow(0 0 10px #ef4444);
   }
 }

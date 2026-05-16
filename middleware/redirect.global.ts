@@ -1,5 +1,3 @@
 export default defineNuxtRouteMiddleware((to) => {
-  if (to.path === "/") {
-    return navigateTo("/components", { redirectCode: 301 });
-  }
+  // Redirect removed to allow for the new Landing Page
 });

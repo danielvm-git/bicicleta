@@ -1,0 +1,27 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "02edf07c642f2c13052a71da7902439234bd1762578e78d6aa120a7a1ef45fda",
+  "edges": [],
+  "file": "locales/pt-BR.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T20:44:44-03:00",
+      "hash": "43c33fd0c0bdb1642e55636f88b3f661db26739e",
+      "kind": "commit",
+      "message": "feat: add brands table with migration and schema"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": [
+    {
+      "endLine": 74,
+      "endOffset": 2266,
+      "kind": "variable",
+      "name": "pt_BR",
+      "startLine": 1,
+      "startOffset": 63,
+      "symbolId": "locales/pt-BR.ts::pt_BR::variable"
+    }
+  ]
+}

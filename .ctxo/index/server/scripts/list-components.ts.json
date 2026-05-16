@@ -1,0 +1,28 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "b1b9014befc09eafc30d79d65b8c4b4377d1d11724fcdae4173dd7ed75503feb",
+  "edges": [
+    {
+      "from": "server/scripts/list-components.ts::list-components::variable",
+      "kind": "imports",
+      "to": "server/database/db.ts::db::variable"
+    },
+    {
+      "from": "server/scripts/list-components.ts::list-components::variable",
+      "kind": "imports",
+      "to": "server/database/schema.ts::components::variable"
+    }
+  ],
+  "file": "server/scripts/list-components.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": []
+}

@@ -1,6 +1,7 @@
 import { db } from "../../../../database/db";
 import { brands } from "../../../../database/schema";
 import { eq } from "drizzle-orm";
+import { requireAdminSession } from "~/server/utils/auth";
 import fs from "fs";
 import path from "path";
 
@@ -13,6 +14,7 @@ const ALLOWED_TYPES = [
 const MAX_FILE_SIZE = 1024 * 1024; // 1MB
 
 export default defineEventHandler(async (event) => {
+  await requireAdminSession(event);
   const id = getRouterParam(event, "id");
 
   if (!id) {

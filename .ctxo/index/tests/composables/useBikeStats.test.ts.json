@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "8fb82ba939949648e17d6287c994177e5998253aeddd6f8f8de48f470767556c",
+  "edges": [],
+  "file": "tests/composables/useBikeStats.test.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": []
+}

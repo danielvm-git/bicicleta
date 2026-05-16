@@ -1,10 +1,28 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "75b10980ef7dadc76f1aa81a1dc014d8dbf37bf25b036416be6d9d9eb22128cc",
+  "contentHash": "38bcdb6ec4c98da9c633fc5faac09c5ae8152a557a2cf9d80b941a29ac5b1cd1",
   "edges": [],
   "file": "nuxt.config.ts",
   "intent": [
+    {
+      "date": "2026-04-27T20:44:44-03:00",
+      "hash": "43c33fd0c0bdb1642e55636f88b3f661db26739e",
+      "kind": "commit",
+      "message": "feat: add brands table with migration and schema"
+    },
+    {
+      "date": "2026-04-27T18:43:15-03:00",
+      "hash": "bb3a004fae72c6eadb9c2486be6d8a57e1249450",
+      "kind": "commit",
+      "message": "fix: Implemented professional print styles for BikeDetailView and fixed…"
+    },
+    {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    },
     {
       "date": "2026-04-27T01:34:35-03:00",
       "hash": "e8f521fbd0724117d57057b41bff73313f3ce568",
@@ -48,6 +66,6 @@
       "message": "feat: Inicializar Nuxt 3, Drizzle ORM e dependências de dados."
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": []
 }

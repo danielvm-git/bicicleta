@@ -1,0 +1,72 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "1eb7fd04b99d28b4fc7312c6a2d2e57fdf47bc3dab9279d2475933583c8f4ac5",
+  "edges": [],
+  "file": "assets/themes/themes.config.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T18:43:15-03:00",
+      "hash": "bb3a004fae72c6eadb9c2486be6d8a57e1249450",
+      "kind": "commit",
+      "message": "fix: Implemented professional print styles for BikeDetailView and fixed…"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": [
+    {
+      "endLine": 19,
+      "endOffset": 375,
+      "kind": "interface",
+      "name": "Theme",
+      "startLine": 13,
+      "startOffset": 255,
+      "symbolId": "assets/themes/themes.config.ts::Theme::interface"
+    },
+    {
+      "endLine": 29,
+      "endOffset": 566,
+      "kind": "interface",
+      "name": "ThemeClasses",
+      "startLine": 21,
+      "startOffset": 377,
+      "symbolId": "assets/themes/themes.config.ts::ThemeClasses::interface"
+    },
+    {
+      "endLine": 11,
+      "endOffset": 253,
+      "kind": "type",
+      "name": "ThemeId",
+      "startLine": 5,
+      "startOffset": 127,
+      "symbolId": "assets/themes/themes.config.ts::ThemeId::type"
+    },
+    {
+      "endLine": 75,
+      "endOffset": 1889,
+      "kind": "variable",
+      "name": "themes",
+      "startLine": 31,
+      "startOffset": 581,
+      "symbolId": "assets/themes/themes.config.ts::themes::variable"
+    },
+    {
+      "endLine": 148,
+      "endOffset": 4914,
+      "kind": "variable",
+      "name": "getThemeClasses",
+      "startLine": 80,
+      "startOffset": 1946,
+      "symbolId": "assets/themes/themes.config.ts::getThemeClasses::variable"
+    },
+    {
+      "endLine": 155,
+      "endOffset": 5061,
+      "kind": "variable",
+      "name": "getThemeById",
+      "startLine": 153,
+      "startOffset": 4966,
+      "symbolId": "assets/themes/themes.config.ts::getThemeById::variable"
+    }
+  ]
+}

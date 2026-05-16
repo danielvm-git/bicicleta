@@ -1,19 +1,22 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Component catalog", () => {
-  test("redirects from / to /components and shows heading", async ({
-    page,
-  }) => {
+  test("landing page shows hero and catalog link", async ({ page }) => {
     await page.goto("/");
-    await page.waitForURL(/\/components\/?$/);
     await expect(
-      page.getByRole("heading", { name: "Componentes" })
+      page.getByRole("heading", {
+        level: 1,
+        name: /UNCOMPROMISING|PERFORMANCE/,
+      })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "Explore Catalog" })
     ).toBeVisible();
   });
 
   test("filters are present", async ({ page }) => {
     await page.goto("/components");
-    await expect(page.getByText("Categoria").first()).toBeVisible();
-    await expect(page.getByText("Marca").first()).toBeVisible();
+    await expect(page.getByText("Category").first()).toBeVisible();
+    await expect(page.getByText("Brand").first()).toBeVisible();
   });
 });

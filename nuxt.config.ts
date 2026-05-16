@@ -4,9 +4,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   /** Avoid Vite pre-transform "Failed to resolve #app-manifest" noise in dev; we do not rely on client app manifest / route rules. */
   experimental: {
-    appManifest: false,
+    appManifest: true,
   },
-  modules: ["@nuxt/ui", "@pinia/nuxt", "@vite-pwa/nuxt"],
+  modules: ["@nuxt/ui", "@pinia/nuxt"],
   pwa: {
     manifest: {
       name: "Monta Bike - Simulador",
@@ -103,61 +103,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/brand.css", "~/assets/css/themes.css"],
-  tailwindcss: {
-    config: {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              50: "#f0f8f7",
-              100: "#ddf1f0",
-              200: "#b9e4e1",
-              300: "#8ed4cf",
-              400: "#5ebdb6",
-              500: "#0d6b6b",
-              600: "#0a5555",
-              700: "#084545",
-              800: "#063939",
-              900: "#052e2e",
-              950: "#021a1a",
-            },
-            gray: {
-              50: "#fafaf9" /* Backgrounds */,
-              100: "#f5f5f4" /* Light backgrounds */,
-              200: "#e7e5e4" /* Light borders */,
-              300: "#d6d3d1" /* Default borders - 3.5:1 ✓ */,
-              400: "#c9b59a" /* Muted elements - 2.8:1 (reduce usage) */,
-              500: "#a8a29e" /* WCAG AA minimum borders - 6:1 ✓ */,
-              600: "#78716b" /* Tertiary text - 3.2:1 (use sparingly) */,
-              700: "#57534e" /* Secondary text - 4.8:1 ✓ GOOD */,
-              800: "#44403c" /* Primary text alt */,
-              900: "#1c1917" /* Body text - 16.4:1 ✓ */,
-              950: "#0c0a09" /* Dark text */,
-            },
-          },
-          fontFamily: {
-            display: [
-              '"Bricolage Grotesque"',
-              "ui-sans-serif",
-              "system-ui",
-              "sans-serif",
-            ],
-            body: ['"Source Serif 4"', "Georgia", '"Times New Roman"', "serif"],
-          },
-          textColor: {
-            "primary-text": "#1c1917" /* H1 text, primary */,
-            "secondary-text": "#57534e" /* Body secondary, labels */,
-            "tertiary-text": "#78716b" /* Muted text (sparingly) */,
-            "disabled-text": "#a8a29e" /* Disabled state */,
-          },
-          borderColor: {
-            default: "#d6d3d1" /* Standard borders */,
-            strong: "#a8a29e" /* Prominent borders */,
-          },
-        },
-      },
-    },
-  },
+  // Tailwind configuration is managed in tailwind.config.ts to avoid duplication and conflicts.
   runtimeConfig: {
     /** Neon Console → Auth; proxy target for /api/auth/* (see server/api/auth/[...].ts) */
     neonAuthBaseUrl:
@@ -170,6 +116,7 @@ export default defineNuxtConfig({
     rateLimitMaxScrape: 3,
   },
   app: {
+    pageTransition: { name: "page", mode: "out-in" },
     head: {
       title: "Monta Bike",
       meta: [

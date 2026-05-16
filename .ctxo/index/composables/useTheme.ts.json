@@ -1,0 +1,36 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "6bf59a69d40032d7a81cc2d484c97bc3a6c28cb4de3d2a7c7b79547b5467ac9d",
+  "edges": [],
+  "file": "composables/useTheme.ts",
+  "intent": [
+    {
+      "date": "2026-04-27T18:43:15-03:00",
+      "hash": "bb3a004fae72c6eadb9c2486be6d8a57e1249450",
+      "kind": "commit",
+      "message": "fix: Implemented professional print styles for BikeDetailView and fixed…"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": [
+    {
+      "endLine": 11,
+      "endOffset": 243,
+      "kind": "type",
+      "name": "ThemeId",
+      "startLine": 5,
+      "startOffset": 117,
+      "symbolId": "composables/useTheme.ts::ThemeId::type"
+    },
+    {
+      "endLine": 84,
+      "endOffset": 2163,
+      "kind": "variable",
+      "name": "useTheme",
+      "startLine": 16,
+      "startOffset": 352,
+      "symbolId": "composables/useTheme.ts::useTheme::variable"
+    }
+  ]
+}

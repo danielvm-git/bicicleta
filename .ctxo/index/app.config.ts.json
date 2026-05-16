@@ -1,10 +1,16 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "26026efd58d576869d2fbbb1a8926decb604f3294317befa4cfad161c0798fa4",
+  "contentHash": "753e1c8988ceceb830ee5bf694388f8fa8f6a8667e38f63b0239319ff9a2bb89",
   "edges": [],
   "file": "app.config.ts",
   "intent": [
+    {
+      "date": "2026-04-27T18:43:15-03:00",
+      "hash": "bb3a004fae72c6eadb9c2486be6d8a57e1249450",
+      "kind": "commit",
+      "message": "fix: Implemented professional print styles for BikeDetailView and fixed…"
+    },
     {
       "date": "2026-04-26T16:55:33-03:00",
       "hash": "9f4bfe166e1bb3f862f31c43c6f71e5374345632",
@@ -18,6 +24,6 @@
       "message": "feat(platform): implement core bicycle builder infrastructure and admin API"
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": []
 }

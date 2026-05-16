@@ -1,7 +1,7 @@
 {
   "antiPatterns": [],
   "complexity": [],
-  "contentHash": "f9ea4b3ef4a1b2c0481ed865ca8c550b28ad66d989318f04dddf3f39b486bd91",
+  "contentHash": "082b9adb7e282207e5c323596f794ae81df242321fa6364d61a7e5ad5d650bb5",
   "edges": [
     {
       "from": "server/database/db.ts::db::variable",
@@ -30,15 +30,15 @@
       "message": "feat: Definir schema Drizzle e conexão com Neon DB."
     }
   ],
-  "lastModified": 1777265180,
+  "lastModified": 1777351410,
   "symbols": [
     {
-      "endLine": 8,
-      "endOffset": 313,
+      "endLine": 12,
+      "endOffset": 420,
       "kind": "variable",
       "name": "db",
-      "startLine": 8,
-      "startOffset": 284,
+      "startLine": 12,
+      "startOffset": 390,
       "symbolId": "server/database/db.ts::db::variable"
     }
   ]

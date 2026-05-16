@@ -62,56 +62,136 @@ const clearFilters = () => {
 </script>
 
 <template>
-  <div class="py-8">
-    <div class="flex items-center justify-between mb-8">
-      <h1 class="text-3xl font-bold">Componentes</h1>
-      <UButton to="/" variant="ghost" icon="i-heroicons-arrow-left"
-        >Voltar</UButton
+  <UContainer class="py-12">
+    <div
+      class="flex items-center justify-between mb-16 border-b-8 border-black pb-8"
+    >
+      <div>
+        <h1 class="text-7xl mb-2">CATALOG</h1>
+        <p class="font-body text-xl opacity-60 uppercase">
+          Full technical specifications and market data.
+        </p>
+      </div>
+      <UButton
+        to="/"
+        variant="ghost"
+        icon="i-heroicons-arrow-left"
+        class="brutalist-button px-8 h-16"
+        >BACK TO BASE</UButton
       >
     </div>
 
-    <UCard class="mb-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <UFormGroup label="Categoria">
-          <USelect v-model="category" :options="categoryOptions" />
-        </UFormGroup>
+    <div class="brutalist-card mb-16 p-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="space-y-2">
+          <label class="block font-display font-black text-sm uppercase"
+            >Category</label
+          >
+          <USelect
+            v-model="category"
+            :options="categoryOptions"
+            :ui="{
+              base: 'brutalist-input h-12 !ring-0',
+              rounded: 'rounded-none',
+              border: 'border-2 border-black focus:border-red-500',
+            }"
+          />
+        </div>
 
-        <UFormGroup label="Marca">
+        <div class="space-y-2">
+          <label class="block font-display font-black text-sm uppercase"
+            >Brand</label
+          >
           <USelect
             v-model="brand"
             :options="brandOptions"
             :disabled="!category && !brands?.length"
+            :ui="{
+              base: 'brutalist-input h-12 !ring-0',
+              rounded: 'rounded-none',
+              border: 'border-2 border-black focus:border-red-500',
+            }"
           />
-        </UFormGroup>
+        </div>
 
-        <UFormGroup label="Linha">
+        <div class="space-y-2">
+          <label class="block font-display font-black text-sm uppercase"
+            >Line</label
+          >
           <USelect
             v-model="line"
             :options="lineOptions"
             :disabled="!brand && !lines?.length"
+            :ui="{
+              base: 'brutalist-input h-12 !ring-0',
+              rounded: 'rounded-none',
+              border: 'border-2 border-black focus:border-red-500',
+            }"
           />
-        </UFormGroup>
+        </div>
 
-        <UFormGroup label="Pesquisar">
+        <div class="space-y-2">
+          <label class="block font-display font-black text-sm uppercase"
+            >Search</label
+          >
           <UInput
             v-model="search"
             icon="i-heroicons-magnifying-glass-20-solid"
-            placeholder="Modelo, marca..."
+            placeholder="MODEL, BRAND..."
+            :ui="{
+              base: 'brutalist-input h-12 !ring-0',
+              rounded: 'rounded-none',
+              border: 'border-2 border-black focus:border-red-500',
+            }"
           />
-        </UFormGroup>
+        </div>
       </div>
       <div
-        class="flex justify-end mt-4"
+        class="flex justify-end mt-8 border-t-2 border-black pt-6"
         v-if="category || brand || line || search"
       >
-        <UButton color="gray" variant="ghost" @click="clearFilters"
-          >Limpar Filtros</UButton
+        <button
+          class="font-display font-black text-sm uppercase underline decoration-4 hover:text-red-500 transition-colors"
+          @click="clearFilters"
         >
+          CLEAR ALL FILTERS
+        </button>
       </div>
-    </UCard>
+    </div>
 
-    <UTable :rows="components || []" :columns="columns" :loading="pending">
-      <template #price-data="{ row }"> R$ {{ row.price }} </template>
-    </UTable>
-  </div>
+    <div class="brutalist-card overflow-hidden">
+      <UTable
+        :rows="components || []"
+        :columns="columns"
+        :loading="pending"
+        :ui="{
+          wrapper: 'relative',
+          thead: 'bg-black text-white',
+          th: {
+            padding: 'py-6 px-6',
+            font: 'font-display font-black uppercase text-sm tracking-widest',
+            color: 'text-white',
+          },
+          td: {
+            padding: 'py-6 px-6',
+            font: 'font-body font-medium',
+            color: 'text-black',
+          },
+          divide: 'divide-y divide-black border-t border-black',
+          tbody: 'divide-y divide-black',
+        }"
+      >
+        <template #category-data="{ row }">
+          <span
+            class="font-display font-black text-xs uppercase bg-black text-white px-2 py-1"
+            >{{ row.category }}</span
+          >
+        </template>
+
+        <template #price-data="{ row }">
+          <span class="font-mono font-bold text-lg">R$ {{ row.price }}</span>
+        </template>
+      </UTable>
+    </div>
+  </UContainer>
 </template>

@@ -1,0 +1,17 @@
+{
+  "antiPatterns": [],
+  "complexity": [],
+  "contentHash": "1449d4d65f672fb4a94d982275aa3b4e20bf330f432adeab831f2ab1ab012e1c",
+  "edges": [],
+  "file": "scratch/check-db.js",
+  "intent": [
+    {
+      "date": "2026-04-27T18:03:01-03:00",
+      "hash": "bd01072d85f3540c4134b105b9a233a225f93da4",
+      "kind": "commit",
+      "message": "test: Add UnifiedBike type and useBikeStats composable with tests"
+    }
+  ],
+  "lastModified": 1777351410,
+  "symbols": []
+}
